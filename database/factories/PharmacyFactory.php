@@ -19,7 +19,7 @@ class PharmacyFactory extends Factory
     public function definition(): array
     {
         return [
-            'pharmacy_name' => fake()->company(),
+            'name' => fake()->company(),
             'location' => fake()->city(),
             'owner_id' => 1
         ];

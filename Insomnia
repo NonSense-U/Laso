@@ -1,0 +1,228 @@
+type: collection.insomnia.rest/5.0
+name: Laso
+meta:
+  id: wrk_38c4629c9663439caa9ade13c2153b47
+  created: 1749705478337
+  modified: 1749705478337
+  description: ""
+collection:
+  - name: Auth
+    meta:
+      id: fld_9088fe657e7f4665a64296038bb52e1f
+      created: 1750012727351
+      modified: 1750012740444
+      sortKey: -1750012727351
+      description: ""
+    children:
+      - url: "{{ _.localhost }}/api/v1/login"
+        name: Login
+        meta:
+          id: req_262015e262594d99b26367a8a7c3a182
+          created: 1750012743848
+          modified: 1750036447246
+          isPrivate: false
+          description: ""
+          sortKey: -1750012751982
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"username" : "aki",
+            	"password" : "password"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.localhost }}/api/v1/logout"
+        name: logout
+        meta:
+          id: req_7719db9281c84f19b63c22d3646dd083
+          created: 1750051102682
+          modified: 1750052852245
+          isPrivate: false
+          description: ""
+          sortKey: -1750012752082
+        method: POST
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+            id: pair_8b31cc1efc644c8b8887d383fa8be4d5
+          - id: pair_8aa91e4c3bc94a0885999ab851c52364
+            name: Accept
+            value: application/json
+            description: ""
+            disabled: false
+        authentication:
+          type: bearer
+          token: "{{ _.auth_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - url: "{{ _.localhost }}/api/test"
+    name: Test
+    meta:
+      id: req_f307f794e0c747039c516af0d6f233ee
+      created: 1749705538370
+      modified: 1750013286637
+      isPrivate: false
+      description: ""
+      sortKey: -1749705538371
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.2.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.localhost }}/api/v1/admin"
+    name: Create Admin
+    meta:
+      id: req_8da51c8e41e6426eb4fd7d9e58a623b3
+      created: 1750051178002
+      modified: 1750052455433
+      isPrivate: false
+      description: ""
+      sortKey: -1750051178002
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"admin" : {
+        	"username" : "{% faker 'randomUserName' %}",
+        	"email" : "{% faker 'randomEmail' %}",
+        	"first_name" : "mikasa",
+        	"last_name" : "akraman"	,
+        	"password" : "123",
+        	"password_confirmation" : "123"
+        	},
+        	"pharmacy" : {
+        		"name" : "dove",
+        		"location" : "Elidia"
+        	},
+        	"login" : true
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.2.0
+    scripts:
+      afterResponse: |
+        const jsonBody = insomnia.response.json();
+
+        if (jsonBody && jsonBody.data && jsonBody.data.token) {
+          insomnia.environment.set('auth_token', jsonBody.data.token);
+        }
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.localhost }}/api/v1/worker"
+    name: Create Worker
+    meta:
+      id: req_2a4195d3219b412a842da317a543b323
+      created: 1750052144156
+      modified: 1750052798450
+      isPrivate: false
+      description: ""
+      sortKey: -1750052144156
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"username" : "{% faker 'randomUserName' %}",
+        	"email" : "{% faker 'randomEmail' %}",
+        	"first_name" : "{% faker 'randomFirstName' %}",
+        	"last_name" : "{% faker 'randomLastName' %}",
+        	"password" : "123",
+        	"password_confirmation" : "123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_a487a3d896d543fabf9810c4d601947d
+      - name: User-Agent
+        value: insomnia/11.2.0
+        id: pair_3819051372934f30840b070fab07d30f
+      - id: pair_c5949717a72448e3b00f23b9bd4cae82
+        name: Accept
+        value: application/json
+        description: ""
+        disabled: false
+    authentication:
+      type: bearer
+      token: "{{ _.auth_token }}"
+    scripts:
+      afterResponse: ""
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_9d59ac680a621bf04540579cae68a39452b9a9a6
+    created: 1749705478344
+    modified: 1750052810439
+  cookies:
+    - id: ceeff576-fa4c-4327-8754-2a2f43c0eef1
+      key: XSRF-TOKEN
+      value: eyJpdiI6ImQ5WVFvMmt3aUlGTGtXcXJwMWxNaGc9PSIsInZhbHVlIjoiT1FEUWFwMTc5Z21BU3lTWXRTOGdLWWpqUFh1OHhNSDVKYnh2ZXM1WW04M2ptd1dKRFozcjVqOCtKUEszNjdnd0VRU25LUisrdHEzUVU0ZVlyMFBYL2FXT2RiZk5LY1Rsb0xYT0toU21yTHJ5UjJ0c3FiVjZhWkhsTDhsdVZDQnYiLCJtYWMiOiIzODhhNTQzYTU0ODUxMDQzYmRlNTdkY2I1MGJhYWU1MDljZDA0ODBmZTBiZmY2NTQ4Y2FkNmM0ZDBjZTE0NTlkIiwidGFnIjoiIn0%3D
+      domain: 127.0.0.1
+      path: /
+      secure: false
+      httpOnly: false
+      creation: 2025-06-16T05:20:01.160Z
+      hostOnly: true
+      lastAccessed: 2025-06-16T05:20:01.160Z
+    - id: e9fb6e59-25ac-4e65-9b86-9a223d55a8b7
+      key: laravel_session
+      value: eyJpdiI6ImxId2sxa3grakd0QXNtbEpiNTcwSGc9PSIsInZhbHVlIjoiN2hpUEIxN2xaYU1reDlBb2NRSVZmMzZ4TnloQkV6S0FYV00zQVdxWGd3emVOOHZpaW1rcCtoU3VDa3AwbDltZXgyU01ZVDBLUmxWZ3YwZTVmY3Ryc2t5N1czT2RpNVk0UFF2d2VwOVI2OEd6cmx2cGpybjJWT1JnMDdGVEUrMzgiLCJtYWMiOiIyNjJhY2RkZGQxN2MxODQ0YjUwYTQ5ZGUxOTQxMjY1MmE3YTEzNWYyYTBkZDk0OGRhMDFjNzdkMWIyZTRkMWYwIiwidGFnIjoiIn0%3D
+      domain: 127.0.0.1
+      path: /
+      secure: false
+      httpOnly: true
+      creation: 2025-06-16T05:20:01.162Z
+      hostOnly: true
+      lastAccessed: 2025-06-16T05:20:01.162Z
+environments:
+  name: Base Environment
+  meta:
+    id: env_9d59ac680a621bf04540579cae68a39452b9a9a6
+    created: 1749705478341
+    modified: 1750052810441
+    isPrivate: false
+  data:
+    localhost: 127.0.0.1:8000
+    auth_token: 4|GND8QYo34cxfwBdlYbuK2VafmGZkEEIDnrnCj4EYffae7335
