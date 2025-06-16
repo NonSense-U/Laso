@@ -17,16 +17,21 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $super = User::factory()->create([
-            'username' => 'SUPER',
-            'email' => 'SUPER@example.com',
+            'username' => 'aki',
+            'email' => 'aki@gmail.com',
+            'phone_number' => '123'
         ]);
+
+
         $global_pharmacy = Pharmacy::factory()->create();
         $super->pharmacy_id = $global_pharmacy->id;
         $super->save();
 
         $this->call([
             PharmacySeeder::class,
-            UserSeeder::class
+            UserSeeder::class,
+            RolesAndPermissionsSeeder::class
         ]);
+        $super->assignRole('super_admin');
     }
 }
