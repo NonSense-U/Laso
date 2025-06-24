@@ -10,4 +10,9 @@ class Supplier extends Model
     {
         return $this->belongsTo(Pharmacy::class);
     }
+
+    public function med_packages()
+    {
+        return $this->hasMany(MedPackage::class);
+    }
 }

@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Requests\Supplier;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateSupplierRequest extends FormRequest
+class StoreMedPackageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,10 +22,7 @@ class CreateSupplierRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required','string','unique:suppliers'],
-            'phone_number' => ['nullable','string','unique:suppliers'],
-            'email' => ['nullable','email','unique:suppliers'],
-            'company' => ['required','string']
+            //
         ];
     }
 }

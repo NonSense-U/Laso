@@ -19,4 +19,9 @@ class Pharmacy extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function med_packages()
+    {
+        return $this->hasMany(MedPackage::class);
+    }
 }

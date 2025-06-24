@@ -7,7 +7,7 @@ use App\Models\User;
 
 class UserService
 {
-    public function createAdmin(array $payload)
+    public function createAdmin(array $payload) :array
     {
         $user = User::create($payload['admin']);
 

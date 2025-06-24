@@ -13,12 +13,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('medications', function (Blueprint $table) {
-            $table->uuid();
+            $table->id();
             $table->string('serial_number')->unique();
             $table->string('med_name')->index();
             $table->string('scientific_name');
             $table->integer('price');
-            $table->string('ntoes');
+            $table->string('notes');
             $table->foreignIdFor(Manufacturer::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });

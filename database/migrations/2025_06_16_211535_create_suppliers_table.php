@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('phone_number')->nullable();
             $table->integer('balance')->default(0);
             //! Manufacturer ??
+            //! TO CHANGE
+            $table->string('company');
             $table->foreignIdFor(Pharmacy::class)->index()->constrained()->cascadeOnDelete();
             $table->timestamps();
         });

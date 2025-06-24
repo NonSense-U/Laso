@@ -10,7 +10,7 @@ collection:
     meta:
       id: fld_9088fe657e7f4665a64296038bb52e1f
       created: 1750012727351
-      modified: 1750012740444
+      modified: 1750761939680
       sortKey: -1750012727351
       description: ""
     children:
@@ -19,7 +19,7 @@ collection:
         meta:
           id: req_262015e262594d99b26367a8a7c3a182
           created: 1750012743848
-          modified: 1750036447246
+          modified: 1750761934460
           isPrivate: false
           description: ""
           sortKey: -1750012751982
@@ -36,6 +36,13 @@ collection:
             value: application/json
           - name: User-Agent
             value: insomnia/11.2.0
+        scripts:
+          afterResponse: |
+            const jsonBody = insomnia.response.json();
+
+            if (jsonBody && jsonBody.data && jsonBody.data.token) {
+              insomnia.environment.set('auth_token', jsonBody.data.token);
+            }
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -49,7 +56,7 @@ collection:
         meta:
           id: req_7719db9281c84f19b63c22d3646dd083
           created: 1750051102682
-          modified: 1750052852245
+          modified: 1750761918541
           isPrivate: false
           description: ""
           sortKey: -1750012752082
@@ -87,7 +94,7 @@ collection:
         meta:
           id: req_f51512dc042e40cb9448e4e91b278a78
           created: 1750109766386
-          modified: 1750121932860
+          modified: 1750761978462
           isPrivate: false
           description: ""
           sortKey: -1750120233530
@@ -96,7 +103,8 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"name" : "{% faker 'randomFirstName' %}"
+            	"name" : "{% faker 'randomFirstName' %}",
+            	"company" : "{% faker 'randomCompanyName' %}"
             }
         headers:
           - name: Content-Type
@@ -121,12 +129,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.localhost }}/api/v1/supplier/update/11"
+      - url: "{{ _.localhost }}/api/v1/supplier/update/1"
         name: Update Supplier
         meta:
           id: req_3e2df6f238c444ab87a69710225a953b
           created: 1750119585430
-          modified: 1750121943511
+          modified: 1750762028424
           isPrivate: false
           description: ""
           sortKey: -1750120233630
@@ -135,7 +143,8 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"name" : "updated_name"
+            	"name" : "updated_name",
+            	"company" : "updated company"
             }
         headers:
           - name: Content-Type
@@ -159,12 +168,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.localhost }}/api/v1/supplier/get/14"
+      - url: "{{ _.localhost }}/api/v1/supplier/get/1"
         name: Get Supplier
         meta:
           id: req_9236c2b98ff440a881cced524b73badb
           created: 1750120550735
-          modified: 1750121890084
+          modified: 1750187994303
           isPrivate: false
           description: ""
           sortKey: -1750120233730
@@ -194,7 +203,7 @@ collection:
         meta:
           id: req_2eb8f9f4f5124bbaae2c5215d24fbc11
           created: 1750121345637
-          modified: 1750121899375
+          modified: 1750155997161
           isPrivate: false
           description: ""
           sortKey: -1750120233830
@@ -202,6 +211,12 @@ collection:
         headers:
           - name: User-Agent
             value: insomnia/11.2.0
+            id: pair_cc3e4576aa72459097ec4e17f9fc2324
+          - id: pair_332a8b4169ca43fbad51ae4bd08a1279
+            name: Accept
+            value: application/json
+            description: ""
+            disabled: false
         authentication:
           type: bearer
           token: "{{ _.auth_token }}"
@@ -218,7 +233,7 @@ collection:
         meta:
           id: req_6b88ddf7578648ffae3296c2e99b2d97
           created: 1750121614415
-          modified: 1750121996994
+          modified: 1750743464445
           isPrivate: false
           description: ""
           sortKey: -1750120233930
@@ -241,7 +256,7 @@ collection:
     meta:
       id: fld_338c9ddef7fe4d28839462acfeab7be5
       created: 1750120244451
-      modified: 1750120244451
+      modified: 1750743443588
       sortKey: -1750120244451
       description: ""
     children:
@@ -365,7 +380,7 @@ cookieJar:
   meta:
     id: jar_9d59ac680a621bf04540579cae68a39452b9a9a6
     created: 1749705478344
-    modified: 1750120135473
+    modified: 1750761939667
   cookies:
     - id: ceeff576-fa4c-4327-8754-2a2f43c0eef1
       key: XSRF-TOKEN
@@ -392,8 +407,8 @@ environments:
   meta:
     id: env_9d59ac680a621bf04540579cae68a39452b9a9a6
     created: 1749705478341
-    modified: 1750120135479
+    modified: 1750761939673
     isPrivate: false
   data:
     localhost: 127.0.0.1:8000
-    auth_token: 3|OzVgbvBkPQ1WWTEAKfOMEpXhnX4KbQlTWndNm7iO994b9769
+    auth_token: 3|A8cWQ6uW8bslpYTtsy1FDdr0M2pF6p4cpXuizm0d44e86ebd

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Manufacturer;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,12 @@ class MedicationFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'med_name' => fake()->colorName(),
+            'serial_number' => rand(100,10000),
+            'scientific_name' => 'Paradol',
+            'price' =>  100,
+            'notes' => 'i hate life',
+            'manufacturer_id' => Manufacturer::factory()
         ];
     }
 }
