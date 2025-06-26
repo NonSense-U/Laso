@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Pharmacy;
 use App\Models\User;
+use App\Models\Vault;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -25,17 +26,19 @@ class PharmacyFactory extends Factory
         ];
     }
 
-    // public function configure(): Factory
-    // {
-    //     return $this->afterCreating(function (Pharmacy $pharmacy) {
-    //         if (!isset($pharmacy->owner_id)) {
-    //             $user = User::factory()->create([
-    //                 'pharmacy_id' => $pharmacy->id
-    //             ]);
+    public function configure(): Factory
+    {
+        return $this->afterCreating(function (Pharmacy $pharmacy) {
+            Vault::create([
+                'pharmacy_id' => $pharmacy->id,
+                'name' => 'main',
+            ]);
 
-    //             $pharmacy->owner_id = $user->id;
-    //             $pharmacy->save();
-    //         }
-    //     });
-    // }
+            Vault::create([
+                'pharmacy_id' => $pharmacy->id,
+                'name' => 'charity',
+            ]);
+
+        });
+    }
 }
