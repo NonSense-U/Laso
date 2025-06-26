@@ -8,12 +8,11 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class SupplierService
 {
-    
+
     public function createSupplier(array $payload, User $user)
     {
         $payload['pharmacy_id'] = $user->pharmacy_id;
         $supplier = Supplier::create($payload);
-        $supplier->load('pharmacy');
         return ['supplier' => $supplier];
     }
 

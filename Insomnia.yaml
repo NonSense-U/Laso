@@ -94,7 +94,7 @@ collection:
         meta:
           id: req_f51512dc042e40cb9448e4e91b278a78
           created: 1750109766386
-          modified: 1750761978462
+          modified: 1750956030351
           isPrivate: false
           description: ""
           sortKey: -1750120233530
@@ -104,7 +104,8 @@ collection:
           text: |-
             {
             	"name" : "{% faker 'randomFirstName' %}",
-            	"company" : "{% faker 'randomCompanyName' %}"
+            	"company" : "{% faker 'randomCompanyName' %}",
+            	"phone_number" : "{% faker 'randomPhoneNumber' %}"
             }
         headers:
           - name: Content-Type

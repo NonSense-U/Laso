@@ -23,8 +23,7 @@ class CreateSupplierRequest extends FormRequest
     {
         return [
             'name' => ['required','string','unique:suppliers'],
-            'phone_number' => ['nullable','string','unique:suppliers'],
-            'email' => ['nullable','email','unique:suppliers'],
+            'phone_number' => ['string','unique:suppliers'],
             'company' => ['required','string']
         ];
     }

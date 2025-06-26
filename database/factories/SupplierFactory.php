@@ -18,6 +18,7 @@ class SupplierFactory extends Factory
     {
         return [
             'pharmacy_id' => rand(1,5),
+            'phone_number' => fake()->phoneNumber(),
             'name' => fake()->firstName(),
             'company' => fake()->company()
         ];

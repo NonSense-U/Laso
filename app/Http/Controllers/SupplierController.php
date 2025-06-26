@@ -24,7 +24,7 @@ class SupplierController extends Controller
 
     public function index(Request $request)
     {
-        $suppliers = Supplier::query()->where('pharmacy_id', '=', $request->user()->pharmacy_id)->with('packages_orders')->get();
+        $suppliers = Supplier::query()->where('pharmacy_id', '=', $request->user()->pharmacy_id)->get();
         return ApiResponse::success('Suppliers retrieved succesfully.', $suppliers);
     }
 

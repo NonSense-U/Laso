@@ -24,7 +24,6 @@ class UpdateSupplierRequest extends FormRequest
         return [
             'name' => ['sometimes', 'string', 'unique:suppliers'],
             'phone_number' => ['sometimes', 'string', 'unique:suppliers'],
-            'email' => ['sometimes', 'email', 'unique:suppliers'],
             'comapny' => ['sometimes','string']
         ];
     }
