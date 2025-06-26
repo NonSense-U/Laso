@@ -4,6 +4,7 @@ use App\Http\Controllers\Accounts\AuthController;
 use App\Http\Controllers\Accounts\UserController;
 use App\Http\Controllers\MedicationController;
 use App\Http\Controllers\MedPackageController;
+use App\Http\Controllers\PackagesOrderController;
 use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,11 @@ Route::put('/supplier/update/{supplier_id}', [SupplierController::class, 'update
 
 //! GLOBAL MEDICATIONS
 Route::get('/global-meds', [MedicationController::class,'index']);
+
+
+//! PACKAGES_ORDERS
+Route::get('/packages_orders',[PackagesOrderController::class,'index'])->middleware('auth:sanctum');
+Route::get('/packages_orders/{packages_order_id}',[PackagesOrderController::class,'show']);
 
 
 //! MED PACKAGES

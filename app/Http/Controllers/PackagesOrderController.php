@@ -5,45 +5,26 @@ namespace App\Http\Controllers;
 use App\Models\PackagesOrder;
 use App\Http\Requests\StorePackagesOrderRequest;
 use App\Http\Requests\UpdatePackagesOrderRequest;
+use App\Traits\V1\ApiResponse;
+use Illuminate\Http\Request;
 
 class PackagesOrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    use ApiResponse;
+
+    public function index(Request $request)
     {
-        //
+        $packagesOrders = PackagesOrder::query()->where('pharmacy_id', '=', $request->user()->pharmacy_id)->get();
+        return ApiResponse::success('Packages Orders have been retrieved successfully', $packagesOrders);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show(Request $request, $packages_order_id)
     {
-        //
+        $packagesOrder = PackagesOrder::findOrFail($packages_order_id);
+        return ApiResponse::success('Supplier retrieved succesfully.', ['packages' => $packagesOrder->packages]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StorePackagesOrderRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(PackagesOrder $packagesOrder)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(PackagesOrder $packagesOrder)
     {
         //
     }
@@ -52,14 +33,6 @@ class PackagesOrderController extends Controller
      * Update the specified resource in storage.
      */
     public function update(UpdatePackagesOrderRequest $request, PackagesOrder $packagesOrder)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(PackagesOrder $packagesOrder)
     {
         //
     }

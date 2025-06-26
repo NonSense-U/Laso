@@ -10,7 +10,7 @@ collection:
     meta:
       id: fld_9088fe657e7f4665a64296038bb52e1f
       created: 1750012727351
-      modified: 1750761939680
+      modified: 1750954095745
       sortKey: -1750012727351
       description: ""
     children:
@@ -354,6 +354,189 @@ collection:
             send: true
             store: true
           rebuildPath: true
+  - name: Med Packages
+    meta:
+      id: fld_42b6668bf2dc47118e9df1c91d948469
+      created: 1750785721728
+      modified: 1750785721728
+      sortKey: -1750785721728
+      description: ""
+    children:
+      - url: "{{ _.localhost }}/api/v1/med_packages"
+        name: index
+        meta:
+          id: req_87f6cea091264f1a89d469687bb84e9e
+          created: 1750785723098
+          modified: 1750946464911
+          isPrivate: false
+          description: ""
+          sortKey: -1750946464872
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+            id: pair_5be27f74fe3d4324a47772a9e943f989
+          - id: pair_b646d7d826794d3a9c2b2d00be72483c
+            name: Accept
+            value: application/json
+            description: ""
+            disabled: false
+        authentication:
+          type: bearer
+          token: "{{ _.auth_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.localhost }}/api/v1/med_packages"
+        name: Add Med Package
+        meta:
+          id: req_448deb4e30384c069919c3c93f06a820
+          created: 1750946496569
+          modified: 1750951844610
+          isPrivate: false
+          description: ""
+          sortKey: -1750946496569
+        method: POST
+        body:
+          mimeType: application/json
+          text: |
+            {
+              "supplier_id": 2,
+            	"total_price": 199.9,
+            	"paid_ammount" : 122.2,
+            	"packages-order": [
+            		{
+            			"medication_id": 1,
+              		"quantity": 100,
+              		"production_date": "2024-10-01",
+              		"expiration_date": "2026-10-01",
+              		"purchase_price": 25.50
+            		},
+            		{
+            			"medication_id": 1,
+              		"quantity": 43,
+              		"production_date": "2024-10-01",
+              		"expiration_date": "2026-10-01",
+              		"purchase_price": 25.50
+            		}
+            	]
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+            id: pair_1ad8c95f9a324c0082e9e60a74fb6169
+          - name: User-Agent
+            value: insomnia/11.2.0
+            id: pair_64707320d2ee4f4b87f476f030fc44ac
+          - id: pair_235e269dca1c4729b0341c0e626adbc3
+            name: Accept
+            value: application/json
+            description: ""
+            disabled: false
+        authentication:
+          type: bearer
+          token: "{{ _.auth_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Medication
+    meta:
+      id: fld_b9a94177ab1c4a369d8b5fd66a52e4b2
+      created: 1750946604668
+      modified: 1750946604668
+      sortKey: -1750946604668
+      description: ""
+    children:
+      - url: "{{ _.localhost }}/api/v1/global-meds"
+        name: index
+        meta:
+          id: req_17a6771b1d694ce190d598de393dcc9c
+          created: 1750946606106
+          modified: 1750946786145
+          isPrivate: false
+          description: ""
+          sortKey: -1750946638652
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Packages Orders
+    meta:
+      id: fld_31b69e75a1954fe6861457919b2d757c
+      created: 1750954015222
+      modified: 1750954015222
+      sortKey: -1750954015222
+      description: ""
+    children:
+      - url: "{{ _.localhost }}/api/v1/packages_orders"
+        name: index
+        meta:
+          id: req_4109983d22ef4a83874f78860c00ed13
+          created: 1750954016716
+          modified: 1750954148849
+          isPrivate: false
+          description: ""
+          sortKey: -1750954146707
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+            id: pair_ad554b7acd9745468f0252049f89622c
+          - id: pair_d89d94aca3e143daad4e782fa3b51a46
+            name: Accept
+            value: application/json
+            description: ""
+            disabled: false
+        authentication:
+          type: bearer
+          token: "{{ _.auth_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.localhost }}/api/v1/packages_orders/1"
+        name: Get Packages Order
+        meta:
+          id: req_b3b6ca1c87464ab18a0b82f4917af429
+          created: 1750954139992
+          modified: 1750954178251
+          isPrivate: false
+          description: ""
+          sortKey: -1750954146607
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.2.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
   - url: "{{ _.localhost }}/api/test"
     name: Test
     meta:
@@ -380,7 +563,7 @@ cookieJar:
   meta:
     id: jar_9d59ac680a621bf04540579cae68a39452b9a9a6
     created: 1749705478344
-    modified: 1750761939667
+    modified: 1750954095741
   cookies:
     - id: ceeff576-fa4c-4327-8754-2a2f43c0eef1
       key: XSRF-TOKEN
@@ -407,8 +590,8 @@ environments:
   meta:
     id: env_9d59ac680a621bf04540579cae68a39452b9a9a6
     created: 1749705478341
-    modified: 1750761939673
+    modified: 1750954095743
     isPrivate: false
   data:
     localhost: 127.0.0.1:8000
-    auth_token: 3|A8cWQ6uW8bslpYTtsy1FDdr0M2pF6p4cpXuizm0d44e86ebd
+    auth_token: 3|8ljKcEso4CeIkPn8eKEp2ydn2S2B1i4cJ1DLFWxUe0342832
