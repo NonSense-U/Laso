@@ -24,13 +24,14 @@ class SupplierController extends Controller
 
     public function index(Request $request)
     {
-        $suppliers = Supplier::query()->where('pharmacy_id', '=', $request->user()->pharmacy_id)->get();
+        $suppliers = Supplier::query()->where('pharmacy_id', '=', $request->user()->pharmacy_id)->with('packages_orders')->get();
         return ApiResponse::success('Suppliers retrieved succesfully.', $suppliers);
     }
 
     public function show(Request $request, $supplier_id)
     {
         $supplier = Supplier::findOrFail($supplier_id);
+        $supplier->load('packages_orders');
         if ($request->user()->pharmacy_id !== $supplier->pharmacy_id) {
             throw new AccessDeniedHttpException();
         }
