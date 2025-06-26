@@ -20,8 +20,9 @@ class MedPackage extends Model
         return $this->belongsTo(Pharmacy::class);
     }
 
-    public function supplier()
+    public function parent_order()
     {
-        return $this->belongsTo(Supplier::class);
+        return $this->belongsTo(PackagesOrder::class,'packages_order_id');
     }
+
 }

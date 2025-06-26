@@ -3,64 +3,34 @@
 namespace App\Http\Controllers;
 
 use App\Models\MedPackage;
-use App\Http\Requests\StoreMedPackageRequest;
+use App\Http\Requests\StoreMedPackagesRequest;
 use App\Http\Requests\UpdateMedPackageRequest;
+use App\Services\MedPackageService;
+use App\Traits\V1\ApiResponse;
+use Illuminate\Http\Request;
 
 class MedPackageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    use ApiResponse;
+
+    private $medPackagesServices;
+
+    public function __construct(MedPackageService $medPackageService)
     {
-        //
+        $this->medPackagesServices = $medPackageService;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function index(Request $request)
     {
-        //
+        $data = $request->user()->pharmacy->med_packages;
+        return ApiResponse::success('Med packages retrieved successfully.',$data,200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreMedPackageRequest $request)
+    public function addMedPackages(StoreMedPackagesRequest $request)
     {
-        //
+        $data = $this->medPackagesServices->addMedPackages($request->validated(), $request->user());
+
+        return ApiResponse::success('Medication Packages has been added successfully.',$data);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(MedPackage $medPackage)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(MedPackage $medPackage)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateMedPackageRequest $request, MedPackage $medPackage)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(MedPackage $medPackage)
-    {
-        //
-    }
 }

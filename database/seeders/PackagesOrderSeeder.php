@@ -2,20 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\MedPackage;
+use App\Models\PackagesOrder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class MedPackageSeeder extends Seeder
+class PackagesOrderSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        MedPackage::factory(4)->create([
-            'pharmacy_id' => 1,
-            'packages_order_id' => 1
-        ]);
+        PackagesOrder::factory(5)->create();
     }
 }

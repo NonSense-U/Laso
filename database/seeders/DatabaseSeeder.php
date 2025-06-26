@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Pharmacy;
+use App\Models\Supplier;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -28,8 +29,11 @@ class DatabaseSeeder extends Seeder
         $super->save();
 
         $this->call([
-            PharmacySeeder::class,
             UserSeeder::class,
+            SupplierSeeder::class,
+            PackagesOrderSeeder::class,
+            MedicationSeeder::class,
+            MedPackageSeeder::class,
             RolesAndPermissionsSeeder::class
         ]);
         $super->assignRole('super_admin');

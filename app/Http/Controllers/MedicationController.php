@@ -5,15 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Medication;
 use App\Http\Requests\StoreMedicationRequest;
 use App\Http\Requests\UpdateMedicationRequest;
+use App\Traits\V1\ApiResponse;
 
 class MedicationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    use ApiResponse;
+
+    private $medicationService;
+
     public function index()
     {
-        //
+     $data = Medication::all();
+     return ApiResponse::success('Global medications retrieved successfully.',$data);
     }
 
     /**

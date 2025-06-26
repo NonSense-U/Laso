@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Medication;
+use App\Models\PackagesOrder;
 use App\Models\Pharmacy;
 use App\Models\Supplier;
 use Illuminate\Database\Migrations\Migration;
@@ -20,10 +21,10 @@ return new class extends Migration
             $table->integer('quantity');
             $table->timestamp('production_date');
             $table->timestamp('expiration_date');
-            $table->foreignIdFor(Supplier::class);
+            $table->foreignIdFor(PackagesOrder::class);
             $table->foreignIdFor(Pharmacy::class);
             $table->integer('purchase_price');
-            $table->boolean('is_viable');
+            $table->boolean('is_viable')->nullable()->default(true);
             $table->timestamps();
         });
     }
