@@ -10,7 +10,7 @@ collection:
     meta:
       id: fld_9088fe657e7f4665a64296038bb52e1f
       created: 1750012727351
-      modified: 1750954095745
+      modified: 1750976619033
       sortKey: -1750012727351
       description: ""
     children:
@@ -135,7 +135,7 @@ collection:
         meta:
           id: req_3e2df6f238c444ab87a69710225a953b
           created: 1750119585430
-          modified: 1750762028424
+          modified: 1750956390621
           isPrivate: false
           description: ""
           sortKey: -1750120233630
@@ -145,7 +145,8 @@ collection:
           text: |-
             {
             	"name" : "updated_name",
-            	"company" : "updated company"
+            	"company" : "updated company",
+            	"phone_number" : "123"
             }
         headers:
           - name: Content-Type
@@ -314,7 +315,7 @@ collection:
         meta:
           id: req_2a4195d3219b412a842da317a543b323
           created: 1750052144156
-          modified: 1750120258385
+          modified: 1750976523211
           isPrivate: false
           description: ""
           sortKey: -1750120256575
@@ -323,12 +324,15 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"username" : "{% faker 'randomUserName' %}",
-            	"email" : "{% faker 'randomEmail' %}",
-            	"first_name" : "{% faker 'randomFirstName' %}",
-            	"last_name" : "{% faker 'randomLastName' %}",
-            	"password" : "123",
-            	"password_confirmation" : "123"
+            	"worker": {
+            		"username" : "{% faker 'randomUserName' %}",
+            		"email" : "smile@gmail.com",
+            		"first_name" : "{% faker 'randomFirstName' %}",
+            		"last_name" : "{% faker 'randomLastName' %}",
+            		"password" : "123",
+            		"password_confirmation" : "123"
+            	},
+            	"login" : true
             }
         headers:
           - name: Content-Type
@@ -538,6 +542,47 @@ collection:
             send: true
             store: true
           rebuildPath: true
+  - name: Mail
+    meta:
+      id: fld_9a6fbef398e24a82bb8836f4c65ac86f
+      created: 1750963153063
+      modified: 1750963153063
+      sortKey: -1750963153063
+      description: ""
+    children:
+      - url: "{{ _.localhost }}/api/v1/send-invitation"
+        name: Send Invitation
+        meta:
+          id: req_4e6f3241f7444638bd2f8d55dad6c27b
+          created: 1750963157527
+          modified: 1750973686684
+          isPrivate: false
+          description: ""
+          sortKey: -1750963169186
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"email" : "smile@gmail.com",
+            	"first_name" : "darling"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.2.0
+        authentication:
+          type: bearer
+          token: "{{ _.auth_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
   - url: "{{ _.localhost }}/api/test"
     name: Test
     meta:
@@ -564,7 +609,7 @@ cookieJar:
   meta:
     id: jar_9d59ac680a621bf04540579cae68a39452b9a9a6
     created: 1749705478344
-    modified: 1750954095741
+    modified: 1750976619025
   cookies:
     - id: ceeff576-fa4c-4327-8754-2a2f43c0eef1
       key: XSRF-TOKEN
@@ -591,8 +636,8 @@ environments:
   meta:
     id: env_9d59ac680a621bf04540579cae68a39452b9a9a6
     created: 1749705478341
-    modified: 1750954095743
+    modified: 1750976619029
     isPrivate: false
   data:
     localhost: 127.0.0.1:8000
-    auth_token: 3|8ljKcEso4CeIkPn8eKEp2ydn2S2B1i4cJ1DLFWxUe0342832
+    auth_token: 1|fyg3i61zzzicrofDjaQA5AkUqefwQDw7TiYH2ukkf08b6e93

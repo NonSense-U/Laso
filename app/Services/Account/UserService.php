@@ -9,7 +9,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class UserService
 {
-    public function createAdmin(array $payload) :array
+    public function createAdmin(array $payload): array
     {
         $user = User::create($payload['admin']);
 
@@ -21,8 +21,7 @@ class UserService
         $user->load('pharmacy');
         $data['user'] = $user;
 
-        if($payload['login'])
-        {
+        if ($payload['login']) {
             $data['token'] = $user->createToken('token')->plainTextToken;
         }
 
@@ -31,15 +30,19 @@ class UserService
 
     public function createWorker(array $payload)
     {
-        $allow_ticket = DB::table('pharmacy_staff_whitelist')->where('email','=',$payload['email'])->first();
-        if(!$allow_ticket)
-        {
+        $allow_ticket = DB::table('pharmacy_staff_whitelist')->where('email', '=', $payload['worker']['email'])->first();
+        if (!$allow_ticket) {
             //! this is not whitelisted
             throw new AccessDeniedHttpException();
         }
         $payload['pharmacy_id'] = $allow_ticket->pharmacy_id;
-        $worker = User::create($payload);
+        $worker = User::create($payload['worker']);
         $worker->assignRole('worker');
+
+        if ($payload['login']) {
+            $data['token'] = $worker->createToken('token')->plainTextToken;
+        }
+
         $data['worker'] = $worker;
         return $data;
     }

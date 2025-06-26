@@ -23,12 +23,13 @@ class CreateWorkerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'username' => ['required', 'string', 'unique:users'],
-            'email' => ['required_without:phone_number', 'email'],
-            'phone_number' => ['required_without:email', 'string'],
-            'first_name' => ['required', 'string'],
-            'last_name' => ['nullable', 'string'],
-            "password" => ['required','confirmed','string'],
+            'worker.username' => ['required', 'string', 'unique:users,username'],
+            'worker.email' => ['required_without:worker.phone_number', 'email','unique:users,email'],
+            'worker.phone_number' => ['required_without:worker.email', 'string','unique:users,phone_number'],
+            'worker.first_name' => ['required', 'string'],
+            'worker.last_name' => ['nullable', 'string'],
+            "worker.password" => ['required','confirmed','string'],
+            'login' => ['required','boolean']
         ];
     }
 }
