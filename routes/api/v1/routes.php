@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Accounts\AuthController;
 use App\Http\Controllers\Accounts\UserController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\MedicationController;
 use App\Http\Controllers\MedPackageController;
 use App\Http\Controllers\PackagesOrderController;
@@ -43,3 +44,7 @@ Route::get('/packages_orders/{packages_order_id}',[PackagesOrderController::clas
 //! MED PACKAGES
 Route::get('/med_packages', [MedPackageController::class, 'index'])->middleware('auth:sanctum');
 Route::post('/med_packages', [MedPackageController::class,'addMedPackages'])->middleware('auth:sanctum');
+
+
+//! ADMIN
+Route::post('/send-invitation',[EmailController::class,'sendInvitation'])->middleware('auth:sanctum');
