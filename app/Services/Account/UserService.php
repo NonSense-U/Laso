@@ -4,6 +4,8 @@ namespace App\Services\Account;
 
 use App\Models\Pharmacy;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class UserService
 {
@@ -27,9 +29,15 @@ class UserService
         return $data;
     }
 
-    public function createWorker(array $payload, User $admin)
+    public function createWorker(array $payload)
     {
-        $payload['pharmacy_id'] = $admin['pharmacy_id'];
+        $allow_ticket = DB::table('pharmacy_staff_whitelist')->where('email','=',$payload['email'])->first();
+        if(!$allow_ticket)
+        {
+            //! this is not whitelisted
+            throw new AccessDeniedHttpException();
+        }
+        $payload['pharmacy_id'] = $allow_ticket->pharmacy_id;
         $worker = User::create($payload);
         $worker->assignRole('worker');
         $data['worker'] = $worker;

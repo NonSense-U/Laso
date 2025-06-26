@@ -28,7 +28,7 @@ class UserController extends Controller
 
     public function createWorker(CreateWorkerRequest $request)
     {
-        $data = $this->userService->createWorker($request->validated(), $request->user());
+        $data = $this->userService->createWorker($request->validated());
         return ApiResponse::success('Worker created successfully.', $data, 201);
     }
 }

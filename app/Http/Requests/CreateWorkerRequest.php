@@ -12,7 +12,7 @@ class CreateWorkerRequest extends FormRequest
      */
     public function authorize(Request $request): bool
     {
-        return $request->user()->hasRole('admin');
+        return true;
     }
 
     /**
