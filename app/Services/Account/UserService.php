@@ -4,6 +4,8 @@ namespace App\Services\Account;
 
 use App\Models\Pharmacy;
 use App\Models\User;
+use Exception;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
@@ -30,20 +32,34 @@ class UserService
 
     public function createWorker(array $payload)
     {
-        $allow_ticket = DB::table('pharmacy_staff_whitelist')->where('email', '=', $payload['worker']['email'])->first();
-        if (!$allow_ticket) {
-            //! this is not whitelisted
-            throw new AccessDeniedHttpException();
-        }
-        $payload['pharmacy_id'] = $allow_ticket->pharmacy_id;
-        $worker = User::create($payload['worker']);
-        $worker->assignRole('worker');
+        DB::beginTransaction();
+        try {
+            $allow_ticket = Cache::get('signup_ticket:' . $payload['worker']['email']);
+            if (!$allow_ticket) {
+                //! this is not whitelisted
+                throw new AccessDeniedHttpException();
+            }
+            $payload['worker']['pharmacy_id'] = $allow_ticket;
+            $worker = User::create($payload['worker']);
+            $worker->assignRole('worker');
 
-        if ($payload['login']) {
-            $data['token'] = $worker->createToken('token')->plainTextToken;
-        }
+            DB::table('pharmacy_staff_whitelist')->insert([
+                'pharmacy_id' => $worker->pharmacy_id,
+                'email' => $payload['worker']['email']
+            ]);
 
-        $data['worker'] = $worker;
-        return $data;
+            Cache::delete('signup_ticket:' . $payload['worker']['email']);
+
+            if ($payload['login']) {
+                $data['token'] = $worker->createToken('token')->plainTextToken;
+            }
+
+            $data['worker'] = $worker;
+            DB::commit();
+            return $data;
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
     }
 }

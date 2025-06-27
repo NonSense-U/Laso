@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\EmailInvitation;
 use App\Traits\V1\ApiResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
@@ -32,11 +33,12 @@ class EmailController extends Controller
         }
 
         try {
-            DB::table('pharmacy_staff_whitelist')->insert([
-                'pharmacy_id' => $pharmacyId,
-                'email' => $request->email,
-            ]);
-
+            //? WHEN ACCEPTING ONLY
+            // DB::table('pharmacy_staff_whitelist')->insert([
+            //     'pharmacy_id' => $pharmacyId,
+            //     'email' => $request->email,
+            // ]);
+            Cache::put('signup_ticket:'.$request->email,$pharmacyId,now()->addDays(7));
             Mail::to($request->email)->queue(new EmailInvitation(
                 $request->first_name
             ));
