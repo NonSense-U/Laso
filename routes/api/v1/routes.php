@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Accounts\AuthController;
 use App\Http\Controllers\Accounts\UserController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\MedicationController;
 use App\Http\Controllers\MedPackageController;
@@ -48,3 +49,4 @@ Route::post('/med_packages', [MedPackageController::class,'addMedPackages'])->mi
 
 //! ADMIN
 Route::post('/send-invitation',[EmailController::class,'sendInvitation'])->middleware('auth:sanctum');
+Route::delete('/admin/disable-worker/{worker_id}',[AdminController::class,'disableWorker'])->middleware('auth:sanctum');

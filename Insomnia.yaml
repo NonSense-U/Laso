@@ -10,7 +10,7 @@ collection:
     meta:
       id: fld_9088fe657e7f4665a64296038bb52e1f
       created: 1750012727351
-      modified: 1750976619033
+      modified: 1751131597316
       sortKey: -1750012727351
       description: ""
     children:
@@ -19,7 +19,7 @@ collection:
         meta:
           id: req_262015e262594d99b26367a8a7c3a182
           created: 1750012743848
-          modified: 1750761934460
+          modified: 1751041194318
           isPrivate: false
           description: ""
           sortKey: -1750012751982
@@ -315,7 +315,7 @@ collection:
         meta:
           id: req_2a4195d3219b412a842da317a543b323
           created: 1750052144156
-          modified: 1750976523211
+          modified: 1751038864296
           isPrivate: false
           description: ""
           sortKey: -1750120256575
@@ -583,12 +583,59 @@ collection:
             send: true
             store: true
           rebuildPath: true
-  - url: "{{ _.localhost }}/api/test"
+  - name: Admin
+    meta:
+      id: fld_858f7c61c3fc44519e6a35c1e6e2365d
+      created: 1751037719851
+      modified: 1751037804646
+      sortKey: -1751037719851
+      description: ""
+    children:
+      - name: Worker Management
+        meta:
+          id: fld_d5739812f97942e4b11ff698f01cb97e
+          created: 1751037819988
+          modified: 1751037822586
+          sortKey: -1751037794875
+          description: ""
+        children:
+          - url: "{{ _.localhost }}/api/v1/admin/disable-worker/17"
+            name: Disable Worker
+            meta:
+              id: req_df32545a3c1b4587876660488f43484e
+              created: 1751037761342
+              modified: 1751040863752
+              isPrivate: false
+              description: ""
+              sortKey: -1751037831261
+            method: DELETE
+            headers:
+              - name: User-Agent
+                value: insomnia/11.2.0
+            authentication:
+              type: bearer
+              token: "{{ _.auth_token }}"
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+  - name: Worker
+    meta:
+      id: fld_ad46ce7a41f7462394c5d6423e49f26d
+      created: 1751037728231
+      modified: 1751037731952
+      sortKey: -1751037724041
+      description: ""
+  - url: "{{ _.localhost }}/"
     name: Test
     meta:
       id: req_f307f794e0c747039c516af0d6f233ee
       created: 1749705538370
-      modified: 1750013286637
+      modified: 1751110786717
       isPrivate: false
       description: ""
       sortKey: -1749705538371
@@ -609,35 +656,45 @@ cookieJar:
   meta:
     id: jar_9d59ac680a621bf04540579cae68a39452b9a9a6
     created: 1749705478344
-    modified: 1750976619025
+    modified: 1751131597304
   cookies:
-    - id: ceeff576-fa4c-4327-8754-2a2f43c0eef1
+    - id: 0cf9f3e9-9b0f-4dd1-8178-687b76eb15d7
       key: XSRF-TOKEN
-      value: eyJpdiI6ImQ5WVFvMmt3aUlGTGtXcXJwMWxNaGc9PSIsInZhbHVlIjoiT1FEUWFwMTc5Z21BU3lTWXRTOGdLWWpqUFh1OHhNSDVKYnh2ZXM1WW04M2ptd1dKRFozcjVqOCtKUEszNjdnd0VRU25LUisrdHEzUVU0ZVlyMFBYL2FXT2RiZk5LY1Rsb0xYT0toU21yTHJ5UjJ0c3FiVjZhWkhsTDhsdVZDQnYiLCJtYWMiOiIzODhhNTQzYTU0ODUxMDQzYmRlNTdkY2I1MGJhYWU1MDljZDA0ODBmZTBiZmY2NTQ4Y2FkNmM0ZDBjZTE0NTlkIiwidGFnIjoiIn0%3D
+      value: eyJpdiI6IjhJTmtqaXFvbkZSUFE1K3FpMTM0TGc9PSIsInZhbHVlIjoiekZjNTgvazBYb1owUzJiUTFPTy9FQkZ6bEZ5MkU3cTh6RUdjRkNrZTZDVGYzMTJPSEJpWEtIQXB5eVhvN3JmNXdvbk00VUVKaXJYVTdPUTdjWWU0NURDWEZzZHFYTzBlTjNkd1p3dVRRVVlHazgwdGF3ZkdYcXlLcXRwdTJoTU0iLCJtYWMiOiIxZmM4MzEyMGViOGUyMDJlODU1MjNhYTE0ZjlmYWQ2MmQ4ZDZjODRmNjY0NTU2ZmQ5OWQ1NDM1MzBhYjllYjEyIiwidGFnIjoiIn0%3D
       domain: 127.0.0.1
       path: /
       secure: false
       httpOnly: false
       creation: 2025-06-16T05:20:01.160Z
       hostOnly: true
-      lastAccessed: 2025-06-16T05:20:01.160Z
-    - id: e9fb6e59-25ac-4e65-9b86-9a223d55a8b7
+      lastAccessed: 2025-06-28T11:39:48.844Z
+    - id: af7e56e1-1288-465e-a95c-64537facc09a
       key: laravel_session
-      value: eyJpdiI6ImxId2sxa3grakd0QXNtbEpiNTcwSGc9PSIsInZhbHVlIjoiN2hpUEIxN2xaYU1reDlBb2NRSVZmMzZ4TnloQkV6S0FYV00zQVdxWGd3emVOOHZpaW1rcCtoU3VDa3AwbDltZXgyU01ZVDBLUmxWZ3YwZTVmY3Ryc2t5N1czT2RpNVk0UFF2d2VwOVI2OEd6cmx2cGpybjJWT1JnMDdGVEUrMzgiLCJtYWMiOiIyNjJhY2RkZGQxN2MxODQ0YjUwYTQ5ZGUxOTQxMjY1MmE3YTEzNWYyYTBkZDk0OGRhMDFjNzdkMWIyZTRkMWYwIiwidGFnIjoiIn0%3D
+      value: eyJpdiI6Im1rbHdaWVlGcFl1anVoT2h0YTQvYnc9PSIsInZhbHVlIjoieGxtS0JpaXlzd3FLaWdkR1NjWGdVSnJ1aHNHenRQTUJ6OGVOeVFoMlRNNEh3cHhKYW9lQUdFZUlENGowcTNPVWVXb3RaZCs0S1ZzcHNwRlUrUWVCYlNBeXRuSDhFaThyMldQb2NMbFc4S0NjQlQxejBORXNVd3VOcGJoajdhUU4iLCJtYWMiOiI2MzBkZDY3MDYzMmE2MTRhNTRiY2E4MDU5YzkyMzk3NmNmYWQzMTM1N2E5ZjYzMWM0NWZmMjZlYjA5OGJhYjMxIiwidGFnIjoiIn0%3D
       domain: 127.0.0.1
       path: /
       secure: false
       httpOnly: true
       creation: 2025-06-16T05:20:01.162Z
       hostOnly: true
-      lastAccessed: 2025-06-16T05:20:01.162Z
+      lastAccessed: 2025-06-28T11:39:48.844Z
+    - id: 4a28c96a-196e-40da-9364-8033f9854dcc
+      key: laso_session
+      value: eyJpdiI6Imt6Ujd4MGQ3bkR4SXh4WHlYMmVpeHc9PSIsInZhbHVlIjoiRXVNMElXeTAzazFUeExKWjZrZDlkVXIrVno0QWtLNVhXb212SVM5N1FXUUhmUmdveWUzVHMyTzkyRXhCdlgzY204VkdMUzZXOUtVNDBsRk4yVCtLb1JiMEVoNHBmWmdRK0NTNUxwWFdZYU9NRHFwN1RmS1dPSTRWaHYxNE9YaSsiLCJtYWMiOiI1MTkxYThhZjcwNDNkY2ZiYTUzMzY4ZjAzNzQxZGJmNGVmYzM3NjViZWIyOTcyNjFkMmIxYTIxYmM2ZDhkODdkIiwidGFnIjoiIn0%3D
+      domain: 127.0.0.1
+      path: /
+      secure: false
+      httpOnly: true
+      creation: 2025-06-28T11:32:53.792Z
+      hostOnly: true
+      lastAccessed: 2025-06-28T11:32:53.792Z
 environments:
   name: Base Environment
   meta:
     id: env_9d59ac680a621bf04540579cae68a39452b9a9a6
     created: 1749705478341
-    modified: 1750976619029
+    modified: 1751131597309
     isPrivate: false
   data:
     localhost: 127.0.0.1:8000
-    auth_token: 1|fyg3i61zzzicrofDjaQA5AkUqefwQDw7TiYH2ukkf08b6e93
+    auth_token: 5|VcfAdEWcdSUy8vkrOTonVU8c3OFrFDa3v9NAA2Rmed0375bf

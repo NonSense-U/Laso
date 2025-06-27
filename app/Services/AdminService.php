@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Services;
+
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
+class AdminService
+{
+
+    public function disableWorker(User $user, $worker_id)
+    {
+        /** @var \App\Models\User $worker */
+        $worker = $user->pharmacy->staff()->find($worker_id); //! DATABASE query instead of memory filer idk UwU
+        if (!$worker) {
+            throw new NotFoundHttpException();
+        }
+        $worker->tokens()->delete();
+        DB::table('pharmacy_staff_whitelist')->where('email', '=', $worker->email)->delete();
+        return;
+    }
+}
