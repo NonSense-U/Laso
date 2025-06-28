@@ -10,7 +10,7 @@ collection:
     meta:
       id: fld_9088fe657e7f4665a64296038bb52e1f
       created: 1750012727351
-      modified: 1751131597316
+      modified: 1751144951797
       sortKey: -1750012727351
       description: ""
     children:
@@ -651,12 +651,36 @@ collection:
         send: true
         store: true
       rebuildPath: true
+  - url: "{{ _.localhost }}/api/v1/get-storage"
+    name: Get Storage
+    meta:
+      id: req_d380cde5818e4392a92fd3a12cda8fcd
+      created: 1751140209439
+      modified: 1751140243961
+      isPrivate: false
+      description: ""
+      sortKey: -1751037724141
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.2.0
+    authentication:
+      type: bearer
+      token: "{{ _.auth_token }}"
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
 cookieJar:
   name: Default Jar
   meta:
     id: jar_9d59ac680a621bf04540579cae68a39452b9a9a6
     created: 1749705478344
-    modified: 1751131597304
+    modified: 1751144951789
   cookies:
     - id: 0cf9f3e9-9b0f-4dd1-8178-687b76eb15d7
       key: XSRF-TOKEN
@@ -693,8 +717,8 @@ environments:
   meta:
     id: env_9d59ac680a621bf04540579cae68a39452b9a9a6
     created: 1749705478341
-    modified: 1751131597309
+    modified: 1751144951794
     isPrivate: false
   data:
     localhost: 127.0.0.1:8000
-    auth_token: 5|VcfAdEWcdSUy8vkrOTonVU8c3OFrFDa3v9NAA2Rmed0375bf
+    auth_token: 1|BnlzklXidhLdaIF5vz5cq0fMDtWopqxOma9nW7QQf9125616

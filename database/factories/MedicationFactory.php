@@ -18,11 +18,12 @@ class MedicationFactory extends Factory
     public function definition(): array
     {
         return [
-            'med_name' => fake()->colorName(),
+            'name' => fake()->colorName(),
             'serial_number' => rand(100,10000),
             'scientific_name' => 'Paradol',
             'price' =>  100,
-            'notes' => 'i hate life',
+            'strength' => '500mg',
+            'notes' => 'i am a note',
             'manufacturer_id' => Manufacturer::factory()
         ];
     }

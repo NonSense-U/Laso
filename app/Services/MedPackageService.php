@@ -12,6 +12,40 @@ use Illuminate\Support\Facades\DB;
 
 class MedPackageService
 {
+    public function getStorage(User $user)
+    {
+        // dd(now()->toDateString());
+        $packages = $user->pharmacy->med_packages()->where('is_viable', '=', true)->with('medication')->get();
+
+        $grouped = $packages->groupBy(
+            function ($package) {
+                return $package->medication_id;
+            }
+        );
+
+
+        // dd($grouped);
+
+        $medications = $grouped->map(function ($groupedPackages) {
+            $medication = $groupedPackages->first()->medication;
+
+            $groupedPackages->each(function ($package) {
+                unset($package->medication);
+            });
+
+            return [
+                'name' => $medication->name,
+                'price' => $medication->price,
+                'strength' => $medication->strength,
+                'stock' => $groupedPackages->sum('quantity'), //! sum of package quantities
+                'expires_in' => $groupedPackages->min('expiration_date'),
+                'packages' => $groupedPackages,
+            ];
+        })->values();
+
+        return $medications;
+    }
+
     public function addMedPackages(array $payload, User $user)
     {
         DB::beginTransaction();

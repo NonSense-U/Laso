@@ -15,8 +15,9 @@ return new class extends Migration
         Schema::create('medications', function (Blueprint $table) {
             $table->id();
             $table->string('serial_number')->unique();
-            $table->string('med_name')->index();
+            $table->string('name')->index();
             $table->string('scientific_name');
+            $table->string('strength');
             $table->integer('price');
             $table->string('notes');
             $table->foreignIdFor(Manufacturer::class)->constrained()->cascadeOnDelete();

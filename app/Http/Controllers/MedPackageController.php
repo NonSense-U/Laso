@@ -23,14 +23,20 @@ class MedPackageController extends Controller
     public function index(Request $request)
     {
         $data = $request->user()->pharmacy->med_packages;
-        return ApiResponse::success('Med packages retrieved successfully.',$data,200);
+        return ApiResponse::success('Med packages retrieved successfully.', $data, 200);
     }
 
     public function addMedPackages(StoreMedPackagesRequest $request)
     {
         $data = $this->medPackagesServices->addMedPackages($request->validated(), $request->user());
 
-        return ApiResponse::success('Medication Packages has been added successfully.',$data);
+        return ApiResponse::success('Medication Packages has been added successfully.', $data);
     }
 
+
+    public function showStorage(Request $request)
+    {
+        $data = $this->medPackagesServices->getStorage($request->user());
+        return ApiResponse::success('Storage info retrieved successfully.', $data);
+    }
 }
