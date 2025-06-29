@@ -17,9 +17,15 @@ class AdminController extends Controller
         $this->adminService = $adminService;
     }
 
+    public function enableWorker(Request $request, $worker_id)
+    {
+        $this->adminService->enableWorker($request->user(), $worker_id);
+        return ApiResponse::success('Worker enabled successfully.');
+    }
+
     public function disableWorker(Request $request, $worker_id)
     {
-        $this->adminService->disableWorker($request->user(),$worker_id);
+        $this->adminService->disableWorker($request->user(), $worker_id);
         return ApiResponse::success('Worker disabled successfully.');
     }
 }
