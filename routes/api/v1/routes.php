@@ -50,7 +50,7 @@ Route::post('/med_packages', [MedPackageController::class,'addMedPackages'])->mi
 //! ADMIN
 Route::post('/send-invitation',[EmailController::class,'sendInvitation'])->middleware('auth:sanctum');
 Route::delete('/admin/disable-worker/{worker_id}',[AdminController::class,'disableWorker'])->middleware('auth:sanctum');
-
+Route::post('/admin/enable-worker/{worker_id}', [AdminController::class,'enableWorker'])->middleware('auth:sanctum');
 
 //! STORAGE
 Route::get('/get-storage',[MedPackageController::class,'showStorage'])->middleware('auth:sanctum');

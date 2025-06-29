@@ -10,7 +10,7 @@ collection:
     meta:
       id: fld_9088fe657e7f4665a64296038bb52e1f
       created: 1750012727351
-      modified: 1751144951797
+      modified: 1751234901489
       sortKey: -1750012727351
       description: ""
     children:
@@ -19,7 +19,7 @@ collection:
         meta:
           id: req_262015e262594d99b26367a8a7c3a182
           created: 1750012743848
-          modified: 1751041194318
+          modified: 1751234842939
           isPrivate: false
           description: ""
           sortKey: -1750012751982
@@ -315,7 +315,7 @@ collection:
         meta:
           id: req_2a4195d3219b412a842da317a543b323
           created: 1750052144156
-          modified: 1751038864296
+          modified: 1751234922843
           isPrivate: false
           description: ""
           sortKey: -1750120256575
@@ -332,7 +332,7 @@ collection:
             		"password" : "123",
             		"password_confirmation" : "123"
             	},
-            	"login" : true
+            	"login" : false
             }
         headers:
           - name: Content-Type
@@ -675,12 +675,36 @@ collection:
         send: true
         store: true
       rebuildPath: true
+  - url: "{{ _.localhost }}/api/v1/admin/enable-worker/17"
+    name: Enable Worker
+    meta:
+      id: req_cdcf128f590e4759aeae146e33a0abdc
+      created: 1751234811143
+      modified: 1751234997761
+      isPrivate: false
+      description: ""
+      sortKey: -1751234811143
+    method: POST
+    headers:
+      - name: User-Agent
+        value: insomnia/11.2.0
+    authentication:
+      type: bearer
+      token: "{{ _.auth_token }}"
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
 cookieJar:
   name: Default Jar
   meta:
     id: jar_9d59ac680a621bf04540579cae68a39452b9a9a6
     created: 1749705478344
-    modified: 1751144951789
+    modified: 1751234901484
   cookies:
     - id: 0cf9f3e9-9b0f-4dd1-8178-687b76eb15d7
       key: XSRF-TOKEN
@@ -717,8 +741,8 @@ environments:
   meta:
     id: env_9d59ac680a621bf04540579cae68a39452b9a9a6
     created: 1749705478341
-    modified: 1751144951794
+    modified: 1751234901487
     isPrivate: false
   data:
     localhost: 127.0.0.1:8000
-    auth_token: 1|BnlzklXidhLdaIF5vz5cq0fMDtWopqxOma9nW7QQf9125616
+    auth_token: 3|lTJmVxglHvePON4NcoRZdoibWVCYIDmlooD1OvZr2c3fc208
