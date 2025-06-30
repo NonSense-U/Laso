@@ -17,6 +17,13 @@ class AdminController extends Controller
         $this->adminService = $adminService;
     }
 
+
+    public function getWorkers(Request $request)
+    {
+        // $this->adminService->getWorkers();
+    }
+
+
     public function enableWorker(Request $request, $worker_id)
     {
         $this->adminService->enableWorker($request->user(), $worker_id);

@@ -10,7 +10,7 @@ collection:
     meta:
       id: fld_9088fe657e7f4665a64296038bb52e1f
       created: 1750012727351
-      modified: 1751234901489
+      modified: 1751271976741
       sortKey: -1750012727351
       description: ""
     children:
@@ -587,7 +587,7 @@ collection:
     meta:
       id: fld_858f7c61c3fc44519e6a35c1e6e2365d
       created: 1751037719851
-      modified: 1751037804646
+      modified: 1751271368356
       sortKey: -1751037719851
       description: ""
     children:
@@ -599,16 +599,40 @@ collection:
           sortKey: -1751037794875
           description: ""
         children:
-          - url: "{{ _.localhost }}/api/v1/admin/disable-worker/17"
+          - url: "{{ _.localhost }}/api/v1/admin/disable-worker/2"
             name: Disable Worker
             meta:
               id: req_df32545a3c1b4587876660488f43484e
               created: 1751037761342
-              modified: 1751040863752
+              modified: 1751271719237
               isPrivate: false
               description: ""
               sortKey: -1751037831261
             method: DELETE
+            headers:
+              - name: User-Agent
+                value: insomnia/11.2.0
+            authentication:
+              type: bearer
+              token: "{{ _.auth_token }}"
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.localhost }}/api/v1/admin/enable-worker/17"
+            name: Enable Worker
+            meta:
+              id: req_cdcf128f590e4759aeae146e33a0abdc
+              created: 1751234811143
+              modified: 1751269756460
+              isPrivate: false
+              description: ""
+              sortKey: -1751037831361
+            method: POST
             headers:
               - name: User-Agent
                 value: insomnia/11.2.0
@@ -675,36 +699,12 @@ collection:
         send: true
         store: true
       rebuildPath: true
-  - url: "{{ _.localhost }}/api/v1/admin/enable-worker/17"
-    name: Enable Worker
-    meta:
-      id: req_cdcf128f590e4759aeae146e33a0abdc
-      created: 1751234811143
-      modified: 1751234997761
-      isPrivate: false
-      description: ""
-      sortKey: -1751234811143
-    method: POST
-    headers:
-      - name: User-Agent
-        value: insomnia/11.2.0
-    authentication:
-      type: bearer
-      token: "{{ _.auth_token }}"
-    settings:
-      renderRequestBody: true
-      encodeUrl: true
-      followRedirects: global
-      cookies:
-        send: true
-        store: true
-      rebuildPath: true
 cookieJar:
   name: Default Jar
   meta:
     id: jar_9d59ac680a621bf04540579cae68a39452b9a9a6
     created: 1749705478344
-    modified: 1751234901484
+    modified: 1751271976736
   cookies:
     - id: 0cf9f3e9-9b0f-4dd1-8178-687b76eb15d7
       key: XSRF-TOKEN
@@ -741,8 +741,8 @@ environments:
   meta:
     id: env_9d59ac680a621bf04540579cae68a39452b9a9a6
     created: 1749705478341
-    modified: 1751234901487
+    modified: 1751271976738
     isPrivate: false
   data:
     localhost: 127.0.0.1:8000
-    auth_token: 3|lTJmVxglHvePON4NcoRZdoibWVCYIDmlooD1OvZr2c3fc208
+    auth_token: 1|aobm52BzVRjmFnvowJoUTYWb55YCFUkbfihuuZwCe71ec0da

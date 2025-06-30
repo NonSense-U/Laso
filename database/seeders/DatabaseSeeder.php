@@ -29,12 +29,12 @@ class DatabaseSeeder extends Seeder
         $super->save();
 
         $this->call([
+            RolesAndPermissionsSeeder::class,
             UserSeeder::class,
             SupplierSeeder::class,
             PackagesOrderSeeder::class,
             MedicationSeeder::class,
             MedPackageSeeder::class,
-            RolesAndPermissionsSeeder::class
         ]);
         $super->assignRole('super_admin');
     }

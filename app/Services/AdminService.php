@@ -2,12 +2,20 @@
 
 namespace App\Services;
 
+use App\Http\Resources\V1\Admin\WorkerResource;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AdminService
 {
+
+
+    public function getWorkers(User $user)
+    {
+        $workers = $user->pharmacy->staff()->role('worker')->get();
+        return WorkerResource::collection($workers);
+    }
 
     public function enableWorker(User $user, $worker_id)
     {
@@ -27,7 +35,7 @@ class AdminService
     public function disableWorker(User $user, $worker_id)
     {
         /** @var \App\Models\User $worker */
-        $worker = $user->pharmacy->staff()->find($worker_id); //! DATABASE query instead of memory filer idk UwU
+        $worker = $user->pharmacy->staff()->role('worker')->find($worker_id); //! DATABASE query instead of memory filer idk UwU
         if (!$worker) {
             throw new NotFoundHttpException();
         }

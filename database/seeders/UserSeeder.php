@@ -13,8 +13,8 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(5)->hasPharmacy()->create();
-        User::factory(10)->create([
+        // User::factory(5)->hasPharmacy()->create();
+        User::factory(10)->isWhiteListed()->create([
             'pharmacy_id' => 1
         ]);
     }

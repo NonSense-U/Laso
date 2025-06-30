@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Pharmacy;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -52,7 +53,19 @@ class UserFactory extends Factory
                 'owner_id' => $user->id
             ]);
             $user->pharmacy_id = $pharmacy->id;
+            $user->assignRole('admin');
             $user->save();
+        });
+    }
+
+    public function isWhiteListed(): Factory
+    {
+        return  $this->afterCreating(function (User $user) {
+            DB::table('pharmacy_staff_whitelist')->insert([
+                'pharmacy_id' => $user->pharmacy_id,
+                'email' => $user->email
+            ]);
+            $user->assignRole('worker');
         });
     }
 }
