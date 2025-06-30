@@ -13,7 +13,7 @@ class MedPackageSeeder extends Seeder
      */
     public function run(): void
     {
-        MedPackage::factory(4)->create([
+        MedPackage::factory(100)->create([
             'pharmacy_id' => 1,
             'packages_order_id' => 1
         ]);

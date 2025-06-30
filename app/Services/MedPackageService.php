@@ -24,13 +24,28 @@ class MedPackageService
         );
 
 
-        // dd($grouped);
+        $info = [
+            'total_meds' => 0,
+            'expires_soon' => 0,
+            'expired' => 0,
+            'low_stock' => 0,
+        ];
 
-        $medications = $grouped->map(function ($groupedPackages) {
+        $medications = $grouped->map(function ($groupedPackages) use (&$info) {
             $medication = $groupedPackages->first()->medication;
 
-            $groupedPackages->each(function ($package) {
+            $groupedPackages->each(function ($package) use (&$info) {
                 unset($package->medication);
+
+                if ($package->expiration_date <= now()->toDateString()) {
+                    $info['expired'] += 1;
+                } else if ($package->expiration_date <= now()->addWeeks(2)->toDateString()) {
+                    $info['expires_soon'] += 1;
+                }
+
+                if ($package->quantity < 10) {
+                    $info['low_stock'] += 1;
+                }
             });
 
             return [
@@ -43,7 +58,8 @@ class MedPackageService
             ];
         })->values();
 
-        return $medications;
+        $info['total_meds'] = $medications->count();
+        return ['overview' => $info, 'medications' => $medications];
     }
 
     public function addMedPackages(array $payload, User $user)

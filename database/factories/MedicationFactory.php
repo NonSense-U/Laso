@@ -10,6 +10,25 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class MedicationFactory extends Factory
 {
+
+    private array $medicationNames = [
+        'Paracetamol',
+        'Ibuprofen',
+        'Metformin',
+        'Amoxicillin',
+        'Lisinopril',
+        'Amlodipine',
+        'Omeprazole',
+        'Atorvastatin',
+        'Albuterol',
+        'Gabapentin',
+        'Simvastatin',
+        'Levothyroxine',
+        'Hydrochlorothiazide',
+        'Sertraline',
+        'Ciprofloxacin'
+    ];
+
     /**
      * Define the model's default state.
      *
@@ -18,8 +37,8 @@ class MedicationFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->colorName(),
-            'serial_number' => rand(100,10000),
+            'name' => fake()->randomElement($this->medicationNames),
+            'serial_number' => rand(100, 10000),
             'scientific_name' => 'Paradol',
             'price' =>  100,
             'strength' => '500mg',
