@@ -29,6 +29,7 @@ class PharmacyFactory extends Factory
     public function configure(): Factory
     {
         return $this->afterCreating(function (Pharmacy $pharmacy) {
+            
             Vault::create([
                 'pharmacy_id' => $pharmacy->id,
                 'name' => 'main',

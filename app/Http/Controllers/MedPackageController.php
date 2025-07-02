@@ -39,4 +39,10 @@ class MedPackageController extends Controller
         $data = $this->medPackagesServices->getStorage($request->user());
         return ApiResponse::success('Storage info retrieved successfully.', $data);
     }
+
+    public function expiredMeds(Request $request)
+    {
+        $data = $this->medPackagesServices->getExpiredMeds($request->user());
+        return ApiResponse::success('Expired meds retrieved successfully.', $data);
+    }
 }

@@ -27,8 +27,6 @@ class PharmacyController extends Controller
     }
 
 
-    public function showStorage(Request $request) {}
-
     /**
      * Remove the specified resource from storage.
      */

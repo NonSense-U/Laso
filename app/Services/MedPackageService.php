@@ -12,6 +12,13 @@ use Illuminate\Support\Facades\DB;
 
 class MedPackageService
 {
+
+    public function getExpiredMeds(User $user)
+    {
+        $expiredMeds = $user->pharmacy->med_packages()->where('expiration_date', '<=', now()->toDateString())->with('medication')->get();
+        return $expiredMeds;
+    }
+
     public function getStorage(User $user)
     {
         // dd(now()->toDateString());

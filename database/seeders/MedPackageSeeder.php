@@ -15,7 +15,6 @@ class MedPackageSeeder extends Seeder
     {
         MedPackage::factory(100)->create([
             'pharmacy_id' => 1,
-            'packages_order_id' => 1
         ]);
     }
 }

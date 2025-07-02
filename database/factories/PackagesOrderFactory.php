@@ -21,7 +21,7 @@ class PackagesOrderFactory extends Factory
             'supplier_id' => rand(1, 5),
             'pharmacy_id' => '1',
             'total_price' => rand(100,1000),
-            'paid_ammount' => rand(1,100)
+            'paid_ammount' => rand(100,1000)
         ];
     }
 }

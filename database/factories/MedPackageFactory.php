@@ -22,10 +22,10 @@ class MedPackageFactory extends Factory
         return [
             'medication_id' => rand(1,5),
             'quantity' => rand(1, 100),
-            'production_date' => fake()->date(),
-            'expiration_date' => fake()->date(),
+            'production_date' => now()->subWeeks(rand(1,12))->toDateString(),
+            'expiration_date' => now()->subWeeks(rand(0,8))->addMonths(rand(0,14))->toDateString(),
             'pharmacy_id' => Pharmacy::factory(),
-            'packages_order_id' => PackagesOrder::factory(),
+            'packages_order_id' => rand(1,5),
             'purchase_price' => rand(100, 1000),
             'is_viable' => true
         ];

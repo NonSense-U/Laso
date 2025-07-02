@@ -50,9 +50,16 @@ class SupplierController extends Controller
         return ApiResponse::success('Supplier updated succesfully', $data, 200);
     }
 
-    public function deleteSupplier(Request $request, $supplier_id)
+    // public function deleteSupplier(Request $request, $supplier_id)
+    // {
+    //     $this->supplierService->deleteSupplier($request->user(), $supplier_id);
+    //     return ApiResponse::success('Supplier deleted successfully.', [], 204);
+    // }
+
+
+    public function getSupplierRecord(Request $request, $supplier_id)
     {
-        $this->supplierService->deleteSupplier($request->user(), $supplier_id);
-        return ApiResponse::success('Supplier deleted successfully.', [], 204);
+        $data = $this->supplierService->getRecord($supplier_id);
+        return ApiResponse::success('Supplier record retrieved successfully.', $data);
     }
 }

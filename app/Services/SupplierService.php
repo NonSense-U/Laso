@@ -38,4 +38,11 @@ class SupplierService
         $supplier->delete();
         return;
     }
+
+    public function getRecord($supplier_id)
+    {
+        $supplier = Supplier::findOrFail($supplier_id);
+        $records = $supplier->packages_orders()->whereColumn('total_price', '>', 'paid_ammount')->with('packages')->get();
+        return $records;
+    }
 }
