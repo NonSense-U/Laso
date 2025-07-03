@@ -32,32 +32,32 @@ Route::get('/supplier/get', [SupplierController::class, 'index'])->middleware('a
 Route::get('/supplier/get/{supplier_id}', [SupplierController::class, 'show'])->middleware('auth:sanctum');
 Route::post('/supplier/create', [SupplierController::class, 'createSupplier'])->middleware('auth:sanctum');
 Route::put('/supplier/update/{supplier_id}', [SupplierController::class, 'updateSupplier'])->middleware('auth:sanctum');
-Route::get('/supplier/record/{supplier_id}', [SupplierController::class,'getSupplierRecord'])->middleware('auth:sanctum');
+Route::get('/supplier/record/{supplier_id}', [SupplierController::class, 'getSupplierRecord'])->middleware('auth:sanctum');
 // Route::delete('/supplier/delete/{supplier_id}',[SupplierController::class,'deleteSupplier'])->middleware('auth:sanctum'); //! NOT NOW
 
 //! GLOBAL MEDICATIONS
-Route::get('/global-meds', [MedicationController::class,'index']);
-
+Route::get('/global-meds', [MedicationController::class, 'index']);
+Route::get('/global-meds/{medication_id}', [MedicationController::class, 'show'])->middleware('auth:sanctum');
 
 //! PACKAGES_ORDERS
-Route::get('/packages_orders',[PackagesOrderController::class,'index'])->middleware('auth:sanctum');
-Route::get('/packages_orders/{packages_order_id}',[PackagesOrderController::class,'show']);
+Route::get('/packages_orders', [PackagesOrderController::class, 'index'])->middleware('auth:sanctum');
+Route::get('/packages_orders/{packages_order_id}', [PackagesOrderController::class, 'show']);
 
 
 //! MED PACKAGES
 Route::get('/med_packages', [MedPackageController::class, 'index'])->middleware('auth:sanctum');
-Route::post('/med_packages', [MedPackageController::class,'addMedPackages'])->middleware('auth:sanctum');
+Route::post('/med_packages', [MedPackageController::class, 'addMedPackages'])->middleware('auth:sanctum');
 
 
 //! ADMIN
-Route::post('/send-invitation',[EmailController::class,'sendInvitation'])->middleware('auth:sanctum');
-Route::delete('/admin/disable-worker/{worker_id}',[AdminController::class,'disableWorker'])->middleware('auth:sanctum');
-Route::post('/admin/enable-worker/{worker_id}', [AdminController::class,'enableWorker'])->middleware('auth:sanctum');
+Route::post('/send-invitation', [EmailController::class, 'sendInvitation'])->middleware('auth:sanctum');
+Route::delete('/admin/disable-worker/{worker_id}', [AdminController::class, 'disableWorker'])->middleware('auth:sanctum');
+Route::post('/admin/enable-worker/{worker_id}', [AdminController::class, 'enableWorker'])->middleware('auth:sanctum');
 
 //! STORAGE
-Route::get('/get-storage',[MedPackageController::class,'showStorage'])->middleware('auth:sanctum');
-Route::get('/expired-meds', [MedPackageController::class,'expiredMeds'])->middleware('auth:sanctum');
+Route::get('/get-storage', [MedPackageController::class, 'showStorage'])->middleware('auth:sanctum');
+Route::get('/expired-meds', [MedPackageController::class, 'expiredMeds'])->middleware('auth:sanctum');
 
 
 //! Sales
-Route::post('/sales/checkout',[WorkerController::class,'checkout'])->middleware('auth:sanctum');
+Route::post('/sales/checkout', [WorkerController::class, 'checkout'])->middleware('auth:sanctum');

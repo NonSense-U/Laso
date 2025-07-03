@@ -8,10 +8,13 @@ use App\Models\FastSellingItem;
 use App\Models\MedPackage;
 use App\Models\Payment;
 use App\Models\User;
+use App\Models\Vault;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 use Throwable;
+
+use function Pest\Laravel\get;
 
 class SalesService
 {
@@ -22,12 +25,25 @@ class SalesService
 
         try {
 
+            if ($payload['payment_method'] === 'cash') {
+                $main_vault = $user->pharmacy->vaults()->where('name', '=', 'main')->firstOrFail();
+                $main_vault->balance += $payload['total_price'];
+                $main_vault->save();
+            } elseif ($payload['payment_method'] === 'charity') {
+                $charity_vault = $user->pharmacy->vaults()->where('name', '=', 'charity')->firstOrFail();
+                if ($charity_vault->balance < $payload['total_price']) {
+                    throw new UnprocessableEntityHttpException('There is not enough money in the charity box.');
+                }
+                $charity_vault->balance -= $payload['total_price'];
+                $charity_vault->save();
+            }
+            //! HANDLE DEPT
+
             $payment = Payment::create([
                 'pharmacy_id' => $user->pharmacy_id,
                 'payment_method' => $payload['payment_method'],
                 'paid_price' => $payload['total_price']
             ]);
-
 
             $cart = Cart::create([
                 'total_price' => $payload['total_price'],

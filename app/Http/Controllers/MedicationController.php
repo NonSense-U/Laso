@@ -6,6 +6,7 @@ use App\Models\Medication;
 use App\Http\Requests\StoreMedicationRequest;
 use App\Http\Requests\UpdateMedicationRequest;
 use App\Traits\V1\ApiResponse;
+use Illuminate\Http\Request;
 
 class MedicationController extends Controller
 {
@@ -38,9 +39,10 @@ class MedicationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Medication $medication)
+    public function show(Request $request,int $medication_id)
     {
-        //
+        $medication = Medication::findOrFail($medication_id);
+        return ApiResponse::success('ok',['medication' => $medication]);
     }
 
     /**
