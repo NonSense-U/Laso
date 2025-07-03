@@ -23,7 +23,7 @@ return new class extends Migration
             $table->timestamp('expiration_date');
             $table->foreignIdFor(PackagesOrder::class);
             $table->foreignIdFor(Pharmacy::class);
-            $table->integer('purchase_price');
+            $table->integer('base_price');
             $table->boolean('is_viable')->nullable()->default(true);
             $table->timestamps();
         });

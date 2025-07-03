@@ -8,6 +8,7 @@ use App\Http\Controllers\MedicationController;
 use App\Http\Controllers\MedPackageController;
 use App\Http\Controllers\PackagesOrderController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\WorkerController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/test', function () {
@@ -56,3 +57,7 @@ Route::post('/admin/enable-worker/{worker_id}', [AdminController::class,'enableW
 //! STORAGE
 Route::get('/get-storage',[MedPackageController::class,'showStorage'])->middleware('auth:sanctum');
 Route::get('/expired-meds', [MedPackageController::class,'expiredMeds'])->middleware('auth:sanctum');
+
+
+//! Sales
+Route::post('/sales/checkout',[WorkerController::class,'checkout'])->middleware('auth:sanctum');

@@ -29,4 +29,5 @@ class Pharmacy extends Model
     {
         return $this->hasMany(Vault::class);
     }
+
 }

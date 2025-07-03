@@ -26,7 +26,7 @@ class MedPackageFactory extends Factory
             'expiration_date' => now()->subWeeks(rand(0,8))->addMonths(rand(0,14))->toDateString(),
             'pharmacy_id' => Pharmacy::factory(),
             'packages_order_id' => rand(1,5),
-            'purchase_price' => rand(100, 1000),
+            'base_price' => rand(100, 1000),
             'is_viable' => true
         ];
     }
