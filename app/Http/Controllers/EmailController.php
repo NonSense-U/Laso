@@ -34,6 +34,7 @@ class EmailController extends Controller
 
         try {
             //? WHEN ACCEPTING ONLY
+            //TODO
             // DB::table('pharmacy_staff_whitelist')->insert([
             //     'pharmacy_id' => $pharmacyId,
             //     'email' => $request->email,

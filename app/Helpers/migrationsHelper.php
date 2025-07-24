@@ -8,6 +8,7 @@ class migrationsHelper
     {
         $migrationsPath = database_path('migrations');
         $directories = glob($migrationsPath . '/*', GLOB_ONLYDIR);
-        return array_merge([$migrationsPath], $directories);
+        $subDirectories = glob($migrationsPath.'/*/*',GLOB_ONLYDIR);
+        return array_merge([$migrationsPath], $directories,$subDirectories);
     }
 }

@@ -14,6 +14,18 @@ class AdminService
     public function getWorkers(User $user)
     {
         $workers = $user->pharmacy->staff()->role('worker')->get();
+        $whitelist = $user->pharmacy->whitelist->pluck('email');
+
+        foreach ($workers as $worker) {
+            $isWhitelisted = $whitelist->contains($worker->email);
+
+            if ($isWhitelisted) {
+                $worker->status = $worker->isOnline() ? 'online' : 'offline';
+            } else {
+                $worker->status = 'disabled';
+            }
+        }
+
         return WorkerResource::collection($workers);
     }
 

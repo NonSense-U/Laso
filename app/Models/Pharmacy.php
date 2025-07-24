@@ -30,4 +30,9 @@ class Pharmacy extends Model
         return $this->hasMany(Vault::class);
     }
 
+    public function whitelist()
+    {
+        return $this->hasMany(PharmacyStaffWhitelist::class);
+    }
+
 }

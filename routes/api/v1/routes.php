@@ -16,7 +16,6 @@ Route::get('/test', function () {
 });
 
 
-
 //! AUTH ROUTES
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
@@ -46,18 +45,26 @@ Route::get('/packages_orders/{packages_order_id}', [PackagesOrderController::cla
 
 //! MED PACKAGES
 Route::get('/med_packages', [MedPackageController::class, 'index'])->middleware('auth:sanctum');
-Route::post('/med_packages', [MedPackageController::class, 'addMedPackages'])->middleware('auth:sanctum');
 
 
 //! ADMIN
 Route::post('/send-invitation', [EmailController::class, 'sendInvitation'])->middleware('auth:sanctum');
 Route::delete('/admin/disable-worker/{worker_id}', [AdminController::class, 'disableWorker'])->middleware('auth:sanctum');
 Route::post('/admin/enable-worker/{worker_id}', [AdminController::class, 'enableWorker'])->middleware('auth:sanctum');
+Route::get('/admin/my-staff', [AdminController::class,'getWorkers'])->middleware('auth:sanctum');
 
 //! STORAGE
 Route::get('/get-storage', [MedPackageController::class, 'showStorage'])->middleware('auth:sanctum');
 Route::get('/expired-meds', [MedPackageController::class, 'expiredMeds'])->middleware('auth:sanctum');
 
 
-//! Sales
-Route::post('/sales/checkout', [WorkerController::class, 'checkout'])->middleware('auth:sanctum');
+//! TO FOLLOW ON-DUTY STAFF
+Route::middleware(['auth:sanctum','update.last.seen'])->group(function(){
+    //! Sales
+    Route::post('/sales/checkout', [WorkerController::class, 'checkout']);
+
+    //* UPDATE URL LATER
+    //TODO
+    //! Add Medication Order
+    Route::post('/med_packages', [MedPackageController::class, 'addMedPackages']);
+});

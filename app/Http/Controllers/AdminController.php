@@ -20,7 +20,8 @@ class AdminController extends Controller
 
     public function getWorkers(Request $request)
     {
-        // $this->adminService->getWorkers();
+        $workers = $this->adminService->getWorkers($request->user());
+        return ApiResponse::success('ok', $workers);
     }
 
 

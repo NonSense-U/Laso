@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('pharmacy_staff_whitelist', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Pharmacy::class)->index()->constrained()->cascadeOnDelete();
+            //TODO
             $table->string('email')->unique(); //! DELETE WHEN WORKER IS DISABLED
             $table->timestamps();
         });

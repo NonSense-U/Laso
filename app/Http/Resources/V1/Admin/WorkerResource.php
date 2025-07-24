@@ -13,12 +13,10 @@ class WorkerResource extends JsonResource
      * @return array<string, mixed>
      */
     public function toArray(Request $request): array
-    {
-        dd($request);
-        
+    {        
         return [
             'id'       => $this->id,
-            'name'     => $this->name,
+            'name'     => $this->first_name.' '.$this->last_name,
             'email'    => $this->email,
             'phone_number' => $this->phone_number,
             'status'   => $this->status,

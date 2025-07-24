@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\UpdateUserLastActivity;
 use Carbon\Exceptions\UnreachableException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
@@ -21,7 +22,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->append(UpdateUserLastActivity::class);
+        $middleware->alias([
+            'update.last.seen' => UpdateUserLastActivity::class
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
                 $exceptions->render(
