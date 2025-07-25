@@ -39,9 +39,16 @@ class MedicationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request,int $medication_id)
+    
+    public function show(Request $request, int $medication_id)
     {
         $medication = Medication::findOrFail($medication_id);
+        return ApiResponse::success('ok', ['medication' => $medication]);
+    }
+
+    public function getMedBySerialNumber(Request $request, $serial_number)
+    {
+        $medication = Medication::query()->where('serial_number', '=', $serial_number)->firstOrFail();
         return ApiResponse::success('ok',['medication' => $medication]);
     }
 

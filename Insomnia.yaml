@@ -10,7 +10,7 @@ collection:
     meta:
       id: fld_d01bc9ed7fa2403e9b7103d43ad16af6
       created: 1750012727351
-      modified: 1753383147754
+      modified: 1753477299676
       sortKey: -1750012727351
       description: ""
     children:
@@ -523,15 +523,39 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.localhost }}/api/v1/global-meds/1"
+      - url: "{{ _.localhost }}/api/v1/global-meds/show/1"
         name: Get medication by ID
         meta:
           id: req_2c7bf75c523144c48f16395af7d0c0e7
           created: 1753370012400
-          modified: 1753370057306
+          modified: 1753477067228
           isPrivate: false
           description: ""
           sortKey: -1750946638752
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.3.0
+        authentication:
+          type: bearer
+          token: "{{ _.auth_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.localhost }}/api/v1/global-meds/6215857101877"
+        name: GET meds by Serial Number
+        meta:
+          id: req_381dcd6441b14a98bc59e9ad6f38794b
+          created: 1753476825674
+          modified: 1753477248653
+          isPrivate: false
+          description: ""
+          sortKey: -1750946638852
         method: GET
         headers:
           - name: User-Agent
@@ -887,7 +911,7 @@ collection:
     meta:
       id: req_007208ce74964e079435aebcfe1d0dee
       created: 1751505201133
-      modified: 1753383091655
+      modified: 1753401575788
       isPrivate: false
       description: ""
       sortKey: -1751505201133
@@ -903,12 +927,16 @@ collection:
         			"type" : "med_package",
         			"product_id" : 1,
         			"quantity" : 2,
+        			"purchase_price" : 100,
+        			"retail_price" : 120,
         			"partial_sale" : false
         		},
         		{
         			"type" : "med_package",
         			"product_id" : 2,
         			"quantity" : 0,
+        			"purchase_price" : 100,
+        			"retail_price" : 120,
         			"partial_sale" : false
         			
         		},
@@ -916,6 +944,8 @@ collection:
         			"type" : "fast_selling_item",
         			"product_id" : 1,
         			"quantity" : 1,
+        			"purchase_price" : 100,
+        			"retail_price" : 120,
         			"partial_sale" : false
         		}
         	]
@@ -939,19 +969,43 @@ collection:
         send: true
         store: true
       rebuildPath: true
+  - url: "{{ _.localhost }}/api/v1/stats"
+    name: Stats
+    meta:
+      id: req_c0264433a937479aafc4be7704ebdff7
+      created: 1753401396661
+      modified: 1753401431733
+      isPrivate: false
+      description: ""
+      sortKey: -1753401396661
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.3.0
+    authentication:
+      type: bearer
+      token: "{{ _.auth_token }}"
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
 cookieJar:
   name: Default Jar
   meta:
     id: jar_b48413c0427982a1a7e317a250f39b263742e8fd
     created: 1753317367158
-    modified: 1753383147750
+    modified: 1753477299669
 environments:
   name: Base Environment
   meta:
     id: env_e5ddf10898c14f3187031bb244517afb
     created: 1749705478341
-    modified: 1753383147752
+    modified: 1753477299673
     isPrivate: false
   data:
-    auth_token: 1|TdsvQr2BX3Ltu5vDmimnCIhOAaUGC9HlIuGOcw1Z49de47b2
+    auth_token: 1|f10Cd1hvt4EgrrVTPj1uXR7CBesFslpw73ugC9XV377a6327
     localhost: 127.0.0.1:8000

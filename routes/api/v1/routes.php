@@ -36,7 +36,8 @@ Route::get('/supplier/record/{supplier_id}', [SupplierController::class, 'getSup
 
 //! GLOBAL MEDICATIONS
 Route::get('/global-meds', [MedicationController::class, 'index']);
-Route::get('/global-meds/{medication_id}', [MedicationController::class, 'show'])->middleware('auth:sanctum');
+Route::get('/global-meds/show/{medication_id}', [MedicationController::class, 'show'])->middleware('auth:sanctum');
+Route::get('/global-meds/{serial_number}', [MedicationController::class, 'getMedBySerialNumber'])->middleware('auth:sanctum');
 
 //! PACKAGES_ORDERS
 Route::get('/packages_orders', [PackagesOrderController::class, 'index'])->middleware('auth:sanctum');

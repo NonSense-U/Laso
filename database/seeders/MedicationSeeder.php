@@ -14,5 +14,10 @@ class MedicationSeeder extends Seeder
     public function run(): void
     {
         Medication::factory(5)->create();
+        Medication::factory()->create([
+            'name' => 'Osteofix',
+            'scientific_name' => 'Osteofix',
+            'serial_number' => 6215857101877
+        ]);
     }
 }
