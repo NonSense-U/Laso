@@ -7,6 +7,7 @@ use App\Http\Controllers\EmailController;
 use App\Http\Controllers\MedicationController;
 use App\Http\Controllers\MedPackageController;
 use App\Http\Controllers\PackagesOrderController;
+use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\WorkerController;
 use Illuminate\Support\Facades\Route;
@@ -68,3 +69,5 @@ Route::middleware(['auth:sanctum','update.last.seen'])->group(function(){
     //! Add Medication Order
     Route::post('/med_packages', [MedPackageController::class, 'addMedPackages']);
 });
+
+Route::get('/stats', [StatisticsController::class, 'test'])->middleware('auth:sanctum');
