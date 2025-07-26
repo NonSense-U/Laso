@@ -31,7 +31,7 @@ return Application::configure(basePath: dirname(__DIR__))
                 $exceptions->render(
             function (NotFoundHttpException $e, Request $request) {
                 if ($request->is('api/*')) {
-                    return ApiResponse::fail('Resource Not Found', 404);
+                    return ApiResponse::fail('Resource Not Found', [], 404);
                 }
             }
         );

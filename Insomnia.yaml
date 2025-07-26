@@ -10,7 +10,7 @@ collection:
     meta:
       id: fld_d01bc9ed7fa2403e9b7103d43ad16af6
       created: 1750012727351
-      modified: 1753477299676
+      modified: 1753565418823
       sortKey: -1750012727351
       description: ""
     children:
@@ -19,7 +19,7 @@ collection:
         meta:
           id: req_3fee760dfc5b45ad87a5aed87e6c31b6
           created: 1750012743848
-          modified: 1753317367701
+          modified: 1753565401582
           isPrivate: false
           description: ""
           sortKey: -1750012751982
@@ -795,7 +795,7 @@ collection:
     meta:
       id: fld_0c0b02a3ece747878ca290b33ac03f60
       created: 1751463908683
-      modified: 1753317367665
+      modified: 1753565475139
       sortKey: -1751463908683
       description: ""
     children:
@@ -969,15 +969,15 @@ collection:
         send: true
         store: true
       rebuildPath: true
-  - url: "{{ _.localhost }}/api/v1/stats"
+  - url: "{{ _.localhost }}/api/v1/stats?scope=lastWeek"
     name: Stats
     meta:
       id: req_c0264433a937479aafc4be7704ebdff7
       created: 1753401396661
-      modified: 1753401431733
+      modified: 1753918229215
       isPrivate: false
       description: ""
-      sortKey: -1753401396661
+      sortKey: -1752453298897
     method: GET
     headers:
       - name: User-Agent
@@ -998,14 +998,14 @@ cookieJar:
   meta:
     id: jar_b48413c0427982a1a7e317a250f39b263742e8fd
     created: 1753317367158
-    modified: 1753477299669
+    modified: 1753565418790
 environments:
   name: Base Environment
   meta:
     id: env_e5ddf10898c14f3187031bb244517afb
     created: 1749705478341
-    modified: 1753477299673
+    modified: 1753565418809
     isPrivate: false
   data:
-    auth_token: 1|f10Cd1hvt4EgrrVTPj1uXR7CBesFslpw73ugC9XV377a6327
+    auth_token: 1|FxYelhwP3GTkSVIZU4NV2Ur6cDoO5kc8dbF36Pl1c3deae39
     localhost: 127.0.0.1:8000
