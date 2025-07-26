@@ -80,6 +80,8 @@ class SalesService
                     'type' => $item['type'],
                     'product_id' => $item['product_id'],
                     'quantity' => $item['quantity'],
+                    'purchase_price' => $item['purchase_price'],
+                    'retail_price' => $item['retail_price'],
                     'partial_sale' => $item['partial_sale']
                 ]);
 

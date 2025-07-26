@@ -18,7 +18,9 @@ return new class extends Migration
             $table->enum('type', ['med_package', 'fast_selling_item']);
             $table->integer('product_id');
             $table->integer('quantity');
-            $table->boolean('partial_sale');
+            $table->integer('purchase_price')->nullable();
+            $table->integer('retail_price')->nullable();
+            $table->boolean('partial_sale')->default(false);
             $table->timestamps();
         });
     }
