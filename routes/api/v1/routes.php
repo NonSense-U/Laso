@@ -29,7 +29,7 @@ Route::post('/change-password', [PasswordController::class, 'changePassword'])->
 
 //! ACCOUNTS ROUTES
 Route::post('/admin', [UserController::class, 'createAdmin']);
-Route::post('/worker', [UserController::class, 'createWorker'])->middleware('auth:sanctum');
+Route::post('/worker', [UserController::class, 'createWorker']);
 
 
 //! SUPPLIER CRU/D

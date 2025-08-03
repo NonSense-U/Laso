@@ -10,7 +10,7 @@ collection:
     meta:
       id: fld_d01bc9ed7fa2403e9b7103d43ad16af6
       created: 1750012727351
-      modified: 1754256800765
+      modified: 1754257891420
       sortKey: -1750012727351
       description: ""
     children:
@@ -19,10 +19,10 @@ collection:
         meta:
           id: req_3fee760dfc5b45ad87a5aed87e6c31b6
           created: 1750012743848
-          modified: 1754256674499
+          modified: 1754257619740
           isPrivate: false
           description: ""
-          sortKey: -1750012751982
+          sortKey: -1750012752182
         method: POST
         body:
           mimeType: application/json
@@ -422,7 +422,7 @@ collection:
         meta:
           id: req_2869726cf73a46c2854f1c76439064fb
           created: 1750052144156
-          modified: 1754252049487
+          modified: 1754257588549
           isPrivate: false
           description: ""
           sortKey: -1750120256575
@@ -449,8 +449,7 @@ collection:
           - name: Accept
             value: application/json
         authentication:
-          token: "{{ _.auth_token }}"
-          type: bearer
+          type: none
         scripts:
           preRequest: ""
           afterResponse: ""
@@ -724,7 +723,7 @@ collection:
         meta:
           id: req_7e424e8f8a374feb8da224796a8029af
           created: 1750963157527
-          modified: 1753386449762
+          modified: 1754257608035
           isPrivate: false
           description: ""
           sortKey: -1750963169186
@@ -733,7 +732,7 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"email" : "aki@gmail.com",
+            	"email" : "smile@gmail.com",
             	"first_name" : "darling"
             }
         headers:
@@ -1196,14 +1195,14 @@ cookieJar:
   meta:
     id: jar_b48413c0427982a1a7e317a250f39b263742e8fd
     created: 1753317367158
-    modified: 1754256800759
+    modified: 1754257891413
 environments:
   name: Base Environment
   meta:
     id: env_e5ddf10898c14f3187031bb244517afb
     created: 1749705478341
-    modified: 1754256800763
+    modified: 1754257891416
     isPrivate: false
   data:
-    auth_token: 1|eQJa6RkHyLGZJNUyJlvuHcaBWkYw7ol8TDyijETy946396c9
+    auth_token: 1|UdpaAUPX28h6J11EiZkkCeICH2kmQXdoDUlZadJc626f7017
     localhost: 127.0.0.1:8000
