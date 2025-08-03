@@ -10,7 +10,7 @@ collection:
     meta:
       id: fld_d01bc9ed7fa2403e9b7103d43ad16af6
       created: 1750012727351
-      modified: 1753565418823
+      modified: 1754232850776
       sortKey: -1750012727351
       description: ""
     children:
@@ -19,7 +19,7 @@ collection:
         meta:
           id: req_3fee760dfc5b45ad87a5aed87e6c31b6
           created: 1750012743848
-          modified: 1753565401582
+          modified: 1754232828881
           isPrivate: false
           description: ""
           sortKey: -1750012751982
@@ -293,7 +293,7 @@ collection:
     meta:
       id: fld_afce286bd4d84188956e2b6411c693ac
       created: 1750120244451
-      modified: 1753317367675
+      modified: 1754002804056
       sortKey: -1750120244451
       description: ""
     children:
@@ -882,6 +882,105 @@ collection:
     scripts:
       afterResponse: ""
       preRequest: ""
+  - name: Fast Selling Items
+    meta:
+      id: fld_2be8add42aa24c72b941fd4008c88c6d
+      created: 1754232863250
+      modified: 1754232863250
+      sortKey: -1754232863250
+      description: ""
+    children:
+      - url: "{{ _.localhost }}/api/v1/fast_selling_items"
+        name: Index
+        meta:
+          id: req_76929bba1f4f47ec8d26d6db3ffb56b1
+          created: 1754232868167
+          modified: 1754232912252
+          isPrivate: false
+          description: ""
+          sortKey: -1754232877883
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.3.0
+        authentication:
+          type: bearer
+          token: "{{ _.auth_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.localhost }}/api/v1/fast_selling_items"
+        name: Add Fast Selling Item
+        meta:
+          id: req_03b8a80a41e04b81930cf2bce82529bd
+          created: 1754233908633
+          modified: 1754234146468
+          isPrivate: false
+          description: ""
+          sortKey: -1754232877983
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name" : "face mask",
+            	"purchase_price" : 1000,
+            	"quantity" : 10,
+            	"retail_price" : 120
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.3.0
+        authentication:
+          type: bearer
+          token: "{{ _.auth_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.localhost }}/api/v1/fast_selling_items/2"
+        name: Update Item
+        meta:
+          id: req_04830c992bba42afb8c81b1ed8e595bb
+          created: 1754235749866
+          modified: 1754236090406
+          isPrivate: false
+          description: ""
+          sortKey: -1754232878083
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"retail_price" : 70
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.3.0
+        authentication:
+          type: bearer
+          token: "{{ _.auth_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
   - url: "{{ _.localhost }}/"
     name: Test
     meta:
@@ -911,7 +1010,7 @@ collection:
     meta:
       id: req_007208ce74964e079435aebcfe1d0dee
       created: 1751505201133
-      modified: 1753401575788
+      modified: 1754189741394
       isPrivate: false
       description: ""
       sortKey: -1751505201133
@@ -921,7 +1020,7 @@ collection:
       text: |-
         {
         	"payment_method" : "cash",
-        	"total_price" : 9090,
+        	"total_retail_price" : 9090,
         	"items" : [
         		{
         			"type" : "med_package",
@@ -953,8 +1052,15 @@ collection:
     headers:
       - name: Content-Type
         value: application/json
+        id: pair_757910b0860241b4adf4ce8794f07b90
       - name: User-Agent
         value: insomnia/11.2.0
+        id: pair_ccda9654a85147579aea3b870fdc661d
+      - id: pair_0e2a1048286948a59e0ce1e1ea26d32b
+        name: Accept
+        value: application/json
+        description: ""
+        disabled: false
     authentication:
       token: "{{ _.auth_token }}"
       type: bearer
@@ -969,12 +1075,12 @@ collection:
         send: true
         store: true
       rebuildPath: true
-  - url: "{{ _.localhost }}/api/v1/stats?scope=lastWeek"
+  - url: "{{ _.localhost }}/api/v1/stats?scope=day"
     name: Stats
     meta:
       id: req_c0264433a937479aafc4be7704ebdff7
       created: 1753401396661
-      modified: 1753918229215
+      modified: 1753960192617
       isPrivate: false
       description: ""
       sortKey: -1752453298897
@@ -982,6 +1088,12 @@ collection:
     headers:
       - name: User-Agent
         value: insomnia/11.3.0
+        id: pair_976882e217ee4263993bc0567d3ff0ad
+      - id: pair_81c9a58643814712bad2c6af5a93cfc9
+        name: Accept
+        value: application/json
+        description: ""
+        disabled: false
     authentication:
       type: bearer
       token: "{{ _.auth_token }}"
@@ -998,14 +1110,14 @@ cookieJar:
   meta:
     id: jar_b48413c0427982a1a7e317a250f39b263742e8fd
     created: 1753317367158
-    modified: 1753565418790
+    modified: 1754232850762
 environments:
   name: Base Environment
   meta:
     id: env_e5ddf10898c14f3187031bb244517afb
     created: 1749705478341
-    modified: 1753565418809
+    modified: 1754232850772
     isPrivate: false
   data:
-    auth_token: 1|FxYelhwP3GTkSVIZU4NV2Ur6cDoO5kc8dbF36Pl1c3deae39
+    auth_token: 2|rNQpdAuluj6CHdQvu1E6uI7Ofvk8yNIVmm1gpx4F62b70758
     localhost: 127.0.0.1:8000

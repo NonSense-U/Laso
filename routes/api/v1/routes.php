@@ -4,6 +4,7 @@ use App\Http\Controllers\Accounts\AuthController;
 use App\Http\Controllers\Accounts\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EmailController;
+use App\Http\Controllers\FastSellingItemController;
 use App\Http\Controllers\MedicationController;
 use App\Http\Controllers\MedPackageController;
 use App\Http\Controllers\PackagesOrderController;
@@ -49,6 +50,10 @@ Route::get('/packages_orders/{packages_order_id}', [PackagesOrderController::cla
 Route::get('/med_packages', [MedPackageController::class, 'index'])->middleware('auth:sanctum');
 
 
+//! FAST SELLING ITEMS
+Route::get('/fast_selling_items', [FastSellingItemController::class, 'index'])->middleware('auth:sanctum');
+Route::post('/fast_selling_items', [FastSellingItemController::class, 'addItem'])->middleware('auth:sanctum');
+Route::put('/fast_selling_items/{item_id}', [FastSellingItemController::class,'updateItem'])->middleware('auth:sanctum');
 //! ADMIN
 Route::post('/send-invitation', [EmailController::class, 'sendInvitation'])->middleware('auth:sanctum');
 Route::delete('/admin/disable-worker/{worker_id}', [AdminController::class, 'disableWorker'])->middleware('auth:sanctum');

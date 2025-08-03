@@ -25,6 +25,11 @@ class Pharmacy extends Model
         return $this->hasMany(MedPackage::class);
     }
 
+    public function fast_selling_items()
+    {
+        return $this->hasMany(FastSellingItem::class);
+    }
+
     public function vaults()
     {
         return $this->hasMany(Vault::class);
