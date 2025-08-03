@@ -10,7 +10,7 @@ collection:
     meta:
       id: fld_d01bc9ed7fa2403e9b7103d43ad16af6
       created: 1750012727351
-      modified: 1754232850776
+      modified: 1754256800765
       sortKey: -1750012727351
       description: ""
     children:
@@ -19,7 +19,7 @@ collection:
         meta:
           id: req_3fee760dfc5b45ad87a5aed87e6c31b6
           created: 1750012743848
-          modified: 1754232828881
+          modified: 1754256674499
           isPrivate: false
           description: ""
           sortKey: -1750012751982
@@ -297,6 +297,77 @@ collection:
       sortKey: -1750120244451
       description: ""
     children:
+      - name: Password
+        meta:
+          id: fld_dace78785f0e4759b3e637b5f591a117
+          created: 1754256870362
+          modified: 1754256950589
+          sortKey: -1750120256675
+          description: ""
+        children:
+          - url: "{{ _.localhost }}/api/v1/verify-code"
+            name: Verify Code
+            meta:
+              id: req_b9d7df12e85148ff9dcd6d175cc1ab6c
+              created: 1754255350976
+              modified: 1754256882388
+              isPrivate: false
+              description: ""
+              sortKey: -1754256882218
+            method: POST
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                	"email" : "aki@gmail.com",
+                	"code" : "435114"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.3.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{ _.localhost }}/api/v1/change-password"
+            name: Change Password
+            meta:
+              id: req_429064abb9c9491fb3aed14849acdb91
+              created: 1754256446816
+              modified: 1754256885158
+              isPrivate: false
+              description: ""
+              sortKey: -1754256882318
+            method: POST
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                	"password" : "12345678",
+                	"password_confirmation" : "12345678"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.3.0
+            authentication:
+              type: bearer
+              token: "{{ _.auth_token }}"
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
       - url: "{{ _.localhost }}/api/v1/admin"
         name: Create Admin
         meta:
@@ -351,7 +422,7 @@ collection:
         meta:
           id: req_2869726cf73a46c2854f1c76439064fb
           created: 1750052144156
-          modified: 1753317367691
+          modified: 1754252049487
           isPrivate: false
           description: ""
           sortKey: -1750120256575
@@ -684,6 +755,37 @@ collection:
             send: true
             store: true
           rebuildPath: true
+      - url: "{{ _.localhost }}/api/v1/forgot-password"
+        name: Forgot Password
+        meta:
+          id: req_991f3438e75844d184c19a6f59e3a400
+          created: 1754252063107
+          modified: 1754256924180
+          isPrivate: false
+          description: ""
+          sortKey: -1750963169286
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"email" : "aki@gmail.com"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.3.0
+        authentication:
+          type: none
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
     scripts:
       afterResponse: ""
       preRequest: ""
@@ -788,6 +890,36 @@ collection:
         scripts:
           afterResponse: ""
           preRequest: ""
+      - url: "{{ _.localhost }}/api/v1/stats?scope=day"
+        name: Stats
+        meta:
+          id: req_c0264433a937479aafc4be7704ebdff7
+          created: 1753401396661
+          modified: 1754256944460
+          isPrivate: false
+          description: ""
+          sortKey: -1751037794975
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.3.0
+            id: pair_976882e217ee4263993bc0567d3ff0ad
+          - id: pair_81c9a58643814712bad2c6af5a93cfc9
+            name: Accept
+            value: application/json
+            description: ""
+            disabled: false
+        authentication:
+          type: bearer
+          token: "{{ _.auth_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
     scripts:
       afterResponse: ""
       preRequest: ""
@@ -844,30 +976,6 @@ collection:
         authentication:
           token: "{{ _.auth_token }}"
           type: bearer
-        scripts:
-          preRequest: ""
-          afterResponse: ""
-        settings:
-          renderRequestBody: true
-          encodeUrl: true
-          followRedirects: global
-          cookies:
-            send: true
-            store: true
-          rebuildPath: true
-      - url: ""
-        name: New Request
-        meta:
-          id: req_2ef433f8d89d4371a409abc9daf0e9f0
-          created: 1751505190772
-          modified: 1753317367698
-          isPrivate: false
-          description: ""
-          sortKey: -1751505190772
-        method: GET
-        headers:
-          - name: User-Agent
-            value: insomnia/11.2.0
         scripts:
           preRequest: ""
           afterResponse: ""
@@ -981,6 +1089,84 @@ collection:
             send: true
             store: true
           rebuildPath: true
+  - name: Sales
+    meta:
+      id: fld_e0335c58bfde4ee5a8f72db0e1c67e66
+      created: 1754257004268
+      modified: 1754257004268
+      sortKey: -1754257004269
+      description: ""
+    children:
+      - url: "{{ _.localhost }}/api/v1/sales/checkout"
+        name: Checkout
+        meta:
+          id: req_007208ce74964e079435aebcfe1d0dee
+          created: 1751505201133
+          modified: 1754257013161
+          isPrivate: false
+          description: ""
+          sortKey: -1754257013010
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"payment_method" : "cash",
+            	"total_retail_price" : 9090,
+            	"items" : [
+            		{
+            			"type" : "med_package",
+            			"product_id" : 1,
+            			"quantity" : 2,
+            			"purchase_price" : 100,
+            			"retail_price" : 120,
+            			"partial_sale" : false
+            		},
+            		{
+            			"type" : "med_package",
+            			"product_id" : 2,
+            			"quantity" : 0,
+            			"purchase_price" : 100,
+            			"retail_price" : 120,
+            			"partial_sale" : false
+            			
+            		},
+            		{
+            			"type" : "fast_selling_item",
+            			"product_id" : 1,
+            			"quantity" : 1,
+            			"purchase_price" : 100,
+            			"retail_price" : 120,
+            			"partial_sale" : false
+            		}
+            	]
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+            id: pair_757910b0860241b4adf4ce8794f07b90
+          - name: User-Agent
+            value: insomnia/11.2.0
+            id: pair_ccda9654a85147579aea3b870fdc661d
+          - id: pair_0e2a1048286948a59e0ce1e1ea26d32b
+            name: Accept
+            value: application/json
+            description: ""
+            disabled: false
+        authentication:
+          token: "{{ _.auth_token }}"
+          type: bearer
+        scripts:
+          preRequest: ""
+          afterResponse: ""
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
   - url: "{{ _.localhost }}/"
     name: Test
     meta:
@@ -1005,119 +1191,19 @@ collection:
         send: true
         store: true
       rebuildPath: true
-  - url: "{{ _.localhost }}/api/v1/sales/checkout"
-    name: Checkout
-    meta:
-      id: req_007208ce74964e079435aebcfe1d0dee
-      created: 1751505201133
-      modified: 1754189741394
-      isPrivate: false
-      description: ""
-      sortKey: -1751505201133
-    method: POST
-    body:
-      mimeType: application/json
-      text: |-
-        {
-        	"payment_method" : "cash",
-        	"total_retail_price" : 9090,
-        	"items" : [
-        		{
-        			"type" : "med_package",
-        			"product_id" : 1,
-        			"quantity" : 2,
-        			"purchase_price" : 100,
-        			"retail_price" : 120,
-        			"partial_sale" : false
-        		},
-        		{
-        			"type" : "med_package",
-        			"product_id" : 2,
-        			"quantity" : 0,
-        			"purchase_price" : 100,
-        			"retail_price" : 120,
-        			"partial_sale" : false
-        			
-        		},
-        		{
-        			"type" : "fast_selling_item",
-        			"product_id" : 1,
-        			"quantity" : 1,
-        			"purchase_price" : 100,
-        			"retail_price" : 120,
-        			"partial_sale" : false
-        		}
-        	]
-        }
-    headers:
-      - name: Content-Type
-        value: application/json
-        id: pair_757910b0860241b4adf4ce8794f07b90
-      - name: User-Agent
-        value: insomnia/11.2.0
-        id: pair_ccda9654a85147579aea3b870fdc661d
-      - id: pair_0e2a1048286948a59e0ce1e1ea26d32b
-        name: Accept
-        value: application/json
-        description: ""
-        disabled: false
-    authentication:
-      token: "{{ _.auth_token }}"
-      type: bearer
-    scripts:
-      preRequest: ""
-      afterResponse: ""
-    settings:
-      renderRequestBody: true
-      encodeUrl: true
-      followRedirects: global
-      cookies:
-        send: true
-        store: true
-      rebuildPath: true
-  - url: "{{ _.localhost }}/api/v1/stats?scope=day"
-    name: Stats
-    meta:
-      id: req_c0264433a937479aafc4be7704ebdff7
-      created: 1753401396661
-      modified: 1753960192617
-      isPrivate: false
-      description: ""
-      sortKey: -1752453298897
-    method: GET
-    headers:
-      - name: User-Agent
-        value: insomnia/11.3.0
-        id: pair_976882e217ee4263993bc0567d3ff0ad
-      - id: pair_81c9a58643814712bad2c6af5a93cfc9
-        name: Accept
-        value: application/json
-        description: ""
-        disabled: false
-    authentication:
-      type: bearer
-      token: "{{ _.auth_token }}"
-    settings:
-      renderRequestBody: true
-      encodeUrl: true
-      followRedirects: global
-      cookies:
-        send: true
-        store: true
-      rebuildPath: true
 cookieJar:
   name: Default Jar
   meta:
     id: jar_b48413c0427982a1a7e317a250f39b263742e8fd
     created: 1753317367158
-    modified: 1754232850762
+    modified: 1754256800759
 environments:
   name: Base Environment
   meta:
     id: env_e5ddf10898c14f3187031bb244517afb
     created: 1749705478341
-    modified: 1754232850772
+    modified: 1754256800763
     isPrivate: false
   data:
-    auth_token: 2|rNQpdAuluj6CHdQvu1E6uI7Ofvk8yNIVmm1gpx4F62b70758
+    auth_token: 1|eQJa6RkHyLGZJNUyJlvuHcaBWkYw7ol8TDyijETy946396c9
     localhost: 127.0.0.1:8000

@@ -8,6 +8,7 @@ use App\Http\Controllers\FastSellingItemController;
 use App\Http\Controllers\MedicationController;
 use App\Http\Controllers\MedPackageController;
 use App\Http\Controllers\PackagesOrderController;
+use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\WorkerController;
@@ -21,6 +22,9 @@ Route::get('/test', function () {
 //! AUTH ROUTES
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+Route::post('/forgot-password', [PasswordController::class, 'sendPasswordResetEmail']);
+Route::post('/verify-code', [PasswordController::class, 'verifyCode']);
+Route::post('/change-password', [PasswordController::class, 'changePassword'])->middleware('auth:sanctum');
 
 
 //! ACCOUNTS ROUTES

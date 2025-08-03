@@ -31,4 +31,10 @@ class UserController extends Controller
         $data = $this->userService->createWorker($request->validated());
         return ApiResponse::success('Worker created successfully.', $data, 201);
     }
+
+    // public function getProfile(Request $request)
+    // {
+    //     $profile = $this->userService->getProfile($request->user());
+    //     return ApiResponse::success('Profile retrieved successfully.', ['profile' => $profile], 200);
+    // }
 }
