@@ -25,7 +25,7 @@ class SalesStatsService
         $profitRows = DB::table('carts')
             ->whereIn('user_id', $staff->pluck('id'))
             ->where('created_at', '>=', $date)
-            ->select('user_id', DB::raw('SUM(total_price - base_price) AS profits'))
+            ->select('user_id', DB::raw('SUM(total_retail_price - total_purchase_price) AS profits'))
             ->groupBy('user_id')
             ->orderByDesc('profits')
             ->get();

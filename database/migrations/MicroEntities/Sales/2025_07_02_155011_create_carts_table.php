@@ -16,8 +16,8 @@ return new class extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
-            $table->decimal('total_price');
-            $table->decimal('base_price')->nullable()->default(0);
+            $table->decimal('total_retail_price');
+            $table->decimal('total_purchase_price')->nullable()->default(0);
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Pharmacy::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Payment::class)->constrained()->cascadeOnDelete();

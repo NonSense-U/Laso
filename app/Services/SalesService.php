@@ -27,14 +27,14 @@ class SalesService
 
             if ($payload['payment_method'] === 'cash') {
                 $main_vault = $user->pharmacy->vaults()->where('name', '=', 'main')->firstOrFail();
-                $main_vault->balance += $payload['total_price'];
+                $main_vault->balance += $payload['total_retail_price'];
                 $main_vault->save();
             } elseif ($payload['payment_method'] === 'charity') {
                 $charity_vault = $user->pharmacy->vaults()->where('name', '=', 'charity')->firstOrFail();
-                if ($charity_vault->balance < $payload['total_price']) {
+                if ($charity_vault->balance < $payload['total_retail_price']) {
                     throw new UnprocessableEntityHttpException('There is not enough money in the charity box.');
                 }
-                $charity_vault->balance -= $payload['total_price'];
+                $charity_vault->balance -= $payload['total_retail_price'];
                 $charity_vault->save();
             }
             //! HANDLE DEPT
@@ -42,11 +42,11 @@ class SalesService
             $payment = Payment::create([
                 'pharmacy_id' => $user->pharmacy_id,
                 'payment_method' => $payload['payment_method'],
-                'paid_price' => $payload['total_price']
+                'paid_price' => $payload['total_retail_price']
             ]);
 
             $cart = Cart::create([
-                'total_price' => $payload['total_price'],
+                'total_retail_price' => $payload['total_retail_price'],
                 'user_id' => $user->id,
                 'pharmacy_id' => $user->pharmacy_id,
                 'payment_id' => $payment->id
@@ -88,7 +88,7 @@ class SalesService
 
                 $product->quantity -= $newItem->quantity;
                 $product->save();
-                $cart->base_price += $product->base_price * $newItem->quantity;
+                $cart->total_purchase_price += $product->purchase_price * $newItem->quantity;
             }
 
             $cart->save();

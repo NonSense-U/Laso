@@ -30,7 +30,7 @@ class StoreMedPackagesRequest extends FormRequest
             'packages-order.*.quantity' => ['required', 'integer'],
             'packages-order.*.production_date' => ['required', 'date'],
             'packages-order.*.expiration_date' => ['required', 'date'],
-            'packages-order.*.base_price' => ['required', 'numeric'],
+            'packages-order.*.purchase_price' => ['required', 'numeric'],
         ];
     }
 }

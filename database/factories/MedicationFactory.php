@@ -40,7 +40,7 @@ class MedicationFactory extends Factory
             'name' => fake()->randomElement($this->medicationNames),
             'serial_number' => rand(100, 10000),
             'scientific_name' => 'Paradol',
-            'price' =>  100,
+            'retail_price' =>  100,
             'strength' => '500mg',
             'notes' => 'i am a note',
             'manufacturer_id' => Manufacturer::factory()

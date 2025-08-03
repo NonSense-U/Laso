@@ -16,8 +16,8 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Pharmacy::class)->constrained()->cascadeOnDelete();
             $table->string('name');
-            $table->decimal('base_price');
-            $table->decimal('price');
+            $table->decimal('purchase_price');
+            $table->decimal('retail_price');
             $table->integer('quantity');
             $table->timestamps();
         });

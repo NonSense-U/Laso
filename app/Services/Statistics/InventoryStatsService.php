@@ -15,11 +15,11 @@ class InventoryStatsService
             'SELECT mp.id,
                     md.name,
                     mp.created_at AS date_added,
-                    mp.base_price AS purchase_price,
+                    mp.purchase_price AS purchase_price,
                     md.price AS retail_price,
-                    mp.base_price AS purchase_price,
+                    mp.purchase_price AS purchase_price,
                     mp.quantity,
-                    (mp.quantity * mp.base_price) AS total_loss
+                    (mp.quantity * mp.purchase_price) AS total_loss
             FROM med_packages mp
             JOIN medications md ON mp.medication_id = md.id
             WHERE mp.pharmacy_id = ?
@@ -30,7 +30,7 @@ class InventoryStatsService
         );
 
         $totalLossResult = DB::selectOne(
-            'SELECT SUM(mp.quantity * mp.base_price) as total_loss
+            'SELECT SUM(mp.quantity * mp.purchase_price) as total_loss
          FROM med_packages mp
          WHERE mp.pharmacy_id = ?
            AND mp.expiration_date > ?
@@ -40,11 +40,11 @@ class InventoryStatsService
 
         $highest_loss = DB::selectOne(
             //TODO
-            //! IS THE LOSS BASED ON BASE_PRICE??
+            //! IS THE LOSS BASED ON PURCHASE_PRICE??
             //? ADD AVG CONSUMPTION
             'SELECT mp.medication_id,
                     md.name,
-                    SUM(mp.base_price * mp.quantity) AS total_loss,
+                    SUM(mp.purchase_price * mp.quantity) AS total_loss,
                     SUM(mp.quantity) AS total_quantity
                     FROM med_packages mp
                     JOIN medications md ON mp.medication_id = md.id
