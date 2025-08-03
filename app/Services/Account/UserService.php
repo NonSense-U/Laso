@@ -2,6 +2,7 @@
 
 namespace App\Services\Account;
 
+use App\Http\Resources\V1\UserProfileResource;
 use App\Models\Pharmacy;
 use App\Models\User;
 use Exception;
@@ -61,5 +62,11 @@ class UserService
             DB::rollBack();
             throw $e;
         }
+    }
+
+    
+    public function getProfile(User $user): UserProfileResource
+    {
+        return new UserProfileResource($user);
     }
 }

@@ -461,6 +461,30 @@ collection:
             send: true
             store: true
           rebuildPath: true
+      - url: "{{ _.localhost }}/api/v1/my-profile"
+        name: Get Profile
+        meta:
+          id: req_b05031405ff74d1a9e53295d5dc923cd
+          created: 1754259409783
+          modified: 1754259525193
+          isPrivate: false
+          description: ""
+          sortKey: -1750120256775
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.3.0
+        authentication:
+          type: bearer
+          token: "{{ _.auth_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
     scripts:
       afterResponse: ""
       preRequest: ""
@@ -908,6 +932,30 @@ collection:
             value: application/json
             description: ""
             disabled: false
+        authentication:
+          type: bearer
+          token: "{{ _.auth_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.localhost }}/api/v1/my-treasury"
+        name: Treasury
+        meta:
+          id: req_12403f1cd2f04036ac7752d173024462
+          created: 1754259816574
+          modified: 1754259873771
+          isPrivate: false
+          description: ""
+          sortKey: -1751037795075
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.3.0
         authentication:
           type: bearer
           token: "{{ _.auth_token }}"

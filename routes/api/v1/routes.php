@@ -9,6 +9,7 @@ use App\Http\Controllers\MedicationController;
 use App\Http\Controllers\MedPackageController;
 use App\Http\Controllers\PackagesOrderController;
 use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\PharmacyController;
 use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\WorkerController;
@@ -30,7 +31,7 @@ Route::post('/change-password', [PasswordController::class, 'changePassword'])->
 //! ACCOUNTS ROUTES
 Route::post('/admin', [UserController::class, 'createAdmin']);
 Route::post('/worker', [UserController::class, 'createWorker']);
-
+Route::get('/my-profile', [UserController::class, 'getProfile'])->middleware('auth:sanctum');
 
 //! SUPPLIER CRU/D
 Route::get('/supplier/get', [SupplierController::class, 'index'])->middleware('auth:sanctum');
@@ -58,11 +59,14 @@ Route::get('/med_packages', [MedPackageController::class, 'index'])->middleware(
 Route::get('/fast_selling_items', [FastSellingItemController::class, 'index'])->middleware('auth:sanctum');
 Route::post('/fast_selling_items', [FastSellingItemController::class, 'addItem'])->middleware('auth:sanctum');
 Route::put('/fast_selling_items/{item_id}', [FastSellingItemController::class,'updateItem'])->middleware('auth:sanctum');
+
+
 //! ADMIN
 Route::post('/send-invitation', [EmailController::class, 'sendInvitation'])->middleware('auth:sanctum');
 Route::delete('/admin/disable-worker/{worker_id}', [AdminController::class, 'disableWorker'])->middleware('auth:sanctum');
 Route::post('/admin/enable-worker/{worker_id}', [AdminController::class, 'enableWorker'])->middleware('auth:sanctum');
 Route::get('/admin/my-staff', [AdminController::class,'getWorkers'])->middleware('auth:sanctum');
+Route::get('/my-treasury', [PharmacyController::class, 'getTreasury'])->middleware('auth:sanctum');
 
 //! STORAGE
 Route::get('/get-storage', [MedPackageController::class, 'showStorage'])->middleware('auth:sanctum');

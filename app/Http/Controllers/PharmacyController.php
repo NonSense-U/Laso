@@ -34,4 +34,10 @@ class PharmacyController extends Controller
     {
         //
     }
+
+    public function getTreasury(Request $request)
+    {
+        $vaults = $request->user()->pharmacy->vaults;
+        return ApiResponse::success('ok', ['valuts' => $vaults]);
+    }
 }

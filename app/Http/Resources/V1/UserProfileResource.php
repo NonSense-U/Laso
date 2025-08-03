@@ -19,7 +19,8 @@ class UserProfileResource extends JsonResource
             'username' => $this->username,
             'email'    => $this->email,
             'phone_number' => $this->phone_number,
-            'password_last_changed_at' => $this->password_last_changed_at
+            'password_last_changed_at' => $this->password_last_changed_at,
+            'pharmacy_id' => $this->pharmacy_id
         ];
     }
 }
