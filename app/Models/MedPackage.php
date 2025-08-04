@@ -25,4 +25,8 @@ class MedPackage extends Model
         return $this->belongsTo(PackagesOrder::class,'packages_order_id');
     }
 
+    public function donations()
+    {
+        return $this->hasMany(Donation::class);
+    }
 }

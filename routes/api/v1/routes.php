@@ -3,6 +3,7 @@
 use App\Http\Controllers\Accounts\AuthController;
 use App\Http\Controllers\Accounts\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DonationsController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\FastSellingItemController;
 use App\Http\Controllers\MedicationController;
@@ -67,6 +68,12 @@ Route::delete('/admin/disable-worker/{worker_id}', [AdminController::class, 'dis
 Route::post('/admin/enable-worker/{worker_id}', [AdminController::class, 'enableWorker'])->middleware('auth:sanctum');
 Route::get('/admin/my-staff', [AdminController::class,'getWorkers'])->middleware('auth:sanctum');
 Route::get('/my-treasury', [PharmacyController::class, 'getTreasury'])->middleware('auth:sanctum');
+
+
+//! DONATIONS
+Route::post('/donate-meds', [DonationsController::class, 'donateMeds'])->middleware('auth:sanctum');
+Route::post('/add-donation', [DonationsController::class, 'addPublicDonation'])->middleware('auth:sanctum');
+
 
 //! STORAGE
 Route::get('/get-storage', [MedPackageController::class, 'showStorage'])->middleware('auth:sanctum');
