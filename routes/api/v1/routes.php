@@ -51,6 +51,8 @@ Route::get('/global-meds/{serial_number}', [MedicationController::class, 'getMed
 Route::get('/packages_orders', [PackagesOrderController::class, 'index'])->middleware('auth:sanctum');
 Route::get('/packages_orders/{packages_order_id}', [PackagesOrderController::class, 'show']);
 
+//! RETURN MEDS
+Route::post('/return-meds', [MedPackageController::class, 'returnMeds'])->middleware('auth:sanctum');
 
 //! MED PACKAGES
 Route::get('/med_packages', [MedPackageController::class, 'index'])->middleware('auth:sanctum');

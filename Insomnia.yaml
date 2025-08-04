@@ -10,7 +10,7 @@ collection:
     meta:
       id: fld_d01bc9ed7fa2403e9b7103d43ad16af6
       created: 1750012727351
-      modified: 1754257891420
+      modified: 1754280890012
       sortKey: -1750012727351
       description: ""
     children:
@@ -572,6 +572,39 @@ collection:
         scripts:
           preRequest: ""
           afterResponse: ""
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.localhost }}/api/v1/return-meds"
+        name: Return Meds
+        meta:
+          id: req_640f818e849942ed8660cca0bb755ec7
+          created: 1754280656703
+          modified: 1754281235392
+          isPrivate: false
+          description: ""
+          sortKey: -1750946496669
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"med_package_id" : 1,
+            	"returned_quantity" : 4
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.3.0
+        authentication:
+          type: bearer
+          token: "{{ _.auth_token }}"
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -1214,6 +1247,162 @@ collection:
             send: true
             store: true
           rebuildPath: true
+  - name: Donations
+    meta:
+      id: fld_1e4a32b332bc4108a553fda08b5cb35a
+      created: 1754267339619
+      modified: 1754267339619
+      sortKey: -1754267339619
+      description: ""
+    children:
+      - url: "{{ _.localhost }}/api/v1/donate-meds"
+        name: Donate Meds
+        meta:
+          id: req_cff49fa62d984ff39770e2f57a118fa8
+          created: 1754264889930
+          modified: 1754267533119
+          isPrivate: false
+          description: ""
+          sortKey: -1754267346133
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"donations" : [
+            			{
+            				"id" : 1,
+            				"quantity" : 2
+            			},
+
+            			{
+            				"id" : 2,
+            				"quantity" : 1
+            			}
+
+            	]
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.3.0
+        authentication:
+          type: bearer
+          token: "{{ _.auth_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.localhost }}/api/v1/add-donation"
+        name: Add public donation
+        meta:
+          id: req_b9d75738c22a48b4b35b05425bcc5fd5
+          created: 1754267853946
+          modified: 1754268468582
+          isPrivate: false
+          description: ""
+          sortKey: -1754267346233
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"ammount" : 100	
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.3.0
+        authentication:
+          type: bearer
+          token: "{{ _.auth_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Expenses
+    meta:
+      id: fld_e41348ef40e84c8a87cececef227cd9c
+      created: 1754268492280
+      modified: 1754268492280
+      sortKey: -1754268492280
+      description: ""
+    children:
+      - url: "{{ _.localhost }}/api/v1/draw-expenses"
+        name: Draw Expenses
+        meta:
+          id: req_910c490031ca465aa6bfcd3d2a50fb22
+          created: 1754275714096
+          modified: 1754275837727
+          isPrivate: false
+          description: ""
+          sortKey: -1754275723050
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"ammount" : 100,
+            	"note" : "Buying a noose"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.3.0
+        authentication:
+          type: bearer
+          token: "{{ _.auth_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.localhost }}/api/v1/get-expenses"
+        name: Get Expenses
+        meta:
+          id: req_c7c5abd1f4d545b0827fb3bc8a9e4f22
+          created: 1754278117550
+          modified: 1754278171190
+          isPrivate: false
+          description: ""
+          sortKey: -1754275723150
+        method: GET
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"scope" : "lastWeek"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.3.0
+        authentication:
+          type: bearer
+          token: "{{ _.auth_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
   - url: "{{ _.localhost }}/"
     name: Test
     meta:
@@ -1243,14 +1432,14 @@ cookieJar:
   meta:
     id: jar_b48413c0427982a1a7e317a250f39b263742e8fd
     created: 1753317367158
-    modified: 1754257891413
+    modified: 1754280890002
 environments:
   name: Base Environment
   meta:
     id: env_e5ddf10898c14f3187031bb244517afb
     created: 1749705478341
-    modified: 1754257891416
+    modified: 1754280890008
     isPrivate: false
   data:
-    auth_token: 1|UdpaAUPX28h6J11EiZkkCeICH2kmQXdoDUlZadJc626f7017
+    auth_token: 1|FSCkh7X9K3bEMHh09MnY1AmviwpE01TY5TbBygAyfd7bd126
     localhost: 127.0.0.1:8000

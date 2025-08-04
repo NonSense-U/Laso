@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReturnMedsRequest;
 use App\Models\MedPackage;
 use App\Http\Requests\StoreMedPackagesRequest;
 use App\Http\Requests\UpdateMedPackageRequest;
@@ -31,6 +32,12 @@ class MedPackageController extends Controller
         $data = $this->medPackagesServices->addMedPackages($request->validated(), $request->user());
 
         return ApiResponse::success('Medication Packages has been added successfully.', $data);
+    }
+
+    public function returnMeds(ReturnMedsRequest $request)
+    {
+        $data = $this->medPackagesServices->returnMeds($request->validated(), $request->user());
+        return ApiResponse::success('ok', $data);
     }
 
 

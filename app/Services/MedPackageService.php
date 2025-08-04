@@ -4,11 +4,13 @@ namespace App\Services;
 
 use App\Models\MedPackage;
 use App\Models\PackagesOrder;
+use App\Models\ReturnRecord;
 use App\Models\Supplier;
 use App\Models\User;
 use Error;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Throwable;
 
 class MedPackageService
 {
@@ -100,6 +102,68 @@ class MedPackageService
             DB::commit();
             return $medPackages;
         } catch (Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+    public function returnMeds(array $payload, User $user)
+    {
+        try {
+            DB::beginTransaction();
+
+            $medPackage = MedPackage::findOrFail($payload['med_package_id']);
+
+            if ($payload['returned_quantity'] <= 0) {
+                throw new \Exception('Returned quantity must be greater than zero.');
+            }
+
+            if ($medPackage->quantity < $payload['returned_quantity']) {
+                throw new \Exception('Insufficient stock to return.');
+            }
+
+            $payload['pharmacy_id'] = $user->pharmacy_id;
+
+            $returnRecord = ReturnRecord::create($payload);
+
+            //! decrease stock
+            $medPackage->quantity -= $payload['returned_quantity'];
+            $medPackage->save();
+
+            $cashValue = $medPackage->purchase_price * $payload['returned_quantity'];
+
+            $parentOrder = $medPackage->parent_order;
+
+            if (!$parentOrder) {
+                throw new \Exception('No parent order associated with this medication package.');
+            }
+
+            $debt = $parentOrder->total_price - $parentOrder->paid_ammount;
+
+            if ($debt > 0) {
+                if ($debt >= $cashValue) {
+                    $parentOrder->paid_ammount += $cashValue;
+                    $cashValue = 0;
+                } else {
+                    $parentOrder->paid_ammount = $parentOrder->total_price;
+                    $cashValue -= $debt;
+                }
+                $parentOrder->save();
+            }
+
+            $mainVault = $user->pharmacy->vaults()->where('name', 'main')->first();
+
+            if (!$mainVault) {
+                throw new \Exception('Main vault not found.');
+            }
+
+            $mainVault->balance += $cashValue;
+            $mainVault->save();
+
+            DB::commit();
+
+            return ['return_record' => $returnRecord];
+        } catch (\Throwable $e) {
             DB::rollBack();
             throw $e;
         }
