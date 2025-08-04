@@ -3,9 +3,13 @@
 namespace App\Services;
 
 use App\Http\Resources\V1\Admin\WorkerResource;
+use App\Models\Expense;
 use App\Models\User;
+use Carbon\Carbon;
+use Exception;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Throwable;
 
 class AdminService
 {
@@ -54,5 +58,49 @@ class AdminService
         $worker->tokens()->delete();
         DB::table('pharmacy_staff_whitelist')->where('email', '=', $worker->email)->delete();
         return;
+    }
+
+
+    public function getExpenses(array $payload, User $user)
+    {
+        $fromDate = match ($payload['scope']) {
+            'today' => Carbon::today(),
+            'lastWeek' => Carbon::now()->subWeek(),
+            'lastMonth' => Carbon::now()->subMonth(),
+        };
+
+        $expenses = Expense::query()
+            ->where('pharmacy_id', $user->pharmacy_id)
+            ->where('drawn_at', '>=', $fromDate)
+            ->latest('drawn_at') // Optional: order by newest
+            ->get();
+
+        return $expenses;
+    }
+
+    public function drawExpenses(array $payload, User $user)
+    {
+        try {
+            DB::beginTransaction();
+
+            $main_vault = $user->pharmacy->vaults()->where('name', '=', 'main')->first();
+            if ($main_vault->balance < $payload['ammount']) {
+                throw new Exception('Insufficient funds');
+            }
+            
+            Expense::create([
+                'pharmacy_id' => $user->pharmacy_id,
+                'ammount_drawn' => $payload['ammount'],
+                'note' => $payload['note']
+            ]);
+
+            $main_vault->balance -= $payload['ammount'];
+            $main_vault->save();
+
+            DB::commit();
+        } catch (Throwable $e) {
+            DB::rollBack();
+            throw $e;
+        }
     }
 }

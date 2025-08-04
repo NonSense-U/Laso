@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Expense;
 use App\Services\AdminService;
 use App\Traits\V1\ApiResponse;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -35,5 +38,28 @@ class AdminController extends Controller
     {
         $this->adminService->disableWorker($request->user(), $worker_id);
         return ApiResponse::success('Worker disabled successfully.');
+    }
+
+    public function drawExpenses(Request $request)
+    {
+        $validated = $request->validate([
+            'ammount' => ['required', 'decimal:0,2', 'min:0'],
+            'note' => ['sometimes','string']
+        ]);
+        $this->adminService->drawExpenses($validated, $request->user());
+        return ApiResponse::success('moeny drawn successfully.');
+    }
+
+
+    public function getExpenses(Request $request)
+    {
+        $user = $request->user();
+
+        $validated = $request->validate([
+            'scope' => ['required', 'in:today,lastWeek,lastMonth'],
+        ]);
+
+        $expenses = $this->adminService->getExpenses($validated, $user);
+        return ApiResponse::success('ok', ['expenses' => $expenses]);
     }
 }

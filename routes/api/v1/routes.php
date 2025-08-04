@@ -68,7 +68,9 @@ Route::delete('/admin/disable-worker/{worker_id}', [AdminController::class, 'dis
 Route::post('/admin/enable-worker/{worker_id}', [AdminController::class, 'enableWorker'])->middleware('auth:sanctum');
 Route::get('/admin/my-staff', [AdminController::class,'getWorkers'])->middleware('auth:sanctum');
 Route::get('/my-treasury', [PharmacyController::class, 'getTreasury'])->middleware('auth:sanctum');
-
+    //* EXPENSES
+Route::post('/draw-expenses', [AdminController::class, 'drawExpenses'])->middleware('auth:sanctum');
+Route::get('/get-expenses', [AdminController::class, 'getExpenses'])->middleware('auth:sanctum');
 
 //! DONATIONS
 Route::post('/donate-meds', [DonationsController::class, 'donateMeds'])->middleware('auth:sanctum');
