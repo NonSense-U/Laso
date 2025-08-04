@@ -18,6 +18,7 @@ return new class extends Migration
         Schema::create('med_packages', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Medication::class)->constrained()->cascadeOnDelete();
+            $table->integer('init_quantity');
             $table->integer('quantity');
             $table->timestamp('production_date');
             $table->timestamp('expiration_date');

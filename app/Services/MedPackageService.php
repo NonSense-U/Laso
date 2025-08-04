@@ -7,7 +7,7 @@ use App\Models\PackagesOrder;
 use App\Models\ReturnRecord;
 use App\Models\Supplier;
 use App\Models\User;
-use Error;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Throwable;
@@ -19,6 +19,106 @@ class MedPackageService
     {
         $expiredMeds = $user->pharmacy->med_packages()->where('expiration_date', '<=', now()->toDateString())->with('medication')->get();
         return $expiredMeds;
+    }
+
+
+    public function getMedsLogs(array $payload, User $user)
+    {
+        $fromDate = match ($payload['scope']) {
+            'today' => Carbon::today(),
+            'lastWeek' => Carbon::now()->subWeek(),
+            'lastMonth' => Carbon::now()->subMonth(),
+        };
+
+
+        $initQuantity = DB::select(
+            'SELECT m.name AS medication_name, SUM(mp.init_quantity) AS init_quantity 
+         FROM med_packages mp
+         JOIN medications m ON mp.medication_id = m.id 
+         WHERE mp.pharmacy_id = ? AND mp.created_at > ? 
+         GROUP BY m.name', 
+            [$user->pharmacy_id, $fromDate]
+        );
+
+        $soldMeds = DB::select(
+            'SELECT m.name AS medication_name, SUM(ci.quantity) AS sold_amount 
+         FROM cart_items ci 
+         JOIN med_packages mp ON ci.product_id = mp.id 
+         JOIN medications m ON mp.medication_id = m.id
+         WHERE mp.pharmacy_id = ? AND ci.type = ? AND mp.created_at > ? 
+         GROUP BY m.name', 
+            [$user->pharmacy_id, 'med_package', $fromDate]
+        );
+
+        $donatedMeds = DB::select(
+            'SELECT m.name AS medication_name, SUM(dn.quantity) AS donated_amount 
+         FROM donations dn 
+         JOIN med_packages mp ON dn.med_package_id = mp.id 
+         JOIN medications m ON mp.medication_id = m.id
+         WHERE dn.pharmacy_id = ? AND mp.created_at > ? 
+         GROUP BY m.name', 
+            [$user->pharmacy_id, $fromDate]
+        );
+
+        $returnedMeds = DB::select(
+            'SELECT m.name AS medication_name, SUM(rr.returned_quantity) AS returned_amount 
+         FROM return_records rr 
+         JOIN med_packages mp ON rr.med_package_id = mp.id 
+         JOIN medications m ON mp.medication_id = m.id
+         WHERE rr.pharmacy_id = ? AND mp.created_at > ? 
+         GROUP BY m.name', 
+            [$user->pharmacy_id, $fromDate]
+        );
+
+        $currentMeds = DB::select(
+            'SELECT m.name AS medication_name, SUM(mp.quantity) AS current_amount 
+         FROM med_packages mp 
+         JOIN medications m ON mp.medication_id = m.id
+         WHERE mp.pharmacy_id = ? AND mp.expiration_date > ? AND mp.created_at > ? 
+         GROUP BY m.name', 
+            [$user->pharmacy_id, now()->addMonth(), $fromDate]
+        );
+
+        $expiredMeds = DB::select(
+            'SELECT m.name AS medication_name, SUM(mp.quantity) AS expired_amount 
+         FROM med_packages mp 
+         JOIN medications m ON mp.medication_id = m.id
+         WHERE mp.pharmacy_id = ? AND mp.created_at > ? AND mp.expiration_date < ? 
+         GROUP BY m.name', 
+            [$user->pharmacy_id, $fromDate, now()]
+        );
+
+
+        $mergedData = [];
+
+        $processDataset = function ($dataset, $valueKey) use (&$mergedData) {
+            foreach ($dataset as $item) {
+                $medName = $item->medication_name;
+
+                if (!isset($mergedData[$medName])) {
+                    $mergedData[$medName] = [
+                        'medication_name' => $medName,
+                        'init_quantity'   => 0,
+                        'sold_amount'     => 0,
+                        'donated_amount'  => 0,
+                        'returned_amount' => 0,
+                        'current_amount'  => 0,
+                        'expired_amount'  => 0,
+                    ];
+                }
+
+                $mergedData[$medName][$valueKey] = $item->{$valueKey};
+            }
+        };
+
+        $processDataset($initQuantity, 'init_quantity');
+        $processDataset($soldMeds, 'sold_amount');
+        $processDataset($donatedMeds, 'donated_amount');
+        $processDataset($returnedMeds, 'returned_amount');
+        $processDataset($currentMeds, 'current_amount');
+        $processDataset($expiredMeds, 'expired_amount');
+
+        return array_values($mergedData);
     }
 
     public function getStorage(User $user)
@@ -80,7 +180,7 @@ class MedPackageService
                 'supplier_id' => $payload['supplier_id'],
                 'pharmacy_id' => $user->pharmacy_id,
                 'total_price' => $payload['total_price'],
-                'paid_ammount' => $payload['paid_ammount']
+                'paid_amount' => $payload['paid_amount']
             ]);
 
             $medPackages = [];
@@ -88,11 +188,12 @@ class MedPackageService
             foreach ($payload['packages-order'] as $package) {
                 $package['packages_order_id'] = $packages_order->id;
                 $package['pharmacy_id'] = $user->pharmacy_id;
+                $package['init_quantity'] = $package['quantity'];
                 $medPackages[] = MedPackage::create($package);
             }
 
             //! Check For Debt
-            $debt = $payload['total_price'] - $payload['paid_ammount'];
+            $debt = $payload['total_price'] - $payload['paid_amount'];
             if ($debt !== 0) {
                 $supplier = Supplier::findOrFail($payload['supplier_id']);
                 $supplier->balance += $debt;
@@ -138,14 +239,14 @@ class MedPackageService
                 throw new \Exception('No parent order associated with this medication package.');
             }
 
-            $debt = $parentOrder->total_price - $parentOrder->paid_ammount;
+            $debt = $parentOrder->total_price - $parentOrder->paid_amount;
 
             if ($debt > 0) {
                 if ($debt >= $cashValue) {
-                    $parentOrder->paid_ammount += $cashValue;
+                    $parentOrder->paid_amount += $cashValue;
                     $cashValue = 0;
                 } else {
-                    $parentOrder->paid_ammount = $parentOrder->total_price;
+                    $parentOrder->paid_amount = $parentOrder->total_price;
                     $cashValue -= $debt;
                 }
                 $parentOrder->save();

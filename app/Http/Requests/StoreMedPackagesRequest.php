@@ -24,7 +24,7 @@ class StoreMedPackagesRequest extends FormRequest
         return [
             'supplier_id' => ['required', 'exists:suppliers,id'],
             'total_price' => ['required','numeric'],
-            'paid_ammount' => ['required','numeric'],
+            'paid_amount' => ['required','numeric'],
             'packages-order' => ['required', 'array'],
             'packages-order.*.medication_id' => ['required', 'exists:medications,id'],
             'packages-order.*.quantity' => ['required', 'integer'],

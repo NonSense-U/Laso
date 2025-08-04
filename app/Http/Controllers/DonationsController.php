@@ -27,9 +27,9 @@ class DonationsController extends Controller
     public function addPublicDonation(Request $request)
     {
         $validated =  $request->validate([
-            'ammount' => ['required','decimal:0,2', 'min:1']
+            'amount' => ['required','decimal:0,2', 'min:1']
         ]);
-        $this->donationsService->addPublicDonation($validated['ammount'], $request->user());
+        $this->donationsService->addPublicDonation($validated['amount'], $request->user());
         return ApiResponse::success('Donation done successfully! Thank you.');
     }
 }

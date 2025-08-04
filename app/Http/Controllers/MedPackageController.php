@@ -27,10 +27,21 @@ class MedPackageController extends Controller
         return ApiResponse::success('Med packages retrieved successfully.', $data, 200);
     }
 
+    public function MedsLogs(Request $request)
+    {
+        $validated = $request->validate([
+            'scope' => ['required','string','in:today,lastWeek,lastMonth']
+        ]);
+        
+        $data = $this->medPackagesServices->getMedsLogs($validated, $request->user());
+
+        return ApiResponse::success('ok', $data);
+    }
+
     public function addMedPackages(StoreMedPackagesRequest $request)
     {
         $data = $this->medPackagesServices->addMedPackages($request->validated(), $request->user());
-
+// 
         return ApiResponse::success('Medication Packages has been added successfully.', $data);
     }
 

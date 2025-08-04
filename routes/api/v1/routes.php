@@ -96,3 +96,6 @@ Route::middleware(['auth:sanctum','update.last.seen'])->group(function(){
 });
 
 Route::get('/stats', [StatisticsController::class, 'getStats'])->middleware('auth:sanctum');
+
+//! LOGS
+Route::get('/meds-logs', [MedPackageController::class, 'MedsLogs'])->middleware('auth:sanctum');

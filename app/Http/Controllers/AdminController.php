@@ -43,7 +43,7 @@ class AdminController extends Controller
     public function drawExpenses(Request $request)
     {
         $validated = $request->validate([
-            'ammount' => ['required', 'decimal:0,2', 'min:0'],
+            'amount' => ['required', 'decimal:0,2', 'min:0'],
             'note' => ['sometimes','string']
         ]);
         $this->adminService->drawExpenses($validated, $request->user());

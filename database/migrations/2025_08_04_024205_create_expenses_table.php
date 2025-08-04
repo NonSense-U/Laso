@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Pharmacy::class)->constrained()->cascadeOnDelete();
-            $table->decimal('ammount_drawn');
+            $table->decimal('amount_drawn');
             $table->string('note')->nullable();
             $table->timestamp('drawn_at')->nullable()->default(now());
         });

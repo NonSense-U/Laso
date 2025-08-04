@@ -84,17 +84,17 @@ class AdminService
             DB::beginTransaction();
 
             $main_vault = $user->pharmacy->vaults()->where('name', '=', 'main')->first();
-            if ($main_vault->balance < $payload['ammount']) {
+            if ($main_vault->balance < $payload['amount']) {
                 throw new Exception('Insufficient funds');
             }
             
             Expense::create([
                 'pharmacy_id' => $user->pharmacy_id,
-                'ammount_drawn' => $payload['ammount'],
+                'amount_drawn' => $payload['amount'],
                 'note' => $payload['note']
             ]);
 
-            $main_vault->balance -= $payload['ammount'];
+            $main_vault->balance -= $payload['amount'];
             $main_vault->save();
 
             DB::commit();

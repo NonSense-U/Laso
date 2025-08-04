@@ -21,6 +21,7 @@ class MedPackageFactory extends Factory
     {
         return [
             'medication_id' => rand(1,5),
+            'init_quantity' => rand(80, 120),
             'quantity' => rand(1, 100),
             'production_date' => now()->subWeeks(rand(1,12))->toDateString(),
             'expiration_date' => now()->subWeeks(rand(0,8))->addMonths(rand(0,14))->toDateString(),

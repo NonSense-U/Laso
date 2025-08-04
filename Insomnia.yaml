@@ -10,7 +10,7 @@ collection:
     meta:
       id: fld_d01bc9ed7fa2403e9b7103d43ad16af6
       created: 1750012727351
-      modified: 1754280890012
+      modified: 1754346152394
       sortKey: -1750012727351
       description: ""
     children:
@@ -422,7 +422,7 @@ collection:
         meta:
           id: req_2869726cf73a46c2854f1c76439064fb
           created: 1750052144156
-          modified: 1754257588549
+          modified: 1754335946515
           isPrivate: false
           description: ""
           sortKey: -1750120256575
@@ -439,7 +439,7 @@ collection:
             		"password" : "123",
             		"password_confirmation" : "123"
             	},
-            	"login" : false
+            	"login" : true
             }
         headers:
           - name: Content-Type
@@ -530,7 +530,7 @@ collection:
         meta:
           id: req_12b799f895da42f0960c4a59c00b26e3
           created: 1750946496569
-          modified: 1753317367686
+          modified: 1754345980692
           isPrivate: false
           description: ""
           sortKey: -1750946496569
@@ -541,7 +541,7 @@ collection:
             {
               "supplier_id": 2,
             	"total_price": 199.9,
-            	"paid_ammount" : 122.2,
+            	"paid_amount" : 122.2,
             	"packages-order": [
             		{
             			"medication_id": 1,
@@ -1000,6 +1000,38 @@ collection:
             send: true
             store: true
           rebuildPath: true
+      - url: "{{ _.localhost }}/api/v1/meds-logs"
+        name: Pharmacy Meds Log
+        meta:
+          id: req_09e1210c9c534a4fb57ba5c3c04a271a
+          created: 1754284856767
+          modified: 1754349454326
+          isPrivate: false
+          description: ""
+          sortKey: -1751037795175
+        method: GET
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"scope" : "lastMonth"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.3.0
+        authentication:
+          type: bearer
+          token: "{{ _.auth_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
     scripts:
       afterResponse: ""
       preRequest: ""
@@ -1303,7 +1335,7 @@ collection:
         meta:
           id: req_b9d75738c22a48b4b35b05425bcc5fd5
           created: 1754267853946
-          modified: 1754268468582
+          modified: 1754345913039
           isPrivate: false
           description: ""
           sortKey: -1754267346233
@@ -1312,7 +1344,7 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"ammount" : 100	
+            	"amount" : 100	
             }
         headers:
           - name: Content-Type
@@ -1343,7 +1375,7 @@ collection:
         meta:
           id: req_910c490031ca465aa6bfcd3d2a50fb22
           created: 1754275714096
-          modified: 1754275837727
+          modified: 1754345907996
           isPrivate: false
           description: ""
           sortKey: -1754275723050
@@ -1352,7 +1384,7 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"ammount" : 100,
+            	"amount" : 100,
             	"note" : "Buying a noose"
             }
         headers:
@@ -1432,14 +1464,14 @@ cookieJar:
   meta:
     id: jar_b48413c0427982a1a7e317a250f39b263742e8fd
     created: 1753317367158
-    modified: 1754280890002
+    modified: 1754346152382
 environments:
   name: Base Environment
   meta:
     id: env_e5ddf10898c14f3187031bb244517afb
     created: 1749705478341
-    modified: 1754280890008
+    modified: 1754346152390
     isPrivate: false
   data:
-    auth_token: 1|FSCkh7X9K3bEMHh09MnY1AmviwpE01TY5TbBygAyfd7bd126
+    auth_token: 1|qoWVgEjwyZX4WEOTFNyphGqrMidYwuhp9RqSKhwaa2b1dc46
     localhost: 127.0.0.1:8000
