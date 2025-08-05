@@ -6,9 +6,9 @@ use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\FastSellingItem;
 use App\Models\MedPackage;
+use App\Models\OpenedMed;
 use App\Models\Payment;
 use App\Models\User;
-use App\Models\Vault;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
@@ -18,7 +18,8 @@ use function Pest\Laravel\get;
 
 class SalesService
 {
-
+    //TODO 
+    //! DON'T TAKE TOTAL_RETAIL_PRICE FOR GRANTED
     public function Checkout(array $payload, User $user)
     {
         DB::beginTransaction();
@@ -85,10 +86,17 @@ class SalesService
                     'partial_sale' => $item['partial_sale']
                 ]);
 
-
-                $product->quantity -= $newItem->quantity;
-                $product->save();
-                $cart->total_purchase_price += $product->purchase_price * $newItem->quantity;
+                if ($newItem['partial_sale']) {
+                    $opened_package = $this->OpenMed($newItem, $product);
+                    //! ITEM QUANTITY TO AVOID COMPLETED MED CASE WHERE newItem->quantity = 1
+                    $opened_package->blister_packs -= $item['quantity'];
+                    $cart->total_purchase_price += ($product->purchase_price / $product->medication->entities) * $newItem->quantity;
+                    $opened_package->save();
+                } else {
+                    $product->quantity -= $newItem->quantity;
+                    $product->save();
+                    $cart->total_purchase_price += $product->purchase_price * $newItem->quantity;
+                }
             }
 
             $cart->save();
@@ -99,5 +107,46 @@ class SalesService
             DB::rollBack();
             throw $e;
         }
+    }
+
+
+    public function OpenMed(CartItem $newItem, MedPackage $med_package)
+    {
+        $required = $newItem['quantity'];
+
+        $opened_package = OpenedMed::where('med_package_id', $newItem['product_id'])->first();
+
+        if (!$opened_package) {
+            if ($med_package->quantity <= 0) {
+                throw new UnprocessableEntityHttpException("No packages available to open for product {$newItem['product_id']}.");
+            }
+
+            $opened_package = OpenedMed::create([
+                'med_package_id' => $newItem['product_id'],
+                'blister_packs' => $med_package->medication->entities
+            ]);
+
+            $med_package->quantity -= 1;
+        }
+
+        while ($opened_package->blister_packs < $required) {
+            if ($med_package->quantity <= 0) {
+                dd($med_package->quantity);
+                throw new UnprocessableEntityHttpException("Not enough blister packs for product {$newItem['product_id']}.");
+            }
+
+            //! COMPLETED MEDPACKAGE SALE
+            $newItem->partial_sale = false;
+            $newItem->quantity = 1;
+            $newItem->save();
+
+            $opened_package->blister_packs += $med_package->medication->entities;
+            $med_package->quantity -= 1;
+        }
+
+        $opened_package->save();
+        $med_package->save();
+
+        return $opened_package;
     }
 }

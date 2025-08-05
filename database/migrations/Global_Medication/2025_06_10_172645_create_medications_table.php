@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name')->index();
             $table->string('scientific_name');
             $table->string('strength');
+            $table->integer('entities')->nullable()->default(1);
             $table->integer('retail_price');
             $table->string('notes');
             $table->foreignIdFor(Manufacturer::class)->constrained()->cascadeOnDelete();

@@ -59,7 +59,7 @@ class SalesStatsService
                 SUM(ci.quantity) AS total_quantity_sold
             FROM carts cs
             JOIN cart_items ci ON cs.id = ci.cart_id 
-            WHERE cs.pharmacy_id = ? AND cs.created_at > ?
+            WHERE cs.pharmacy_id = ? AND cs.created_at > ? AND ci.partial_sale = false
             GROUP BY ci.product_id, ci.type
             ORDER BY total_quantity_sold DESC
             LIMIT 1',
@@ -74,7 +74,7 @@ class SalesStatsService
             SUM(ci.quantity) as total_quantity_sold
             FROM carts cs
             JOIN cart_items ci ON cs.id = ci.cart_id 
-            WHERE cs.pharmacy_id = ? AND cs.created_at > ?
+            WHERE cs.pharmacy_id = ? AND cs.created_at > ? AND ci.partial_sale = false
             GROUP BY ci.product_id, ci.type
             ORDER BY total_quantity_sold ASC
             LIMIT 1',
@@ -89,7 +89,7 @@ class SalesStatsService
             (SUM(ci.retail_price * ci.quantity) - SUM(ci.purchase_price * ci.quantity)) as total_profit
         FROM carts cs
         JOIN cart_items ci ON cs.id = ci.cart_id 
-        WHERE cs.pharmacy_id = ? AND cs.created_at > ?
+        WHERE cs.pharmacy_id = ? AND cs.created_at > ? AND ci.partial_sale = false
         GROUP BY ci.product_id, ci.type
         ORDER BY total_profit DESC
         LIMIT 1',
@@ -104,7 +104,7 @@ class SalesStatsService
             (SUM(ci.retail_price * ci.quantity) - SUM(ci.purchase_price * ci.quantity)) as total_profit
         FROM carts cs
         JOIN cart_items ci ON cs.id = ci.cart_id 
-        WHERE cs.pharmacy_id = ? AND cs.created_at > ?
+        WHERE cs.pharmacy_id = ? AND cs.created_at > ? AND ci.partial_sale = false
         GROUP BY ci.product_id, ci.type
         ORDER BY total_profit ASC
         LIMIT 1',

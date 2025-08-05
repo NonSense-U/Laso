@@ -30,7 +30,7 @@ class MedPackageController extends Controller
     public function MedsLogs(Request $request)
     {
         $validated = $request->validate([
-            'scope' => ['required','string','in:today,lastWeek,lastMonth']
+            'scope' => ['sometimes','string','in:today,lastWeek,lastMonth']
         ]);
         
         $data = $this->medPackagesServices->getMedsLogs($validated, $request->user());

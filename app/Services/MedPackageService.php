@@ -24,13 +24,14 @@ class MedPackageService
 
     public function getMedsLogs(array $payload, User $user)
     {
-        $fromDate = match ($payload['scope']) {
-            'today' => Carbon::today(),
-            'lastWeek' => Carbon::now()->subWeek(),
-            'lastMonth' => Carbon::now()->subMonth(),
-        };
+        // $fromDate = match ($payload['scope']) {
+        //     'today' => Carbon::today(),
+        //     'lastWeek' => Carbon::now()->subWeek(),
+        //     'lastMonth' => Carbon::now()->subMonth(),
+        // };
 
-
+        $fromDate = now()->subMonths(6);
+        
         $initQuantity = DB::select(
             'SELECT m.name AS medication_name, SUM(mp.init_quantity) AS init_quantity 
          FROM med_packages mp

@@ -15,8 +15,8 @@ class InventoryStatsService
             'SELECT mp.id,
                     md.name,
                     mp.created_at AS date_added,
-                    mp.purchase_price AS purchase_price,
-                    md.price AS retail_price,
+                    mp.purchase_price,
+                    md.retail_price,
                     mp.purchase_price AS purchase_price,
                     mp.quantity,
                     (mp.quantity * mp.purchase_price) AS total_loss

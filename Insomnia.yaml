@@ -10,7 +10,7 @@ collection:
     meta:
       id: fld_d01bc9ed7fa2403e9b7103d43ad16af6
       created: 1750012727351
-      modified: 1754346152394
+      modified: 1754363343136
       sortKey: -1750012727351
       description: ""
     children:
@@ -1214,7 +1214,7 @@ collection:
         meta:
           id: req_007208ce74964e079435aebcfe1d0dee
           created: 1751505201133
-          modified: 1754257013161
+          modified: 1754363422910
           isPrivate: false
           description: ""
           sortKey: -1754257013010
@@ -1229,7 +1229,7 @@ collection:
             		{
             			"type" : "med_package",
             			"product_id" : 1,
-            			"quantity" : 2,
+            			"quantity" : 0,
             			"purchase_price" : 100,
             			"retail_price" : 120,
             			"partial_sale" : false
@@ -1237,10 +1237,10 @@ collection:
             		{
             			"type" : "med_package",
             			"product_id" : 2,
-            			"quantity" : 0,
+            			"quantity" : 1,
             			"purchase_price" : 100,
             			"retail_price" : 120,
-            			"partial_sale" : false
+            			"partial_sale" : true
             			
             		},
             		{
@@ -1464,14 +1464,14 @@ cookieJar:
   meta:
     id: jar_b48413c0427982a1a7e317a250f39b263742e8fd
     created: 1753317367158
-    modified: 1754346152382
+    modified: 1754363343112
 environments:
   name: Base Environment
   meta:
     id: env_e5ddf10898c14f3187031bb244517afb
     created: 1749705478341
-    modified: 1754346152390
+    modified: 1754363343116
     isPrivate: false
   data:
-    auth_token: 1|qoWVgEjwyZX4WEOTFNyphGqrMidYwuhp9RqSKhwaa2b1dc46
+    auth_token: 1|AMMYPQMOYuwBfWYTka2MnYbnDoWscIWKwEgajEnNc744dd3e
     localhost: 127.0.0.1:8000
