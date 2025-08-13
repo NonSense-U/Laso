@@ -25,7 +25,7 @@ class SalesService
         DB::beginTransaction();
 
         try {
-
+            //TODO don't trust total_retail_price
             if ($payload['payment_method'] === 'cash') {
                 $main_vault = $user->pharmacy->vaults()->where('name', '=', 'main')->firstOrFail();
                 $main_vault->balance += $payload['total_retail_price'];
@@ -90,7 +90,7 @@ class SalesService
                     $opened_package = $this->OpenMed($newItem, $product);
                     //! ITEM QUANTITY TO AVOID COMPLETED MED CASE WHERE newItem->quantity = 1
                     $opened_package->blister_packs -= $item['quantity'];
-                    $cart->total_purchase_price += ($product->purchase_price / $product->medication->entities) * $newItem->quantity;
+                    $cart->total_purchase_price += ($product->purchase_price / $product->medication->entities) * $item['quantity'];
                     $opened_package->save();
                 } else {
                     $product->quantity -= $newItem->quantity;
