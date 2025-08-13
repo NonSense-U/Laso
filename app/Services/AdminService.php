@@ -90,6 +90,7 @@ class AdminService
             
             Expense::create([
                 'pharmacy_id' => $user->pharmacy_id,
+                'type' => $payload['type'],
                 'amount_drawn' => $payload['amount'],
                 'note' => $payload['note']
             ]);

@@ -10,7 +10,7 @@ collection:
     meta:
       id: fld_d01bc9ed7fa2403e9b7103d43ad16af6
       created: 1750012727351
-      modified: 1754363343136
+      modified: 1755097454667
       sortKey: -1750012727351
       description: ""
     children:
@@ -946,12 +946,12 @@ collection:
         scripts:
           afterResponse: ""
           preRequest: ""
-      - url: "{{ _.localhost }}/api/v1/stats?scope=day"
+      - url: "{{ _.localhost }}/api/v1/stats?scope=today"
         name: Stats
         meta:
           id: req_c0264433a937479aafc4be7704ebdff7
           created: 1753401396661
-          modified: 1754256944460
+          modified: 1754442854605
           isPrivate: false
           description: ""
           sortKey: -1751037794975
@@ -1005,7 +1005,7 @@ collection:
         meta:
           id: req_09e1210c9c534a4fb57ba5c3c04a271a
           created: 1754284856767
-          modified: 1754349454326
+          modified: 1754447351270
           isPrivate: false
           description: ""
           sortKey: -1751037795175
@@ -1375,7 +1375,7 @@ collection:
         meta:
           id: req_910c490031ca465aa6bfcd3d2a50fb22
           created: 1754275714096
-          modified: 1754345907996
+          modified: 1755097477359
           isPrivate: false
           description: ""
           sortKey: -1754275723050
@@ -1384,6 +1384,7 @@ collection:
           mimeType: application/json
           text: |-
             {
+            	"type" : "salary",
             	"amount" : 100,
             	"note" : "Buying a noose"
             }
@@ -1464,14 +1465,14 @@ cookieJar:
   meta:
     id: jar_b48413c0427982a1a7e317a250f39b263742e8fd
     created: 1753317367158
-    modified: 1754363343112
+    modified: 1755097454660
 environments:
   name: Base Environment
   meta:
     id: env_e5ddf10898c14f3187031bb244517afb
     created: 1749705478341
-    modified: 1754363343116
+    modified: 1755097454664
     isPrivate: false
   data:
-    auth_token: 1|AMMYPQMOYuwBfWYTka2MnYbnDoWscIWKwEgajEnNc744dd3e
+    auth_token: 1|joTb1gYbiHjSa84rXmK6xWEcJwsVhntzIF3mCaQCf2dda328
     localhost: 127.0.0.1:8000
