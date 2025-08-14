@@ -10,7 +10,7 @@ collection:
     meta:
       id: fld_d01bc9ed7fa2403e9b7103d43ad16af6
       created: 1750012727351
-      modified: 1755158935760
+      modified: 1755167412937
       sortKey: -1750012727351
       description: ""
     children:
@@ -535,7 +535,7 @@ collection:
         meta:
           id: req_12b799f895da42f0960c4a59c00b26e3
           created: 1750946496569
-          modified: 1754345980692
+          modified: 1755167033621
           isPrivate: false
           description: ""
           sortKey: -1750946496569
@@ -556,7 +556,7 @@ collection:
               		"purchase_price": 25.50
             		},
             		{
-            			"medication_id": 1,
+            			"medication_id": 6,
               		"quantity": 43,
               		"production_date": "2024-10-01",
               		"expiration_date": "2026-10-01",
@@ -1321,7 +1321,7 @@ collection:
         meta:
           id: req_cff49fa62d984ff39770e2f57a118fa8
           created: 1754264889930
-          modified: 1754267533119
+          modified: 1755165674239
           isPrivate: false
           description: ""
           sortKey: -1754267346133
@@ -1364,7 +1364,7 @@ collection:
         meta:
           id: req_b9d75738c22a48b4b35b05425bcc5fd5
           created: 1754267853946
-          modified: 1754345913039
+          modified: 1755159603009
           isPrivate: false
           description: ""
           sortKey: -1754267346233
@@ -1373,7 +1373,41 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"amount" : 100	
+            	"amount" : 100
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.3.0
+        authentication:
+          type: bearer
+          token: "{{ _.auth_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.localhost }}/api/v1/donate-meds"
+        name: Donate Meds V2 DEV
+        meta:
+          id: req_a167275ad101459989620a8b2fca3d90
+          created: 1755165681311
+          modified: 1755167502076
+          isPrivate: false
+          description: ""
+          sortKey: -1754267346333
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name" : "Osteofix",
+            	"strength" : "500mg",
+            	"quantity" : 1
             }
         headers:
           - name: Content-Type
@@ -1491,14 +1525,14 @@ cookieJar:
   meta:
     id: jar_b48413c0427982a1a7e317a250f39b263742e8fd
     created: 1753317367158
-    modified: 1755158935752
+    modified: 1755167412930
 environments:
   name: Base Environment
   meta:
     id: env_e5ddf10898c14f3187031bb244517afb
     created: 1749705478341
-    modified: 1755158935756
+    modified: 1755167412934
     isPrivate: false
   data:
-    auth_token: 1|VmD3XAFOkF1RoYxg2x54ay8EAwfVQ79YPxePvVwBb079e27d
+    auth_token: 1|R48rQIINOnmk3oWMhQY0f4AgDrFxJtfPrnD6AcUL27927c0b
     localhost: 127.0.0.1:8000

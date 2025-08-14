@@ -43,7 +43,7 @@ class AdminController extends Controller
     public function drawExpenses(Request $request)
     {
         $validated = $request->validate([
-            'type' => ['required', 'in:salary,maintenance,daily,donation,other'],
+            'type' => ['required', 'in:salary,maintenance,daily,other'],
             'amount' => ['required', 'decimal:0,2', 'min:0'],
             'note' => ['sometimes','string']
         ]);

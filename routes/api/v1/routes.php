@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DonationsController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\FastSellingItemController;
+use App\Http\Controllers\GoofyDonationController;
 use App\Http\Controllers\MedicationController;
 use App\Http\Controllers\MedPackageController;
 use App\Http\Controllers\PackagesOrderController;
@@ -75,9 +76,9 @@ Route::post('/draw-expenses', [AdminController::class, 'drawExpenses'])->middlew
 Route::get('/get-expenses', [AdminController::class, 'getExpenses'])->middleware('auth:sanctum');
 
 //! DONATIONS
-Route::post('/donate-meds', [DonationsController::class, 'donateMeds'])->middleware('auth:sanctum');
+// Route::post('/donate-meds', [DonationsController::class, 'donateMeds'])->middleware('auth:sanctum');
 Route::post('/add-donation', [DonationsController::class, 'addPublicDonation'])->middleware('auth:sanctum');
-
+Route::post('/donate-meds', [GoofyDonationController::class, 'donateMeds'])->middleware('auth:sanctum');
 
 //! STORAGE
 Route::get('/get-storage', [MedPackageController::class, 'showStorage'])->middleware('auth:sanctum');
