@@ -162,6 +162,7 @@ class MedPackageService
                 'name' => $medication->name,
                 'price' => $medication->price,
                 'strength' => $medication->strength,
+                'entities' => $medication->entities,
                 'stock' => $groupedPackages->sum('quantity'), //! sum of package quantities
                 'expires_in' => $groupedPackages->min('expiration_date'),
                 'packages' => $groupedPackages,

@@ -24,7 +24,7 @@ class LiveStatsService
 
         $onlineWorkersCount = count($online);
 
-        $treasury = $pharmacy->vaults()->where('name', '=', 'main')->firstOrFail();
+        $treasury = $pharmacy->vaults->keyBy('name');
 
         $result = DB::select(
             'SELECT SUM(cs.total_retail_price - cs.total_purchase_price) AS earnings FROM carts cs
@@ -34,9 +34,13 @@ class LiveStatsService
             [$pharmacy->id, today()]
         );
         $earnings = $result[0]->earnings;
+
         return [
             'online-workers-num' => $onlineWorkersCount,
-            'treasury' => $treasury->balance,
+            'treasury' => [
+                'main' => $treasury->get('main')->balance,
+                'charity' => $treasury->get('charity')->balance
+            ],
             'earnings' => $earnings,
         ];
     }
