@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\Statistics\InventoryStatsService;
+use App\Services\Statistics\LiveStatsService;
 use App\Services\Statistics\SalesStatsService;
 use App\Traits\V1\ApiResponse;
 use Carbon\Carbon;
@@ -13,12 +14,13 @@ class StatisticsController extends Controller
 {
     use ApiResponse;
 
-    private $salesStatsService, $inventoryStatsService;
-    
-    public function __construct(SalesStatsService $salesStatsService, InventoryStatsService $inventoryStatsService)
+    private $salesStatsService, $inventoryStatsService, $liveStatsService;
+
+    public function __construct(SalesStatsService $salesStatsService, InventoryStatsService $inventoryStatsService, LiveStatsService $liveStatsService)
     {
         $this->salesStatsService = $salesStatsService;
         $this->inventoryStatsService = $inventoryStatsService;
+        $this->liveStatsService =  $liveStatsService;
     }
 
     public function getStats(Request $request)
@@ -37,6 +39,13 @@ class StatisticsController extends Controller
         $data['profit_section']['product_section'] = $this->salesStatsService->getProductInfo($request->user(), $date);
         // TODO
         $data['losses_section'] = $this->inventoryStatsService->expiredMeds($request->user(), $date);
-        return ApiResponse::success('ok',$data);
+        return ApiResponse::success('ok', $data);
+    }
+
+
+    public function getLiveStats(Request $request)
+    {
+        $data = $this->liveStatsService->getLiveStats($request->user());
+        return ApiResponse::success('ok', $data, 200);
     }
 }
