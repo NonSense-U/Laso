@@ -10,7 +10,7 @@ collection:
     meta:
       id: fld_d01bc9ed7fa2403e9b7103d43ad16af6
       created: 1750012727351
-      modified: 1755097454667
+      modified: 1755158935760
       sortKey: -1750012727351
       description: ""
     children:
@@ -293,7 +293,7 @@ collection:
     meta:
       id: fld_afce286bd4d84188956e2b6411c693ac
       created: 1750120244451
-      modified: 1754002804056
+      modified: 1755133823052
       sortKey: -1750120244451
       description: ""
     children:
@@ -422,7 +422,7 @@ collection:
         meta:
           id: req_2869726cf73a46c2854f1c76439064fb
           created: 1750052144156
-          modified: 1754335946515
+          modified: 1755133779338
           isPrivate: false
           description: ""
           sortKey: -1750120256575
@@ -452,7 +452,12 @@ collection:
           type: none
         scripts:
           preRequest: ""
-          afterResponse: ""
+          afterResponse: |
+            const jsonBody = insomnia.response.json();
+
+            if (jsonBody && jsonBody.data && jsonBody.data.token) {
+              insomnia.environment.set('auth_token', jsonBody.data.token);
+            }
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -1032,6 +1037,30 @@ collection:
             send: true
             store: true
           rebuildPath: true
+      - url: "{{ _.localhost }}/api/v1/live-stats"
+        name: Live Stats
+        meta:
+          id: req_b8212c4db56b43b3a0c0acc3ce85a267
+          created: 1755131506500
+          modified: 1755134356436
+          isPrivate: false
+          description: ""
+          sortKey: -1751037795275
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.3.0
+        authentication:
+          type: bearer
+          token: "{{ _.auth_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
     scripts:
       afterResponse: ""
       preRequest: ""
@@ -1409,17 +1438,14 @@ collection:
         meta:
           id: req_c7c5abd1f4d545b0827fb3bc8a9e4f22
           created: 1754278117550
-          modified: 1754278171190
+          modified: 1755158851204
           isPrivate: false
           description: ""
           sortKey: -1754275723150
         method: GET
         body:
           mimeType: application/json
-          text: |-
-            {
-            	"scope" : "lastWeek"
-            }
+          text: ""
         headers:
           - name: Content-Type
             value: application/json
@@ -1465,14 +1491,14 @@ cookieJar:
   meta:
     id: jar_b48413c0427982a1a7e317a250f39b263742e8fd
     created: 1753317367158
-    modified: 1755097454660
+    modified: 1755158935752
 environments:
   name: Base Environment
   meta:
     id: env_e5ddf10898c14f3187031bb244517afb
     created: 1749705478341
-    modified: 1755097454664
+    modified: 1755158935756
     isPrivate: false
   data:
-    auth_token: 1|joTb1gYbiHjSa84rXmK6xWEcJwsVhntzIF3mCaQCf2dda328
+    auth_token: 1|VmD3XAFOkF1RoYxg2x54ay8EAwfVQ79YPxePvVwBb079e27d
     localhost: 127.0.0.1:8000

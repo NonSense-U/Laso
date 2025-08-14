@@ -55,12 +55,7 @@ class AdminController extends Controller
     public function getExpenses(Request $request)
     {
         $user = $request->user();
-
-        $validated = $request->validate([
-            'scope' => ['required', 'in:today,lastWeek,lastMonth'],
-        ]);
-
-        $expenses = $this->adminService->getExpenses($validated, $user);
+        $expenses = $this->adminService->getExpenses($user);
         return ApiResponse::success('ok', ['expenses' => $expenses]);
     }
 }

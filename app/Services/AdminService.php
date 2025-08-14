@@ -61,17 +61,11 @@ class AdminService
     }
 
 
-    public function getExpenses(array $payload, User $user)
+    public function getExpenses(User $user)
     {
-        $fromDate = match ($payload['scope']) {
-            'today' => Carbon::today(),
-            'lastWeek' => Carbon::now()->subWeek(),
-            'lastMonth' => Carbon::now()->subMonth(),
-        };
 
         $expenses = Expense::query()
             ->where('pharmacy_id', $user->pharmacy_id)
-            ->where('drawn_at', '>=', $fromDate)
             ->latest('drawn_at') // Optional: order by newest
             ->get();
 
