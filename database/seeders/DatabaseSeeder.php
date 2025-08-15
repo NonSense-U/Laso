@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Helpers\medicationPriceHelper;
 use App\Models\Pharmacy;
 use App\Models\Supplier;
 use App\Models\User;
@@ -37,6 +38,8 @@ class DatabaseSeeder extends Seeder
             MedPackageSeeder::class,
             FastSellingItemSeeder::class,
         ]);
+        
         $super->assignRole('super_admin');
+        medicationPriceHelper::getPrices();
     }
 }

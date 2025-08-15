@@ -9,12 +9,17 @@ use App\Models\MedPackage;
 use App\Models\OpenedMed;
 use App\Models\Payment;
 use App\Models\User;
+use Illuminate\Support\Exceptions\MathException;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 use Throwable;
 
 use function Pest\Laravel\get;
+use function PHPSTORM_META\map;
 
 class SalesService
 {
@@ -25,21 +30,7 @@ class SalesService
         DB::beginTransaction();
 
         try {
-            //TODO don't trust total_retail_price
-            if ($payload['payment_method'] === 'cash') {
-                $main_vault = $user->pharmacy->vaults()->where('name', '=', 'main')->firstOrFail();
-                $main_vault->balance += $payload['total_retail_price'];
-                $main_vault->save();
-            } elseif ($payload['payment_method'] === 'charity') {
-                $charity_vault = $user->pharmacy->vaults()->where('name', '=', 'charity')->firstOrFail();
-                if ($charity_vault->balance < $payload['total_retail_price']) {
-                    throw new UnprocessableEntityHttpException('There is not enough money in the charity box.');
-                }
-                $charity_vault->balance -= $payload['total_retail_price'];
-                $charity_vault->save();
-            }
-            //! HANDLE DEPT
-
+            //* DONE    TODO don't trust total_retail_price
             $payment = Payment::create([
                 'pharmacy_id' => $user->pharmacy_id,
                 'payment_method' => $payload['payment_method'],
@@ -59,17 +50,24 @@ class SalesService
             $medPackages = MedPackage::whereIn('id', $grouped->get('med_package', collect())->pluck('product_id'))->get()->keyBy('id');
             $fastSellingItems = FastSellingItem::whereIn('id', $grouped->get('fast_selling_item', collect())->pluck('product_id'))->get()->keyBy('id');
 
+            $redisKeys = $medPackages->mapWithKeys(fn($med) => [$med->id => $med->medication_id . '_medication_price'])->all();
+            $values = Redis::mget(array_values($redisKeys));
+            $prices = collect($redisKeys)->keys()->combine($values)->all();
+            $actual_total_retail_price = 0;
 
             foreach ($payload['items'] as $item) {
 
-                $product = match ($item['type']) {
-                    'med_package' => $medPackages->get($item['product_id']),
-                    'fast_selling_item' => $fastSellingItems->get($item['product_id']),
-                    default => null,
-                };
-
-                if (!$product) {
-                    throw new NotFoundHttpException();
+                if ($item['type'] == 'med_package') {
+                    $product = $medPackages->get($item['product_id']);
+                    $price = $prices[$product->id];
+                    if($item['partial_sale'])
+                    {
+                        $price = ($price/$product->medication->entities) * $item['quantity'];
+                    }
+                    $actual_total_retail_price += $price * $item['quantity'];
+                } else {
+                    $product = $fastSellingItems->get($item['product_id']);
+                    $actual_total_retail_price += $product->retail_price * $item['quantity'];
                 }
 
                 if ($item['quantity'] > $product->quantity) {
@@ -82,7 +80,7 @@ class SalesService
                     'product_id' => $item['product_id'],
                     'quantity' => $item['quantity'],
                     'purchase_price' => $item['purchase_price'],
-                    'retail_price' => $item['retail_price'],
+                    'retail_price' => $price,
                     'partial_sale' => $item['partial_sale']
                 ]);
 
@@ -99,7 +97,25 @@ class SalesService
                 }
             }
 
+            if ($cart->total_retail_price != $actual_total_retail_price) {
+                throw new MathException("sum of cart items prices does not amount to total cart price {$actual_total_retail_price}");
+            }
             $cart->save();
+
+            if ($payload['payment_method'] === 'cash') {
+                $main_vault = $user->pharmacy->vaults()->where('name', '=', 'main')->firstOrFail();
+                $main_vault->balance += $actual_total_retail_price;
+                $main_vault->save();
+            } elseif ($payload['payment_method'] === 'charity') {
+                $charity_vault = $user->pharmacy->vaults()->where('name', '=', 'charity')->firstOrFail();
+                if ($charity_vault->balance < $actual_total_retail_price) {
+                    throw new UnprocessableEntityHttpException('There is not enough money in the charity box.');
+                }
+                $charity_vault->balance -= $actual_total_retail_price;
+                $charity_vault->save();
+            }
+            //! HANDLE DEPT
+
             DB::commit();
 
             return $cart;

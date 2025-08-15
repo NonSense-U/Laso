@@ -56,8 +56,6 @@ class User extends Authenticatable
 
     public function isOnline()
     {
-        //? UPDATE TO HOUERS IN PROD
-        //TODO
         return $this->last_seen_at && $this->last_seen_at->gt(now()->subMinutes(15));
     }
 }
