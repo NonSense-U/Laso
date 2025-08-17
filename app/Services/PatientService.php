@@ -29,4 +29,18 @@ class PatientService
         return $patient;
     }
 
+    public function payDebt($debt_id)
+    {
+        $debt = Debt::findOrFail($debt_id);
+        $debt->status = 'paid';
+        $debt->save();
+        return $debt;
+    }
+
+    public function deleteDebt($debt_id)
+    {
+        $debt = Debt::findOrFail($debt_id);
+        $debt->delete();
+        return;
+    }
 }

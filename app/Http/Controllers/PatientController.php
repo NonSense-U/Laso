@@ -10,6 +10,7 @@ use App\Models\Patient;
 use App\Services\PatientService;
 use App\Traits\V1\ApiResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PatientController extends Controller
 {
@@ -26,13 +27,17 @@ class PatientController extends Controller
         $patients = $request->user()->pharmacy->patients;
         return ApiResponse::success('ok', ['patients' => $patients]);
     }
-
     public function getPatient(Request $request, $patient_id)
     {
-        $patient = Patient::findOrFail($patient_id);
-        $patient->load('debts');
+        $patient = DB::select(
+            'SELECT p.full_name, d.id As debt_id, d.status, c.id AS cart_id, c.total_retail_price AS amount FROM patients p
+            JOIN debts d ON p.id = d.patient_id
+            JOIN carts c ON d.cart_id = c.id 
+            WHERE p.id = ?
+            ',[$patient_id]);
         return ApiResponse::success('ok', ['patient' => $patient]);
     }
+
 
     public function storePatient(StorePatientRequest $request)
     {
@@ -54,5 +59,15 @@ class PatientController extends Controller
         return;
     }
 
+    public function payDebt(Request $request, $debt_id)
+    {
+        $debt = $this->patientService->payDebt($debt_id);
+        return ApiResponse::success("debt paid successfully", ['debt' => $debt], 200);
+    }
 
+    public function deleteDebt(Request $request, $debt_id)
+    {
+        $this->patientService->deleteDebt($debt_id);
+        return;
+    }
 }

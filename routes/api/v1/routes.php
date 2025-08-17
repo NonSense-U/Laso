@@ -52,6 +52,9 @@ Route::get('/supplier/record/{supplier_id}', [SupplierController::class, 'getSup
 Route::post('/insurance', [InsuranceController::class, 'addInsurance'])->middleware('auth:sanctum');
 Route::get('/insurance/records', [InsuranceController::class, 'getInsuranceRecords'])->middleware('auth:sanctum');
 
+//! DEBT
+Route::post('/pay-debt/{debt_id}', [PatientController::class, 'payDebt'])->middleware('auth:sanctum');
+
 //! PATIENT CRUD
 Route::get('/patients', [PatientController::class, 'index'])->middleware('auth:sanctum');
 Route::get('/patients/{patient_id}', [PatientController::class, 'getPatient'])->middleware('auth:sanctum');
