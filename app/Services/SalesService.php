@@ -5,8 +5,11 @@ namespace App\Services;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\FastSellingItem;
+use App\Models\Insurance;
+use App\Models\InsuranceRecords;
 use App\Models\MedPackage;
 use App\Models\OpenedMed;
+use App\Models\Patient;
 use App\Models\Payment;
 use App\Models\User;
 use Illuminate\Support\Exceptions\MathException;
@@ -60,9 +63,8 @@ class SalesService
                 if ($item['type'] == 'med_package') {
                     $product = $medPackages->get($item['product_id']);
                     $price = $prices[$product->id];
-                    if($item['partial_sale'])
-                    {
-                        $price = ($price/$product->medication->entities) * $item['quantity'];
+                    if ($item['partial_sale']) {
+                        $price = ($price / $product->medication->entities) * $item['quantity'];
                     }
                     $actual_total_retail_price += $price * $item['quantity'];
                 } else {
@@ -97,25 +99,47 @@ class SalesService
                 }
             }
 
+            if (isset($payload['insurance'])) {
+                /** @var App\Models\Patient $patient */
+                $patient = Patient::findOrFail($payload['insurance']['patient_id']);
+                $insurance = $patient->insurance;
+                if (!$insurance) {
+                    throw new NotFoundHttpException("patient {$patient->full_name} doesn't have a registered insurance.");
+                }
+                $discounted_amount = round(($insurance->discount_percentage * $actual_total_retail_price) / 100, 2);
+                InsuranceRecords::create([
+                    'insurance_id' => $patient->insurance->id,
+                    'cart_id' => $cart->id,
+                    'discounted_amount' => $discounted_amount
+                ]);
+                $actual_total_retail_price = $actual_total_retail_price - $discounted_amount;
+            }
+
+            $actual_total_retail_price = round($actual_total_retail_price, 2);
             if ($cart->total_retail_price != $actual_total_retail_price) {
                 throw new MathException("sum of cart items prices does not amount to total cart price {$actual_total_retail_price}");
             }
             $cart->save();
 
+            //* DONE TODO HANDLE DEBT            
+            $main_vault = $user->pharmacy->vaults()->where('name', '=', 'main')->firstOrFail();
+
             if ($payload['payment_method'] === 'cash') {
-                $main_vault = $user->pharmacy->vaults()->where('name', '=', 'main')->firstOrFail();
                 $main_vault->balance += $actual_total_retail_price;
-                $main_vault->save();
             } elseif ($payload['payment_method'] === 'charity') {
                 $charity_vault = $user->pharmacy->vaults()->where('name', '=', 'charity')->firstOrFail();
                 if ($charity_vault->balance < $actual_total_retail_price) {
                     throw new UnprocessableEntityHttpException('There is not enough money in the charity box.');
                 }
                 $charity_vault->balance -= $actual_total_retail_price;
+                $main_vault->balance += $actual_total_retail_price;
                 $charity_vault->save();
+            } elseif ($payload['payment_method'] === 'debt') {
+                PatientService::addDebt($cart->id, $payload['patient_id'], $user->pharmacy->id);
             }
-            //! HANDLE DEPT
 
+            $main_vault->save();
+            
             DB::commit();
 
             return $cart;

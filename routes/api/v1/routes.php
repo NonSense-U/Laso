@@ -7,15 +7,19 @@ use App\Http\Controllers\DonationsController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\FastSellingItemController;
 use App\Http\Controllers\GoofyDonationController;
+use App\Http\Controllers\InsuranceController;
 use App\Http\Controllers\MedicationController;
 use App\Http\Controllers\MedPackageController;
 use App\Http\Controllers\PackagesOrderController;
+use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\PharmacyController;
 use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\WorkerController;
 use Illuminate\Support\Facades\Route;
+
+use function Pest\Laravel\post;
 
 Route::get('/test', function () {
     dd('smile');
@@ -43,6 +47,18 @@ Route::put('/supplier/update/{supplier_id}', [SupplierController::class, 'update
 Route::get('/supplier/record/{supplier_id}', [SupplierController::class, 'getSupplierRecord'])->middleware('auth:sanctum');
 // Route::delete('/supplier/delete/{supplier_id}',[SupplierController::class,'deleteSupplier'])->middleware('auth:sanctum'); //! NOT NOW
 
+
+//! INURANCE
+Route::post('/insurance', [InsuranceController::class, 'addInsurance'])->middleware('auth:sanctum');
+Route::get('/insurance/records', [InsuranceController::class, 'getInsuranceRecords'])->middleware('auth:sanctum');
+
+//! PATIENT CRUD
+Route::get('/patients', [PatientController::class, 'index'])->middleware('auth:sanctum');
+Route::get('/patients/{patient_id}', [PatientController::class, 'getPatient'])->middleware('auth:sanctum');
+Route::put('/patients/{patient_id}', [PatientController::class, 'updatePatient'])->middleware('auth:sanctum');
+Route::post('/patients', [PatientController::class, 'storePatient'])->middleware('auth:sanctum');
+Route::delete('/patients/{patient_id}', [PatientController::class, 'deletePatient'])->middleware('auth:sanctum');
+
 //! GLOBAL MEDICATIONS
 Route::get('/global-meds', [MedicationController::class, 'index']);
 Route::get('/global-meds/show/{medication_id}', [MedicationController::class, 'show'])->middleware('auth:sanctum');
@@ -62,16 +78,16 @@ Route::get('/med_packages', [MedPackageController::class, 'index'])->middleware(
 //! FAST SELLING ITEMS
 Route::get('/fast_selling_items', [FastSellingItemController::class, 'index'])->middleware('auth:sanctum');
 Route::post('/fast_selling_items', [FastSellingItemController::class, 'addItem'])->middleware('auth:sanctum');
-Route::put('/fast_selling_items/{item_id}', [FastSellingItemController::class,'updateItem'])->middleware('auth:sanctum');
+Route::put('/fast_selling_items/{item_id}', [FastSellingItemController::class, 'updateItem'])->middleware('auth:sanctum');
 
 
 //! ADMIN
 Route::post('/send-invitation', [EmailController::class, 'sendInvitation'])->middleware('auth:sanctum');
 Route::delete('/admin/disable-worker/{worker_id}', [AdminController::class, 'disableWorker'])->middleware('auth:sanctum');
 Route::post('/admin/enable-worker/{worker_id}', [AdminController::class, 'enableWorker'])->middleware('auth:sanctum');
-Route::get('/admin/my-staff', [AdminController::class,'getWorkers'])->middleware('auth:sanctum');
+Route::get('/admin/my-staff', [AdminController::class, 'getWorkers'])->middleware('auth:sanctum');
 Route::get('/my-treasury', [PharmacyController::class, 'getTreasury'])->middleware('auth:sanctum');
-    //* EXPENSES
+//* EXPENSES
 Route::post('/draw-expenses', [AdminController::class, 'drawExpenses'])->middleware('auth:sanctum');
 Route::get('/get-expenses', [AdminController::class, 'getExpenses'])->middleware('auth:sanctum');
 
@@ -86,7 +102,7 @@ Route::get('/expired-meds', [MedPackageController::class, 'expiredMeds'])->middl
 
 
 //! TO FOLLOW ON-DUTY STAFF
-Route::middleware(['auth:sanctum','update.last.seen'])->group(function(){
+Route::middleware(['auth:sanctum', 'update.last.seen'])->group(function () {
     //! Sales
     Route::post('/sales/checkout', [WorkerController::class, 'checkout']);
 
@@ -97,6 +113,6 @@ Route::middleware(['auth:sanctum','update.last.seen'])->group(function(){
 });
 
 Route::get('/stats', [StatisticsController::class, 'getStats'])->middleware('auth:sanctum');
-Route::get('/live-stats', [StatisticsController::class,'getLiveStats'])->middleware('auth:sanctum');
+Route::get('/live-stats', [StatisticsController::class, 'getLiveStats'])->middleware('auth:sanctum');
 //! LOGS
 Route::get('/meds-logs', [MedPackageController::class, 'MedsLogs'])->middleware('auth:sanctum');

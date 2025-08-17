@@ -1,23 +1,23 @@
 type: collection.insomnia.rest/5.0
 name: Laso
 meta:
-  id: wrk_1b84460edfd1436c97bbe987b9a2b10a
-  created: 1752210160647
-  modified: 1753317367738
+  id: wrk_55e8f7939eef4920a28fdb63aa21b684
+  created: 1755171062670
+  modified: 1755171062670
   description: ""
 collection:
   - name: Auth
     meta:
-      id: fld_d01bc9ed7fa2403e9b7103d43ad16af6
+      id: fld_1bea599113054baaaaa56cf9371883bf
       created: 1750012727351
-      modified: 1755167412937
+      modified: 1755430697103
       sortKey: -1750012727351
       description: ""
     children:
       - url: "{{ _.localhost }}/api/v1/login"
         name: Login
         meta:
-          id: req_3fee760dfc5b45ad87a5aed87e6c31b6
+          id: req_75d657f8208f437ead17690558bd4507
           created: 1750012743848
           modified: 1754257619740
           isPrivate: false
@@ -57,7 +57,7 @@ collection:
       - url: "{{ _.localhost }}/api/v1/logout"
         name: logout
         meta:
-          id: req_4bb50cf677e441ac950cc52fd7df8587
+          id: req_2cffd737c1b242ca94ae6ab05088a721
           created: 1750051102682
           modified: 1753317367704
           isPrivate: false
@@ -70,8 +70,8 @@ collection:
           - name: Accept
             value: application/json
         authentication:
-          token: "{{ _.auth_token }}"
           type: bearer
+          token: "{{ _.auth_token }}"
         scripts:
           preRequest: ""
           afterResponse: ""
@@ -88,7 +88,7 @@ collection:
       preRequest: ""
   - name: Supplier
     meta:
-      id: fld_527f434f0f9548f8b3720d9f10ab5153
+      id: fld_e074df088dd14d31beec767975603121
       created: 1750120228707
       modified: 1753317367671
       sortKey: -1750120228707
@@ -97,7 +97,7 @@ collection:
       - url: "{{ _.localhost }}/api/v1/supplier/create"
         name: Create Supplier
         meta:
-          id: req_5d061f9182b74e7eadee2c9f5e8cd1d6
+          id: req_f246b4f73c8f4d32b2038f6bbe236b30
           created: 1750109766386
           modified: 1753317367707
           isPrivate: false
@@ -120,8 +120,8 @@ collection:
           - name: Accept
             value: application/json
         authentication:
-          token: "{{ _.auth_token }}"
           type: bearer
+          token: "{{ _.auth_token }}"
         scripts:
           preRequest: ""
           afterResponse: ""
@@ -136,7 +136,7 @@ collection:
       - url: "{{ _.localhost }}/api/v1/supplier/update/1"
         name: Update Supplier
         meta:
-          id: req_662470df31bb4a50be1345e0104a1e30
+          id: req_5379705817aa40269b5c883e8468b8af
           created: 1750119585430
           modified: 1753317367709
           isPrivate: false
@@ -159,8 +159,8 @@ collection:
           - name: Accept
             value: application/json
         authentication:
-          token: "{{ _.auth_token }}"
           type: bearer
+          token: "{{ _.auth_token }}"
         scripts:
           preRequest: ""
           afterResponse: ""
@@ -175,7 +175,7 @@ collection:
       - url: "{{ _.localhost }}/api/v1/supplier/get/1"
         name: Get Supplier
         meta:
-          id: req_8449f6179ae4498199d234e8066c7cda
+          id: req_e9d14f3897144a019e6c68fb88e19cf2
           created: 1750120550735
           modified: 1753317367717
           isPrivate: false
@@ -188,8 +188,8 @@ collection:
           - name: Accept
             value: application/json
         authentication:
-          token: "{{ _.auth_token }}"
           type: bearer
+          token: "{{ _.auth_token }}"
         scripts:
           preRequest: ""
           afterResponse: ""
@@ -204,7 +204,7 @@ collection:
       - url: "{{ _.localhost }}/api/v1/supplier/get"
         name: Index
         meta:
-          id: req_c0f6f230b10a4a93bf85f75b2f35ef80
+          id: req_c5667d03a5ce48c6b255d555f0ede66f
           created: 1750121345637
           modified: 1753317367721
           isPrivate: false
@@ -217,8 +217,8 @@ collection:
           - name: Accept
             value: application/json
         authentication:
-          token: "{{ _.auth_token }}"
           type: bearer
+          token: "{{ _.auth_token }}"
         scripts:
           preRequest: ""
           afterResponse: ""
@@ -233,7 +233,7 @@ collection:
       - url: "{{ _.localhost }}/api/v1/supplier/delete/12"
         name: Delete Supplier
         meta:
-          id: req_6c685cf7c53f4bffaf505f84fb426855
+          id: req_685d8500e2474bb6b4e9987ea159648d
           created: 1750121614415
           modified: 1753317367712
           isPrivate: false
@@ -246,8 +246,8 @@ collection:
           - name: Accept
             value: application/json
         authentication:
-          token: "{{ _.auth_token }}"
           type: bearer
+          token: "{{ _.auth_token }}"
         scripts:
           preRequest: ""
           afterResponse: ""
@@ -262,7 +262,7 @@ collection:
       - url: "{{ _.localhost }}/api/v1/supplier/record/2"
         name: Supplier Financial Record
         meta:
-          id: req_09f22107b9714abb979737fdd92f05fd
+          id: req_af6f5101b0ba4c499043490dc067cf9b
           created: 1751281145478
           modified: 1753317367683
           isPrivate: false
@@ -273,8 +273,8 @@ collection:
           - name: User-Agent
             value: insomnia/11.2.0
         authentication:
-          token: "{{ _.auth_token }}"
           type: bearer
+          token: "{{ _.auth_token }}"
         scripts:
           preRequest: ""
           afterResponse: ""
@@ -291,7 +291,7 @@ collection:
       preRequest: ""
   - name: Accounts
     meta:
-      id: fld_afce286bd4d84188956e2b6411c693ac
+      id: fld_208688f315bc4bc49ad81f68f2e60b65
       created: 1750120244451
       modified: 1755133823052
       sortKey: -1750120244451
@@ -299,7 +299,7 @@ collection:
     children:
       - name: Password
         meta:
-          id: fld_dace78785f0e4759b3e637b5f591a117
+          id: fld_32288a5538d54ab3965875fdc0b1bfe5
           created: 1754256870362
           modified: 1754256950589
           sortKey: -1750120256675
@@ -308,7 +308,7 @@ collection:
           - url: "{{ _.localhost }}/api/v1/verify-code"
             name: Verify Code
             meta:
-              id: req_b9d7df12e85148ff9dcd6d175cc1ab6c
+              id: req_df0cfb4129694a01b0b344d6c54b5e04
               created: 1754255350976
               modified: 1754256882388
               isPrivate: false
@@ -327,6 +327,9 @@ collection:
                 value: application/json
               - name: User-Agent
                 value: insomnia/11.3.0
+            scripts:
+              preRequest: ""
+              afterResponse: ""
             settings:
               renderRequestBody: true
               encodeUrl: true
@@ -338,7 +341,7 @@ collection:
           - url: "{{ _.localhost }}/api/v1/change-password"
             name: Change Password
             meta:
-              id: req_429064abb9c9491fb3aed14849acdb91
+              id: req_6bd679767cfc4c78915994b736d12e79
               created: 1754256446816
               modified: 1754256885158
               isPrivate: false
@@ -360,6 +363,9 @@ collection:
             authentication:
               type: bearer
               token: "{{ _.auth_token }}"
+            scripts:
+              preRequest: ""
+              afterResponse: ""
             settings:
               renderRequestBody: true
               encodeUrl: true
@@ -368,10 +374,13 @@ collection:
                 send: true
                 store: true
               rebuildPath: true
+        scripts:
+          afterResponse: ""
+          preRequest: ""
       - url: "{{ _.localhost }}/api/v1/admin"
         name: Create Admin
         meta:
-          id: req_e3e43a15064348c4a57440b87f41c465
+          id: req_8d0baf50e1634f0f89799ae25b08f750
           created: 1750051178002
           modified: 1753317367732
           isPrivate: false
@@ -420,7 +429,7 @@ collection:
       - url: "{{ _.localhost }}/api/v1/worker"
         name: Create Worker
         meta:
-          id: req_2869726cf73a46c2854f1c76439064fb
+          id: req_02bf2451e5564ba384598cab68934cbc
           created: 1750052144156
           modified: 1755133779338
           isPrivate: false
@@ -469,7 +478,7 @@ collection:
       - url: "{{ _.localhost }}/api/v1/my-profile"
         name: Get Profile
         meta:
-          id: req_b05031405ff74d1a9e53295d5dc923cd
+          id: req_3a783ff1a68d48fca9baa6eac91f288c
           created: 1754259409783
           modified: 1754259525193
           isPrivate: false
@@ -482,6 +491,9 @@ collection:
         authentication:
           type: bearer
           token: "{{ _.auth_token }}"
+        scripts:
+          preRequest: ""
+          afterResponse: ""
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -495,7 +507,7 @@ collection:
       preRequest: ""
   - name: Med Packages
     meta:
-      id: fld_44842c1c3d3a44758ace387b40e1f455
+      id: fld_23aba87ae64e452a9249ec870715c31f
       created: 1750785721728
       modified: 1753369979591
       sortKey: -1750785721728
@@ -504,7 +516,7 @@ collection:
       - url: "{{ _.localhost }}/api/v1/med_packages"
         name: index
         meta:
-          id: req_2634b921d5b54f88a24ca0c367531a54
+          id: req_96eea4b12a2a41089db4b9fd629eb184
           created: 1750785723098
           modified: 1753317367688
           isPrivate: false
@@ -517,8 +529,8 @@ collection:
           - name: Accept
             value: application/json
         authentication:
-          token: "{{ _.auth_token }}"
           type: bearer
+          token: "{{ _.auth_token }}"
         scripts:
           preRequest: ""
           afterResponse: ""
@@ -533,7 +545,7 @@ collection:
       - url: "{{ _.localhost }}/api/v1/med_packages"
         name: Add Med Package
         meta:
-          id: req_12b799f895da42f0960c4a59c00b26e3
+          id: req_b409fbf88fcf4fd8a13232a5c4d1e159
           created: 1750946496569
           modified: 1755167033621
           isPrivate: false
@@ -572,8 +584,8 @@ collection:
           - name: Accept
             value: application/json
         authentication:
-          token: "{{ _.auth_token }}"
           type: bearer
+          token: "{{ _.auth_token }}"
         scripts:
           preRequest: ""
           afterResponse: ""
@@ -588,7 +600,7 @@ collection:
       - url: "{{ _.localhost }}/api/v1/return-meds"
         name: Return Meds
         meta:
-          id: req_640f818e849942ed8660cca0bb755ec7
+          id: req_f6553fae7a10469db1d6940a456e3622
           created: 1754280656703
           modified: 1754281235392
           isPrivate: false
@@ -610,6 +622,9 @@ collection:
         authentication:
           type: bearer
           token: "{{ _.auth_token }}"
+        scripts:
+          preRequest: ""
+          afterResponse: ""
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -623,7 +638,7 @@ collection:
       preRequest: ""
   - name: Medication
     meta:
-      id: fld_0ce6666ce2734c3a94009ea12cf46cb4
+      id: fld_682be776018d4e5da3815276af38b84e
       created: 1750946604668
       modified: 1753317367667
       sortKey: -1750946604668
@@ -632,7 +647,7 @@ collection:
       - url: "{{ _.localhost }}/api/v1/global-meds"
         name: index
         meta:
-          id: req_e1f6788fe4c44e7eae347c375e8e1392
+          id: req_79c7280f45ba4863a0c9de7cba370928
           created: 1750946606106
           modified: 1753317367729
           isPrivate: false
@@ -658,7 +673,7 @@ collection:
       - url: "{{ _.localhost }}/api/v1/global-meds/show/1"
         name: Get medication by ID
         meta:
-          id: req_2c7bf75c523144c48f16395af7d0c0e7
+          id: req_7f09011fd7ec438a88ec1c13f997fcb5
           created: 1753370012400
           modified: 1753477067228
           isPrivate: false
@@ -671,6 +686,9 @@ collection:
         authentication:
           type: bearer
           token: "{{ _.auth_token }}"
+        scripts:
+          preRequest: ""
+          afterResponse: ""
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -682,7 +700,7 @@ collection:
       - url: "{{ _.localhost }}/api/v1/global-meds/6215857101877"
         name: GET meds by Serial Number
         meta:
-          id: req_381dcd6441b14a98bc59e9ad6f38794b
+          id: req_7f79f04a90584c51b15080ce984eef39
           created: 1753476825674
           modified: 1753477248653
           isPrivate: false
@@ -695,6 +713,9 @@ collection:
         authentication:
           type: bearer
           token: "{{ _.auth_token }}"
+        scripts:
+          preRequest: ""
+          afterResponse: ""
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -708,7 +729,7 @@ collection:
       preRequest: ""
   - name: Packages Orders
     meta:
-      id: fld_f6036d4f5afd46808e3f0a6baa3a93fc
+      id: fld_3c2718ae63864a7e97f9f3b65b397ca9
       created: 1750954015222
       modified: 1753317367678
       sortKey: -1750954015222
@@ -717,7 +738,7 @@ collection:
       - url: "{{ _.localhost }}/api/v1/packages_orders"
         name: index
         meta:
-          id: req_d191bbc65abf41fd9123a8a606ed38c4
+          id: req_0217920782dd4320b52ce0f76d35b897
           created: 1750954016716
           modified: 1753317367727
           isPrivate: false
@@ -730,8 +751,8 @@ collection:
           - name: Accept
             value: application/json
         authentication:
-          token: "{{ _.auth_token }}"
           type: bearer
+          token: "{{ _.auth_token }}"
         scripts:
           preRequest: ""
           afterResponse: ""
@@ -746,7 +767,7 @@ collection:
       - url: "{{ _.localhost }}/api/v1/packages_orders/1"
         name: Get Order Packages
         meta:
-          id: req_fb99bdf6892344c68a8e2b9b8ea7dd18
+          id: req_a115b1ea943b46e28cca2e69e7768893
           created: 1750954139992
           modified: 1753317367736
           isPrivate: false
@@ -774,7 +795,7 @@ collection:
       preRequest: ""
   - name: Mail
     meta:
-      id: fld_0a3d27123ddc448b8948abb06586fc04
+      id: fld_e94c842b1c9149ef8479c9f76bdf9560
       created: 1750963153063
       modified: 1753317367660
       sortKey: -1750963153063
@@ -783,7 +804,7 @@ collection:
       - url: "{{ _.localhost }}/api/v1/send-invitation"
         name: Send Invitation
         meta:
-          id: req_7e424e8f8a374feb8da224796a8029af
+          id: req_6ce4ac7911c64fe2b9d290f28d2adec0
           created: 1750963157527
           modified: 1754257608035
           isPrivate: false
@@ -803,8 +824,8 @@ collection:
           - name: User-Agent
             value: insomnia/11.2.0
         authentication:
-          token: "{{ _.auth_token }}"
           type: bearer
+          token: "{{ _.auth_token }}"
         scripts:
           preRequest: ""
           afterResponse: ""
@@ -819,7 +840,7 @@ collection:
       - url: "{{ _.localhost }}/api/v1/forgot-password"
         name: Forgot Password
         meta:
-          id: req_991f3438e75844d184c19a6f59e3a400
+          id: req_ed49295aeac544e890faaea57fb011cf
           created: 1754252063107
           modified: 1754256924180
           isPrivate: false
@@ -839,6 +860,9 @@ collection:
             value: insomnia/11.3.0
         authentication:
           type: none
+        scripts:
+          preRequest: ""
+          afterResponse: ""
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -852,7 +876,7 @@ collection:
       preRequest: ""
   - name: Admin
     meta:
-      id: fld_657c3b6a7aab4520a767a80dcd71cf77
+      id: fld_6a8084612a504ef49dd533f49fcb9f4d
       created: 1751037719851
       modified: 1753317367673
       sortKey: -1751037719851
@@ -860,7 +884,7 @@ collection:
     children:
       - name: Worker Management
         meta:
-          id: fld_11f5ac501db54a58bc08f5fb6548cb6b
+          id: fld_26ca89b6f757441689a9c8d06f9b5a9c
           created: 1751037819988
           modified: 1753317367668
           sortKey: -1751037794875
@@ -869,7 +893,7 @@ collection:
           - url: "{{ _.localhost }}/api/v1/admin/disable-worker/3"
             name: Disable Worker
             meta:
-              id: req_c7494e346f0d499fb8b005f4e965d707
+              id: req_bb1f71b041eb45969bb66117b8874312
               created: 1751037761342
               modified: 1753317367724
               isPrivate: false
@@ -882,8 +906,8 @@ collection:
               - name: Accept
                 value: application/json
             authentication:
-              token: "{{ _.auth_token }}"
               type: bearer
+              token: "{{ _.auth_token }}"
             scripts:
               preRequest: ""
               afterResponse: ""
@@ -898,7 +922,7 @@ collection:
           - url: "{{ _.localhost }}/api/v1/admin/enable-worker/17"
             name: Enable Worker
             meta:
-              id: req_8a6c7d42847748c39b5a49528928db4d
+              id: req_185296e9c6de4f9a90d5dcbe0b7a5963
               created: 1751234811143
               modified: 1753372656606
               isPrivate: false
@@ -911,8 +935,8 @@ collection:
               - name: Accept
                 value: application/json
             authentication:
-              token: "{{ _.auth_token }}"
               type: bearer
+              token: "{{ _.auth_token }}"
             scripts:
               preRequest: ""
               afterResponse: ""
@@ -927,7 +951,7 @@ collection:
           - url: "{{ _.localhost }}/api/v1/admin/my-staff"
             name: GET workers
             meta:
-              id: req_03b77539ed0a4038965989c5bfbd52bc
+              id: req_c31a183a9a1148c3a547f999ed78992b
               created: 1753372590465
               modified: 1753372686148
               isPrivate: false
@@ -940,6 +964,9 @@ collection:
             authentication:
               type: bearer
               token: "{{ _.auth_token }}"
+            scripts:
+              preRequest: ""
+              afterResponse: ""
             settings:
               renderRequestBody: true
               encodeUrl: true
@@ -954,7 +981,7 @@ collection:
       - url: "{{ _.localhost }}/api/v1/stats?scope=today"
         name: Stats
         meta:
-          id: req_c0264433a937479aafc4be7704ebdff7
+          id: req_7eb94b2e998f4b91b637d2e41cad90c4
           created: 1753401396661
           modified: 1754442854605
           isPrivate: false
@@ -964,15 +991,14 @@ collection:
         headers:
           - name: User-Agent
             value: insomnia/11.3.0
-            id: pair_976882e217ee4263993bc0567d3ff0ad
-          - id: pair_81c9a58643814712bad2c6af5a93cfc9
-            name: Accept
+          - name: Accept
             value: application/json
-            description: ""
-            disabled: false
         authentication:
           type: bearer
           token: "{{ _.auth_token }}"
+        scripts:
+          preRequest: ""
+          afterResponse: ""
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -984,7 +1010,7 @@ collection:
       - url: "{{ _.localhost }}/api/v1/my-treasury"
         name: Treasury
         meta:
-          id: req_12403f1cd2f04036ac7752d173024462
+          id: req_c2908b64b3254b959a7b89cbc6a23d4b
           created: 1754259816574
           modified: 1754259873771
           isPrivate: false
@@ -997,6 +1023,9 @@ collection:
         authentication:
           type: bearer
           token: "{{ _.auth_token }}"
+        scripts:
+          preRequest: ""
+          afterResponse: ""
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -1008,7 +1037,7 @@ collection:
       - url: "{{ _.localhost }}/api/v1/meds-logs"
         name: Pharmacy Meds Log
         meta:
-          id: req_09e1210c9c534a4fb57ba5c3c04a271a
+          id: req_74ac6b1017554d57a8f4eac264833920
           created: 1754284856767
           modified: 1754447351270
           isPrivate: false
@@ -1029,6 +1058,9 @@ collection:
         authentication:
           type: bearer
           token: "{{ _.auth_token }}"
+        scripts:
+          preRequest: ""
+          afterResponse: ""
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -1040,7 +1072,7 @@ collection:
       - url: "{{ _.localhost }}/api/v1/live-stats"
         name: Live Stats
         meta:
-          id: req_b8212c4db56b43b3a0c0acc3ce85a267
+          id: req_b4a0b6ea245a4058afb6efcaea871931
           created: 1755131506500
           modified: 1755134356436
           isPrivate: false
@@ -1053,6 +1085,9 @@ collection:
         authentication:
           type: bearer
           token: "{{ _.auth_token }}"
+        scripts:
+          preRequest: ""
+          afterResponse: ""
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -1066,7 +1101,7 @@ collection:
       preRequest: ""
   - name: Storage
     meta:
-      id: fld_0c0b02a3ece747878ca290b33ac03f60
+      id: fld_9443e112033d4353a7b60a077f10c96f
       created: 1751463908683
       modified: 1753565475139
       sortKey: -1751463908683
@@ -1075,7 +1110,7 @@ collection:
       - url: "{{ _.localhost }}/api/v1/get-storage"
         name: Get Storage
         meta:
-          id: req_2cb8766750d14b938e11612771414618
+          id: req_5b94a7bcd6554772bb3b55809c104446
           created: 1751140209439
           modified: 1753317367695
           isPrivate: false
@@ -1088,8 +1123,8 @@ collection:
           - name: Accept
             value: application/json
         authentication:
-          token: "{{ _.auth_token }}"
           type: bearer
+          token: "{{ _.auth_token }}"
         scripts:
           preRequest: ""
           afterResponse: ""
@@ -1104,7 +1139,7 @@ collection:
       - url: "{{ _.localhost }}/api/v1/expired-meds"
         name: Get Expired Meds
         meta:
-          id: req_e4c02b13ab29431e8d4e4dc6fa43f78b
+          id: req_98c8ef9a4b474a5589cfafc74010b212
           created: 1751463664737
           modified: 1753317367734
           isPrivate: false
@@ -1115,8 +1150,8 @@ collection:
           - name: User-Agent
             value: insomnia/11.2.0
         authentication:
-          token: "{{ _.auth_token }}"
           type: bearer
+          token: "{{ _.auth_token }}"
         scripts:
           preRequest: ""
           afterResponse: ""
@@ -1133,16 +1168,16 @@ collection:
       preRequest: ""
   - name: Fast Selling Items
     meta:
-      id: fld_2be8add42aa24c72b941fd4008c88c6d
+      id: fld_577763b08c8042d0b05ee28d19073841
       created: 1754232863250
-      modified: 1754232863250
-      sortKey: -1754232863250
+      modified: 1755178000593
+      sortKey: -1754262171944
       description: ""
     children:
       - url: "{{ _.localhost }}/api/v1/fast_selling_items"
         name: Index
         meta:
-          id: req_76929bba1f4f47ec8d26d6db3ffb56b1
+          id: req_8e7f52305da24fd299e7a472a7ef160e
           created: 1754232868167
           modified: 1754232912252
           isPrivate: false
@@ -1155,6 +1190,9 @@ collection:
         authentication:
           type: bearer
           token: "{{ _.auth_token }}"
+        scripts:
+          preRequest: ""
+          afterResponse: ""
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -1166,7 +1204,7 @@ collection:
       - url: "{{ _.localhost }}/api/v1/fast_selling_items"
         name: Add Fast Selling Item
         meta:
-          id: req_03b8a80a41e04b81930cf2bce82529bd
+          id: req_8e2803f0e49b4f7c83a3e9d74b34f65d
           created: 1754233908633
           modified: 1754234146468
           isPrivate: false
@@ -1190,6 +1228,9 @@ collection:
         authentication:
           type: bearer
           token: "{{ _.auth_token }}"
+        scripts:
+          preRequest: ""
+          afterResponse: ""
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -1201,7 +1242,7 @@ collection:
       - url: "{{ _.localhost }}/api/v1/fast_selling_items/2"
         name: Update Item
         meta:
-          id: req_04830c992bba42afb8c81b1ed8e595bb
+          id: req_c856d824cc0945dd97468764ac57001a
           created: 1754235749866
           modified: 1754236090406
           isPrivate: false
@@ -1222,6 +1263,9 @@ collection:
         authentication:
           type: bearer
           token: "{{ _.auth_token }}"
+        scripts:
+          preRequest: ""
+          afterResponse: ""
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -1230,9 +1274,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
+    scripts:
+      afterResponse: ""
+      preRequest: ""
   - name: Sales
     meta:
-      id: fld_e0335c58bfde4ee5a8f72db0e1c67e66
+      id: fld_7c632dbcee1847408155e8888e6fd92b
       created: 1754257004268
       modified: 1754257004268
       sortKey: -1754257004269
@@ -1241,9 +1288,9 @@ collection:
       - url: "{{ _.localhost }}/api/v1/sales/checkout"
         name: Checkout
         meta:
-          id: req_007208ce74964e079435aebcfe1d0dee
+          id: req_467eb15f86884c0e8bb9aefd308f0ffc
           created: 1751505201133
-          modified: 1754363422910
+          modified: 1755430730801
           isPrivate: false
           description: ""
           sortKey: -1754257013010
@@ -1252,8 +1299,12 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"payment_method" : "cash",
-            	"total_retail_price" : 9090,
+            	"payment_method" : "debt",
+            	"patient_id" : 1,
+            	"total_retail_price" : 403.5,
+            	"insurance" : {
+            		"patient_id" : 1
+            	},
             	"items" : [
             		{
             			"type" : "med_package",
@@ -1267,8 +1318,8 @@ collection:
             			"type" : "med_package",
             			"product_id" : 2,
             			"quantity" : 1,
-            			"purchase_price" : 100,
-            			"retail_price" : 120,
+            			"purchase_price" : 40,
+            			"retail_price" : 50,
             			"partial_sale" : true
             			
             		},
@@ -1277,7 +1328,7 @@ collection:
             			"product_id" : 1,
             			"quantity" : 1,
             			"purchase_price" : 100,
-            			"retail_price" : 120,
+            			"retail_price" : 373,
             			"partial_sale" : false
             		}
             	]
@@ -1285,18 +1336,13 @@ collection:
         headers:
           - name: Content-Type
             value: application/json
-            id: pair_757910b0860241b4adf4ce8794f07b90
           - name: User-Agent
             value: insomnia/11.2.0
-            id: pair_ccda9654a85147579aea3b870fdc661d
-          - id: pair_0e2a1048286948a59e0ce1e1ea26d32b
-            name: Accept
+          - name: Accept
             value: application/json
-            description: ""
-            disabled: false
         authentication:
-          token: "{{ _.auth_token }}"
           type: bearer
+          token: "{{ _.auth_token }}"
         scripts:
           preRequest: ""
           afterResponse: ""
@@ -1308,9 +1354,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
+    scripts:
+      afterResponse: ""
+      preRequest: ""
   - name: Donations
     meta:
-      id: fld_1e4a32b332bc4108a553fda08b5cb35a
+      id: fld_b8968be1a37448a3b66b551dc2ee93ab
       created: 1754267339619
       modified: 1754267339619
       sortKey: -1754267339619
@@ -1319,7 +1368,7 @@ collection:
       - url: "{{ _.localhost }}/api/v1/donate-meds"
         name: Donate Meds
         meta:
-          id: req_cff49fa62d984ff39770e2f57a118fa8
+          id: req_b02a193293c145c5ab633e8f107399f3
           created: 1754264889930
           modified: 1755165674239
           isPrivate: false
@@ -1351,6 +1400,9 @@ collection:
         authentication:
           type: bearer
           token: "{{ _.auth_token }}"
+        scripts:
+          preRequest: ""
+          afterResponse: ""
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -1362,7 +1414,7 @@ collection:
       - url: "{{ _.localhost }}/api/v1/add-donation"
         name: Add public donation
         meta:
-          id: req_b9d75738c22a48b4b35b05425bcc5fd5
+          id: req_3498e51387a542f89ad9f07e4375ef30
           created: 1754267853946
           modified: 1755159603009
           isPrivate: false
@@ -1383,6 +1435,9 @@ collection:
         authentication:
           type: bearer
           token: "{{ _.auth_token }}"
+        scripts:
+          preRequest: ""
+          afterResponse: ""
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -1394,7 +1449,7 @@ collection:
       - url: "{{ _.localhost }}/api/v1/donate-meds"
         name: Donate Meds V2 DEV
         meta:
-          id: req_a167275ad101459989620a8b2fca3d90
+          id: req_2026a43c7c1043adae336298824dd06c
           created: 1755165681311
           modified: 1755167502076
           isPrivate: false
@@ -1417,6 +1472,9 @@ collection:
         authentication:
           type: bearer
           token: "{{ _.auth_token }}"
+        scripts:
+          preRequest: ""
+          afterResponse: ""
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -1425,9 +1483,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
+    scripts:
+      afterResponse: ""
+      preRequest: ""
   - name: Expenses
     meta:
-      id: fld_e41348ef40e84c8a87cececef227cd9c
+      id: fld_53f42f0ad63f44edb6b3dd2d381f7854
       created: 1754268492280
       modified: 1754268492280
       sortKey: -1754268492280
@@ -1436,7 +1497,7 @@ collection:
       - url: "{{ _.localhost }}/api/v1/draw-expenses"
         name: Draw Expenses
         meta:
-          id: req_910c490031ca465aa6bfcd3d2a50fb22
+          id: req_6c0ac6fce8a444958425a83d28a4c851
           created: 1754275714096
           modified: 1755097477359
           isPrivate: false
@@ -1459,6 +1520,9 @@ collection:
         authentication:
           type: bearer
           token: "{{ _.auth_token }}"
+        scripts:
+          preRequest: ""
+          afterResponse: ""
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -1470,7 +1534,7 @@ collection:
       - url: "{{ _.localhost }}/api/v1/get-expenses"
         name: Get Expenses
         meta:
-          id: req_c7c5abd1f4d545b0827fb3bc8a9e4f22
+          id: req_3dbe48c1f2484fbea1f909b2d5d5cd6d
           created: 1754278117550
           modified: 1755158851204
           isPrivate: false
@@ -1488,6 +1552,224 @@ collection:
         authentication:
           type: bearer
           token: "{{ _.auth_token }}"
+        scripts:
+          preRequest: ""
+          afterResponse: ""
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+    scripts:
+      afterResponse: ""
+      preRequest: ""
+  - name: Patients
+    meta:
+      id: fld_7059a5401ac847289f19f558586e717b
+      created: 1755290713619
+      modified: 1755290718448
+      sortKey: -1755290713619
+      description: ""
+    children:
+      - url: "{{ _.localhost }}/api/v1/patients"
+        name: Index
+        meta:
+          id: req_4081f187a20b4388ba009ea545ba108f
+          created: 1755290720569
+          modified: 1755290888131
+          isPrivate: false
+          description: ""
+          sortKey: -1755290888038
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.4.0
+        authentication:
+          type: bearer
+          token: "{{ _.auth_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.localhost }}/api/v1/patients/1"
+        name: Get Patient
+        meta:
+          id: req_5bd6a527c3384b6b86a937e196ff95d6
+          created: 1755290889622
+          modified: 1755293699276
+          isPrivate: false
+          description: ""
+          sortKey: -1755290889622
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.4.0
+        authentication:
+          type: bearer
+          token: "{{ _.auth_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.localhost }}/api/v1/patients"
+        name: Add Patient
+        meta:
+          id: req_26f7f81a58a04341805b67ff629bc110
+          created: 1755293430649
+          modified: 1755293551088
+          isPrivate: false
+          description: ""
+          sortKey: -1755290889722
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"full_name" : "john Doe",
+            	"phone_number" : "{% faker 'randomPhoneNumber' %}"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.4.0
+        authentication:
+          type: bearer
+          token: "{{ _.auth_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.localhost }}/api/v1/patients/1"
+        name: Delete Patient
+        meta:
+          id: req_5f7a9c8efb0e4ea6a367dd5da424ac54
+          created: 1755425886222
+          modified: 1755425944303
+          isPrivate: false
+          description: ""
+          sortKey: -1755290889822
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.4.0
+        authentication:
+          type: bearer
+          token: "{{ _.auth_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.localhost }}/api/v1/patients/2"
+        name: Update Patient
+        meta:
+          id: req_53f6bca9dd2645ec99a86586c013bc04
+          created: 1755426017785
+          modified: 1755426321338
+          isPrivate: false
+          description: ""
+          sortKey: -1755290889922
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"full_name" : "momo",
+            	"phone_number" : "123123"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.4.0
+        authentication:
+          type: bearer
+          token: "{{ _.auth_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Insurance
+    meta:
+      id: fld_07718fb1bb9b474cb1f6c44fee9fd843
+      created: 1755330603808
+      modified: 1755330603808
+      sortKey: -1755330603809
+      description: ""
+    children:
+      - url: "{{ _.localhost }}/api/v1/insurance"
+        name: Add inurance
+        meta:
+          id: req_aaa5e57ef7754dbab3a3747bfcb38d6a
+          created: 1755293825013
+          modified: 1755425452460
+          isPrivate: false
+          description: ""
+          sortKey: -1755425441041
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"patient_id" : 1,
+            	"provider" : "Kamila",
+            	"discount_percentage" : 50
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.4.0
+        authentication:
+          type: bearer
+          token: "{{ _.auth_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.localhost }}/api/v1/insurance/records"
+        name: Get Insurance Records
+        meta:
+          id: req_2aaf8892846842d19adcd66904f0c12a
+          created: 1755330612809
+          modified: 1755425440997
+          isPrivate: false
+          description: ""
+          sortKey: -1755425440941
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.4.0
+        authentication:
+          type: bearer
+          token: "{{ _.auth_token }}"
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -1499,7 +1781,7 @@ collection:
   - url: "{{ _.localhost }}/"
     name: Test
     meta:
-      id: req_29fef594f3e341d19925ae314c29c50a
+      id: req_d263801b9cbf4bf2ad7c0669fd505bb8
       created: 1749705538370
       modified: 1753317367693
       isPrivate: false
@@ -1523,16 +1805,16 @@ collection:
 cookieJar:
   name: Default Jar
   meta:
-    id: jar_b48413c0427982a1a7e317a250f39b263742e8fd
+    id: jar_faed63c6158848849117aab01c96a3fe
     created: 1753317367158
-    modified: 1755167412930
+    modified: 1755430697100
 environments:
   name: Base Environment
   meta:
-    id: env_e5ddf10898c14f3187031bb244517afb
+    id: env_232c3e4eef1f4e8e8c88033ca2d25fa6
     created: 1749705478341
-    modified: 1755167412934
+    modified: 1755430697101
     isPrivate: false
   data:
-    auth_token: 1|R48rQIINOnmk3oWMhQY0f4AgDrFxJtfPrnD6AcUL27927c0b
+    auth_token: 1|ynTWGtct0yce4IG86WzlAVXsxMcGxie7fuDeSZfd89c232c4
     localhost: 127.0.0.1:8000

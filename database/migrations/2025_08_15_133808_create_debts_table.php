@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Cart;
+use App\Models\Patient;
 use App\Models\Pharmacy;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -12,11 +14,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payments', function (Blueprint $table) {
+        Schema::create('debts', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Pharmacy::class)->constrained()->cascadeOnDelete();
-            $table->enum('payment_method', ['cash','debt', 'charity']);
-            $table->decimal('paid_price');
+            $table->foreignIdFor(Patient::class);
+            $table->foreignIdFor(Cart::class);
+            $table->enum('status', ['pending', 'paid'])->nullable()->default('pending');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('payments');
+        Schema::dropIfExists('debts');
     }
 };

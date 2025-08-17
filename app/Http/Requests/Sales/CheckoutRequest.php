@@ -23,7 +23,10 @@ class CheckoutRequest extends FormRequest
     {
         return [
             'payment_method' => ['required','in:cash,debt,charity'],
-            'total_retail_price' => ['required','integer'],
+            'patient_id' => ['required_if:payment_method,debt', 'exists:patients,id'],
+            'total_retail_price' => ['required','decimal:0,2'],
+            'insurance' => ['sometimes','array'],
+            'insurance.patient_id' => ['required_with:insurance', 'exists:patients,id'],
             'items' => ['required','array'],
             'items.*.type' => ['required','in:,med_package,fast_selling_item'],
             'items.*.product_id' => ['required','integer'],

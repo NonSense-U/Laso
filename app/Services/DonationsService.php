@@ -59,5 +59,6 @@ class DonationsService
 
         $vault->balance += $amount;
         $vault->save();
+        return $vault->balance;
     }
 }

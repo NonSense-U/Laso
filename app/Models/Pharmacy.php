@@ -49,4 +49,9 @@ class Pharmacy extends Model
     {
         return $this->hasMany(Expense::class);
     }
+
+    public function patients()
+    {
+        return $this->hasMany(Patient::class);
+    }
 }

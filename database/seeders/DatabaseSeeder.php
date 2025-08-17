@@ -37,6 +37,7 @@ class DatabaseSeeder extends Seeder
             MedicationSeeder::class,
             MedPackageSeeder::class,
             FastSellingItemSeeder::class,
+            PatientSeeder::class,
         ]);
         
         $super->assignRole('super_admin');
