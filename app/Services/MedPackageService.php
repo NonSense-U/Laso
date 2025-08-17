@@ -125,7 +125,7 @@ class MedPackageService
     public function getStorage(User $user)
     {
         // dd(now()->toDateString());
-        $packages = $user->pharmacy->med_packages()->where('is_viable', '=', true)->with('medication')->get();
+        $packages = $user->pharmacy->med_packages()->where('quantity', '>', 0)->with('medication')->get();
 
         $grouped = $packages->groupBy(
             function ($package) {
@@ -160,6 +160,9 @@ class MedPackageService
 
             return [
                 'name' => $medication->name,
+                'scientific_name' => $medication->scientific_name,
+                'indications' => $medication->indications,
+                'side_effects' => $medication->side_effects,
                 'price' => $medication->price,
                 'strength' => $medication->strength,
                 'entities' => $medication->entities,

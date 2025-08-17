@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Medication;
-use App\Models\SideEffects;
+use App\Models\SideEffect;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -21,7 +21,7 @@ return new class extends Migration
 
         Schema::create('medications_side_effects', function (Blueprint $table) {
             $table->foreignIdFor(Medication::class)->primary()->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(SideEffects::class)->primary()->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(SideEffect::class)->primary()->constrained()->cascadeOnDelete();
         });
     }
 

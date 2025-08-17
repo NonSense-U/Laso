@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ReturnMedsRequest;
-use App\Models\MedPackage;
 use App\Http\Requests\StoreMedPackagesRequest;
-use App\Http\Requests\UpdateMedPackageRequest;
 use App\Services\MedPackageService;
 use App\Traits\V1\ApiResponse;
 use Illuminate\Http\Request;
