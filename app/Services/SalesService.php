@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Helpers\vaultsHelper;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\FastSellingItem;
@@ -122,12 +123,12 @@ class SalesService
             $cart->save();
 
             //* DONE TODO HANDLE DEBT            
-            $main_vault = $user->pharmacy->vaults()->where('name', '=', 'main')->firstOrFail();
+            $main_vault = vaultsHelper::getMain($user);
 
             if ($payload['payment_method'] === 'cash') {
                 $main_vault->balance += $actual_total_retail_price;
             } elseif ($payload['payment_method'] === 'charity') {
-                $charity_vault = $user->pharmacy->vaults()->where('name', '=', 'charity')->firstOrFail();
+                $charity_vault = vaultsHelper::getCharity($user);
                 if ($charity_vault->balance < $actual_total_retail_price) {
                     throw new UnprocessableEntityHttpException('There is not enough money in the charity box.');
                 }
@@ -139,7 +140,7 @@ class SalesService
             }
 
             $main_vault->save();
-            
+
             DB::commit();
 
             return $cart;
@@ -188,5 +189,20 @@ class SalesService
         $med_package->save();
 
         return $opened_package;
+    }
+
+    public function customerReturnMeds(array $payload, User $user)
+    {
+        /** @var app/models/MedPackage */
+        $med_package = MedPackage::where('medication_id', $payload['medication_id'])
+            ->where('expiration_date', $payload['expiration_date'])
+            ->firstOrFail();
+
+        $med_package->quantity += $payload['return_quantity'];
+        $med_package->save();
+
+        $main_vault = vaultsHelper::getMain($user);
+        $main_vault->balance -= $payload['return_quantity'] * $med_package->medication->retail_price;
+        $main_vault->save();
     }
 }

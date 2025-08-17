@@ -108,7 +108,7 @@ Route::get('/expired-meds', [MedPackageController::class, 'expiredMeds'])->middl
 Route::middleware(['auth:sanctum', 'update.last.seen'])->group(function () {
     //! Sales
     Route::post('/sales/checkout', [WorkerController::class, 'checkout']);
-
+    Route::post('/sales/return-meds', [WorkerController::class, 'customerReturnMeds']);
     //* UPDATE URL LATER
     //TODO
     //! Add Medication Order

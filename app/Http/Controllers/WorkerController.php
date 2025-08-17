@@ -26,4 +26,19 @@ class WorkerController extends Controller
         $data = $this->salesService->Checkout($request->validated(), $request->user());
         return ApiResponse::success('Sale was successfull.', $data);
     }
+
+    public function customerReturnMeds(Request $request)
+    {
+        $validated = $request->validate(
+            [
+                'medication_id' => ['required', 'exists:medications,id'],
+                'expiration_date' => ['required','date'],
+                'return_quantity' => ['required', 'integer', 'min:0']
+            ]
+        );
+
+        $this->salesService->customerReturnMeds($validated, $request->user());
+        
+        return ApiResponse::success('medications returned successfully.');
+    }
 }
