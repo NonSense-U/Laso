@@ -136,7 +136,13 @@ class SalesService
                 $main_vault->balance += $actual_total_retail_price;
                 $charity_vault->save();
             } elseif ($payload['payment_method'] === 'debt') {
-                PatientService::addDebt($cart->id, $payload['patient_id'], $user->pharmacy->id);
+                $debt_payload = [
+                    'cart_id' => $cart->id,
+                    'patient_id' => $payload['patient_id'],
+                    'pharmacy_id' => $user->pharmacy_id,
+                    'amount' => $cart->total_retail_price
+                ];
+                PatientService::addDebt($debt_payload);
             }
 
             $main_vault->save();

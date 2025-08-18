@@ -17,14 +17,10 @@ class PatientService
         return $patient;
     }
 
-    public static function addDebt($cart_id, $patient_id, $pharmacy_id)
+    public static function addDebt(array $payload)
     {
-        $patient = Patient::findOrFail($patient_id);
-        Debt::create([
-            'pharmacy_id' => $pharmacy_id,
-            'cart_id' => $cart_id,
-            'patient_id' => $patient->id
-        ]);
+        $patient = Patient::findOrFail($payload['patient_id']);
+        Debt::create($payload);
         $patient->load('debts');
         return $patient;
     }

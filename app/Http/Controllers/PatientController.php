@@ -21,20 +21,15 @@ class PatientController extends Controller
     {
         $this->patientService = $patientService;
     }
-
+    
     public function index(Request $request)
     {
-        $patients = $request->user()->pharmacy->patients;
+        $patients = Patient::query()->with('debts')->get();
         return ApiResponse::success('ok', ['patients' => $patients]);
     }
     public function getPatient(Request $request, $patient_id)
     {
-        $patient = DB::select(
-            'SELECT p.full_name, d.id As debt_id, d.status, c.id AS cart_id, c.total_retail_price AS amount FROM patients p
-            JOIN debts d ON p.id = d.patient_id
-            JOIN carts c ON d.cart_id = c.id 
-            WHERE p.id = ?
-            ',[$patient_id]);
+        $patient = Patient::query()->where('id', '=', $patient_id)->with('debts')->get();
         return ApiResponse::success('ok', ['patient' => $patient]);
     }
 

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignIdFor(Pharmacy::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Patient::class);
             $table->foreignIdFor(Cart::class);
+            $table->decimal('amount');
             $table->enum('status', ['pending', 'paid'])->nullable()->default('pending');
             $table->timestamps();
         });
