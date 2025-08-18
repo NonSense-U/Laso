@@ -6,6 +6,7 @@ use App\Models\Debt;
 use App\Models\Insurance;
 use App\Models\Patient;
 use App\Models\User;
+use Exception;
 
 class PatientService
 {
@@ -36,6 +37,11 @@ class PatientService
     public function deleteDebt($debt_id)
     {
         $debt = Debt::findOrFail($debt_id);
+        if($debt->status != 'paid')
+        {
+            throw new Exception("This debt is not paid yet.");
+        }
+
         $debt->delete();
         return;
     }

@@ -54,6 +54,7 @@ Route::get('/insurance/records', [InsuranceController::class, 'getInsuranceRecor
 
 //! DEBT
 Route::post('/pay-debt/{debt_id}', [PatientController::class, 'payDebt'])->middleware('auth:sanctum');
+Route::delete('/delete-debt/{debt_id}', [PatientController::class, 'deleteDebt'])->middleware('auth:sanctum');
 
 //! PATIENT CRUD
 Route::get('/patients', [PatientController::class, 'index'])->middleware('auth:sanctum');

@@ -10,7 +10,7 @@ collection:
     meta:
       id: fld_1bea599113054baaaaa56cf9371883bf
       created: 1750012727351
-      modified: 1755434138543
+      modified: 1755541224980
       sortKey: -1750012727351
       description: ""
     children:
@@ -1290,7 +1290,7 @@ collection:
         meta:
           id: req_467eb15f86884c0e8bb9aefd308f0ffc
           created: 1751505201133
-          modified: 1755446822839
+          modified: 1755541235553
           isPrivate: false
           description: ""
           sortKey: -1754257013010
@@ -1301,7 +1301,7 @@ collection:
             {
             	"payment_method" : "debt",
             	"patient_id" : 1,
-            	"total_retail_price" : 215.66,
+            	"total_retail_price" : 108.5,
             	"insurance" : {
             		"patient_id" : 1
             	},
@@ -1346,6 +1346,40 @@ collection:
         scripts:
           preRequest: ""
           afterResponse: ""
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.localhost }}/api/v1/sales/return-meds"
+        name: Customer Return Meds
+        meta:
+          id: req_54ed252b1c4c4027a3d7d2677c724f1d
+          created: 1755469995234
+          modified: 1755470559425
+          isPrivate: false
+          description: ""
+          sortKey: -1754257013110
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"medication_id" : 5,
+            	"return_quantity" : 4,
+            	"expiration_date" : "2025-08-06"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.4.0
+        authentication:
+          type: bearer
+          token: "{{ _.auth_token }}"
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -1791,11 +1825,35 @@ collection:
         meta:
           id: req_f2cd94fe106049b3af5e39dc6f1a317d
           created: 1755447611069
-          modified: 1755447772273
+          modified: 1755541779470
           isPrivate: false
           description: ""
-          sortKey: -1755447772191
+          sortKey: -1755541359941
         method: POST
+        headers:
+          - name: User-Agent
+            value: insomnia/11.4.0
+        authentication:
+          type: bearer
+          token: "{{ _.auth_token }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.localhost }}/api/v1/delete-debt/1"
+        name: Delete Debt
+        meta:
+          id: req_39cb500a354b486eb09617ef1d74c7cc
+          created: 1755541579345
+          modified: 1755541785316
+          isPrivate: false
+          description: ""
+          sortKey: -1755541360041
+        method: DELETE
         headers:
           - name: User-Agent
             value: insomnia/11.4.0
@@ -1839,14 +1897,14 @@ cookieJar:
   meta:
     id: jar_faed63c6158848849117aab01c96a3fe
     created: 1753317367158
-    modified: 1755434138542
+    modified: 1755541224979
 environments:
   name: Base Environment
   meta:
     id: env_232c3e4eef1f4e8e8c88033ca2d25fa6
     created: 1749705478341
-    modified: 1755434138542
+    modified: 1755541224980
     isPrivate: false
   data:
-    auth_token: 1|FBjTIDIu0IF32CTByjb12PhSR7Zq45INGnSk80HGed8ae2bb
+    auth_token: 1|jWG8TFpT7bQvmH1y3zPJ3r23s6C4sYNRXW7xiUmK125c09ef
     localhost: 127.0.0.1:8000
