@@ -19,7 +19,7 @@ class FastSellingItemFactory extends Factory
         return [
             'name' => fake()->randomElement(['cloves','needle','face mask','tissues']),
             'purchase_price' => rand(50,99),
-            'retail_price' => rand(100, 1000),
+            'retail_price' => 100,
             'quantity' => rand(20,50)
         ];
     }

@@ -65,7 +65,7 @@ class SalesService
                     $product = $medPackages->get($item['product_id']);
                     $price = $prices[$product->id];
                     if ($item['partial_sale']) {
-                        $price = ($price / $product->medication->entities) * $item['quantity'];
+                        $price = ($price / $product->medication->entities);
                     }
                     $actual_total_retail_price += $price * $item['quantity'];
                 } else {

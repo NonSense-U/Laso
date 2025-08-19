@@ -42,7 +42,7 @@ class MedicationFactory extends Factory
             'scientific_name' => 'Paradol',
             'retail_price' =>  100,
             'strength' => '500mg',
-            'entities' => rand(1,5),
+            'entities' => 4,
             'notes' => 'i am a note',
             'manufacturer_id' => Manufacturer::factory()
         ];
