@@ -21,12 +21,21 @@ class PatientController extends Controller
     {
         $this->patientService = $patientService;
     }
-    
+
     public function index(Request $request)
     {
-        $patients = Patient::query()->with('debts')->get();
+        $user = $request->user();
+        $patients = Patient::query()->where('pharmacy_id', '=', $user->pharmacy_id)->with('debts')->get();
         return ApiResponse::success('ok', ['patients' => $patients]);
     }
+
+    public function getPatientsWithInsurance(Request $request)
+    {
+        $user = $request->user();
+        $patients = Patient::query()->where('pharmacy_id', '=', $user->pharmacy_id)->whereHas('insurance')->with('insurance')->get();
+        return ApiResponse::success('ok', ['patients' => $patients]);
+    }
+
     public function getPatient(Request $request, $patient_id)
     {
         $patient = Patient::query()->where('id', '=', $patient_id)->with('debts')->get();

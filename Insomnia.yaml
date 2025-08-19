@@ -1892,6 +1892,30 @@ collection:
         send: true
         store: true
       rebuildPath: true
+  - url: "{{ _.localhost }}/api/v1/patients-with-insurance"
+    name: Get Patients With Inusrance
+    meta:
+      id: req_5fd154f5c42c4eb1a203145b05047d72
+      created: 1755585958913
+      modified: 1755585997157
+      isPrivate: false
+      description: ""
+      sortKey: -1755585958913
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.4.0
+    authentication:
+      type: bearer
+      token: "{{ _.auth_token }}"
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
 cookieJar:
   name: Default Jar
   meta:

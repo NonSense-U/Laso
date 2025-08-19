@@ -58,6 +58,7 @@ Route::delete('/delete-debt/{debt_id}', [PatientController::class, 'deleteDebt']
 
 //! PATIENT CRUD
 Route::get('/patients', [PatientController::class, 'index'])->middleware('auth:sanctum');
+Route::get('/patients-with-insurance', [PatientController::class, 'getPatientsWithInsurance'])->middleware('auth:sanctum');
 Route::get('/patients/{patient_id}', [PatientController::class, 'getPatient'])->middleware('auth:sanctum');
 Route::put('/patients/{patient_id}', [PatientController::class, 'updatePatient'])->middleware('auth:sanctum');
 Route::post('/patients', [PatientController::class, 'storePatient'])->middleware('auth:sanctum');
