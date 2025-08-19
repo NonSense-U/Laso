@@ -159,11 +159,12 @@ class MedPackageService
             });
 
             return [
+                'serial_number' => $medication->serial_number,
                 'name' => $medication->name,
                 'scientific_name' => $medication->scientific_name,
                 'indications' => $medication->indications,
                 'side_effects' => $medication->side_effects,
-                'price' => $medication->price,
+                'price' => $medication->retail_price,
                 'strength' => $medication->strength,
                 'entities' => $medication->entities,
                 'stock' => $groupedPackages->sum('quantity'), //! sum of package quantities
