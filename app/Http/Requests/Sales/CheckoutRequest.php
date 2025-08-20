@@ -31,8 +31,8 @@ class CheckoutRequest extends FormRequest
             'items.*.type' => ['required','in:,med_package,fast_selling_item'],
             'items.*.product_id' => ['required','integer'],
             'items.*.quantity' => ['required','integer'],
-            'items.*.purchase_price'=>['required','integer'],
-            'items.*.retail_price' => ['required', 'integer'],
+            'items.*.purchase_price'=>['required','decimal:0,2'],
+            'items.*.retail_price' => ['required', 'decimal:0,2'],
             'items.*.partial_sale' => ['required','boolean']
         ];
     }

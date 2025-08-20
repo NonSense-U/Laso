@@ -42,7 +42,7 @@ class SupplierService
     public function getRecord($supplier_id)
     {
         $supplier = Supplier::findOrFail($supplier_id);
-        $records = $supplier->packages_orders()->whereColumn('total_price', '>', 'paid_amount')->with('packages')->get();
+        $records = $supplier->packages_orders()->with('packages')->get();
         return $records;
     }
 }

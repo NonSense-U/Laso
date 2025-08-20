@@ -25,12 +25,12 @@ class StoreMedPackagesRequest extends FormRequest
             'supplier_id' => ['required', 'exists:suppliers,id'],
             'total_price' => ['required','numeric'],
             'paid_amount' => ['required','numeric'],
-            'packages-order' => ['required', 'array'],
-            'packages-order.*.medication_id' => ['required', 'exists:medications,id'],
-            'packages-order.*.quantity' => ['required', 'integer'],
-            'packages-order.*.production_date' => ['required', 'date'],
-            'packages-order.*.expiration_date' => ['required', 'date'],
-            'packages-order.*.purchase_price' => ['required', 'numeric'],
+            'packages_order' => ['required', 'array'],
+            'packages_order.*.medication_id' => ['required', 'exists:medications,id'],
+            'packages_order.*.quantity' => ['required', 'integer'],
+            'packages_order.*.production_date' => ['required', 'date'],
+            'packages_order.*.expiration_date' => ['required', 'date'],
+            'packages_order.*.purchase_price' => ['required', 'numeric'],
         ];
     }
 }

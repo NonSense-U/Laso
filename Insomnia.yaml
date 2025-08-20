@@ -10,7 +10,7 @@ collection:
     meta:
       id: fld_1bea599113054baaaaa56cf9371883bf
       created: 1750012727351
-      modified: 1755619244111
+      modified: 1755946378042
       sortKey: -1750012727351
       description: ""
     children:
@@ -259,12 +259,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.localhost }}/api/v1/supplier/record/2"
+      - url: "{{ _.localhost }}/api/v1/supplier/record/1"
         name: Supplier Financial Record
         meta:
           id: req_af6f5101b0ba4c499043490dc067cf9b
           created: 1751281145478
-          modified: 1753317367683
+          modified: 1755635899685
           isPrivate: false
           description: ""
           sortKey: -1750120234030
@@ -547,7 +547,7 @@ collection:
         meta:
           id: req_b409fbf88fcf4fd8a13232a5c4d1e159
           created: 1750946496569
-          modified: 1755167033621
+          modified: 1755946121974
           isPrivate: false
           description: ""
           sortKey: -1750946496569
@@ -556,10 +556,10 @@ collection:
           mimeType: application/json
           text: |
             {
-              "supplier_id": 2,
+              "supplier_id": 1,
+            	"paid_amount" : 199.9,
             	"total_price": 199.9,
-            	"paid_amount" : 122.2,
-            	"packages-order": [
+            	"packages_order": [
             		{
             			"medication_id": 1,
               		"quantity": 100,
@@ -1112,7 +1112,7 @@ collection:
         meta:
           id: req_5b94a7bcd6554772bb3b55809c104446
           created: 1751140209439
-          modified: 1753317367695
+          modified: 1755856988308
           isPrivate: false
           description: ""
           sortKey: -1751463912465
@@ -1921,14 +1921,14 @@ cookieJar:
   meta:
     id: jar_faed63c6158848849117aab01c96a3fe
     created: 1753317367158
-    modified: 1755619244109
+    modified: 1755946378038
 environments:
   name: Base Environment
   meta:
     id: env_232c3e4eef1f4e8e8c88033ca2d25fa6
     created: 1749705478341
-    modified: 1755619244110
+    modified: 1755946378042
     isPrivate: false
   data:
-    auth_token: 1|kVoTplVxA3vg5B2s5BKEfZSslXEMM3CpSRLGy4xB9ddb3502
+    auth_token: 2|vUsICntLxydMYYAh3vIrir6gw10DHRgbXhZOOx1j714fc2d8
     localhost: 127.0.0.1:8000

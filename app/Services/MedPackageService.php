@@ -31,13 +31,13 @@ class MedPackageService
         // };
 
         $fromDate = now()->subMonths(6);
-        
+
         $initQuantity = DB::select(
             'SELECT m.name AS medication_name, SUM(mp.init_quantity) AS init_quantity 
          FROM med_packages mp
          JOIN medications m ON mp.medication_id = m.id 
          WHERE mp.pharmacy_id = ? AND mp.created_at > ? 
-         GROUP BY m.name', 
+         GROUP BY m.name',
             [$user->pharmacy_id, $fromDate]
         );
 
@@ -47,7 +47,7 @@ class MedPackageService
          JOIN med_packages mp ON ci.product_id = mp.id 
          JOIN medications m ON mp.medication_id = m.id
          WHERE mp.pharmacy_id = ? AND ci.type = ? AND mp.created_at > ? 
-         GROUP BY m.name', 
+         GROUP BY m.name',
             [$user->pharmacy_id, 'med_package', $fromDate]
         );
 
@@ -57,7 +57,7 @@ class MedPackageService
          JOIN med_packages mp ON dn.med_package_id = mp.id 
          JOIN medications m ON mp.medication_id = m.id
          WHERE dn.pharmacy_id = ? AND mp.created_at > ? 
-         GROUP BY m.name', 
+         GROUP BY m.name',
             [$user->pharmacy_id, $fromDate]
         );
 
@@ -67,7 +67,7 @@ class MedPackageService
          JOIN med_packages mp ON rr.med_package_id = mp.id 
          JOIN medications m ON mp.medication_id = m.id
          WHERE rr.pharmacy_id = ? AND mp.created_at > ? 
-         GROUP BY m.name', 
+         GROUP BY m.name',
             [$user->pharmacy_id, $fromDate]
         );
 
@@ -76,7 +76,7 @@ class MedPackageService
          FROM med_packages mp 
          JOIN medications m ON mp.medication_id = m.id
          WHERE mp.pharmacy_id = ? AND mp.expiration_date > ? AND mp.created_at > ? 
-         GROUP BY m.name', 
+         GROUP BY m.name',
             [$user->pharmacy_id, now()->addMonth(), $fromDate]
         );
 
@@ -85,7 +85,7 @@ class MedPackageService
          FROM med_packages mp 
          JOIN medications m ON mp.medication_id = m.id
          WHERE mp.pharmacy_id = ? AND mp.created_at > ? AND mp.expiration_date < ? 
-         GROUP BY m.name', 
+         GROUP BY m.name',
             [$user->pharmacy_id, $fromDate, now()]
         );
 
@@ -125,7 +125,14 @@ class MedPackageService
     public function getStorage(User $user)
     {
         // dd(now()->toDateString());
-        $packages = $user->pharmacy->med_packages()->where('quantity', '>', 0)->with('medication')->get();
+        $packages = $user->pharmacy
+            ->med_packages()
+            ->where('quantity', '>', 0)
+            ->join('packages_orders', 'med_packages.packages_order_id', '=', 'packages_orders.id')
+            ->join('suppliers', 'packages_orders.supplier_id', '=', 'suppliers.id')
+            ->select('med_packages.*', 'suppliers.name as supplier_name')
+            ->with('medication') // still eager load medication normally
+            ->get();
 
         $grouped = $packages->groupBy(
             function ($package) {
@@ -191,7 +198,7 @@ class MedPackageService
 
             $medPackages = [];
 
-            foreach ($payload['packages-order'] as $package) {
+            foreach ($payload['packages_order'] as $package) {
                 $package['packages_order_id'] = $packages_order->id;
                 $package['pharmacy_id'] = $user->pharmacy_id;
                 $package['init_quantity'] = $package['quantity'];
