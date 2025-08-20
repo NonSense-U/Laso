@@ -60,7 +60,7 @@ class SalesService
             $actual_total_retail_price = 0;
 
             foreach ($payload['items'] as $item) {
-
+                $price = 0;
                 if ($item['type'] == 'med_package') {
                     $product = $medPackages->get($item['product_id']);
                     $price = $prices[$product->id];
@@ -70,7 +70,8 @@ class SalesService
                     $actual_total_retail_price += $price * $item['quantity'];
                 } else {
                     $product = $fastSellingItems->get($item['product_id']);
-                    $actual_total_retail_price += $product->retail_price * $item['quantity'];
+                    $price = $product->retail_price;
+                    $actual_total_retail_price += $price * $item['quantity'];
                 }
 
                 if ($item['quantity'] > $product->quantity) {
