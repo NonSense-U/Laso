@@ -257,14 +257,14 @@ class MedPackageService
             }
 
             $debt = $parentOrder->total_price - $parentOrder->paid_amount;
+            $parentOrder->total_price -= $cashValue;
 
             if ($debt > 0) {
                 if ($debt >= $cashValue) {
-                    $parentOrder->paid_amount += $cashValue;
                     $cashValue = 0;
                 } else {
-                    $parentOrder->paid_amount = $parentOrder->total_price;
                     $cashValue -= $debt;
+                    $parentOrder->paid_amount = $parentOrder->total_price;
                 }
                 $parentOrder->save();
             }
