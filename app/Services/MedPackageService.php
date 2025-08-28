@@ -14,11 +14,15 @@ use Throwable;
 
 class MedPackageService
 {
-
     public function getExpiredMeds(User $user)
     {
-        $expiredMeds = $user->pharmacy->med_packages()->where('expiration_date', '<=', now()->toDateString())->with('medication')->get();
-        return $expiredMeds;
+        return DB::table('med_packages as mp')
+            ->join('packages_orders as po', 'po.id', '=', 'mp.packages_order_id')
+            ->join('suppliers as s', 's.id', '=', 'po.supplier_id')
+            ->where('mp.pharmacy_id', $user->pharmacy_id)
+            ->where('mp.expiration_date', '<', now())
+            ->select('mp.*', 's.name AS supplier_name')
+            ->get();
     }
 
 
