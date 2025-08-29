@@ -16,13 +16,45 @@ class MedPackageService
 {
     public function getExpiredMeds(User $user)
     {
-        return DB::table('med_packages as mp')
-            ->join('packages_orders as po', 'po.id', '=', 'mp.packages_order_id')
-            ->join('suppliers as s', 's.id', '=', 'po.supplier_id')
-            ->where('mp.pharmacy_id', $user->pharmacy_id)
-            ->where('mp.expiration_date', '<', now())
-            ->select('mp.*', 's.name AS supplier_name')
+        $packages = $user->pharmacy
+            ->med_packages()
+            ->where('quantity', '>', 0)
+            ->where('expiration_date', '>', now())
+            ->join('packages_orders', 'med_packages.packages_order_id', '=', 'packages_orders.id')
+            ->join('suppliers', 'packages_orders.supplier_id', '=', 'suppliers.id')
+            ->select('med_packages.*', 'suppliers.name as supplier_name')
+            ->with('medication') // still eager load medication normally
             ->get();
+
+        $grouped = $packages->groupBy(
+            function ($package) {
+                return $package->medication_id;
+            }
+        );
+
+        $medications = $grouped->map(function ($groupedPackages) use (&$info) {
+            $medication = $groupedPackages->first()->medication;
+           
+            $groupedPackages->each(function ($package) use (&$info) {
+                unset($package->medication);
+            });
+
+            return [
+                'serial_number' => $medication->serial_number,
+                'name' => $medication->name,
+                'scientific_name' => $medication->scientific_name,
+                'indications' => $medication->indications,
+                'side_effects' => $medication->side_effects,
+                'price' => $medication->retail_price,
+                'strength' => $medication->strength,
+                'entities' => $medication->entities,
+                'stock' => $groupedPackages->sum('quantity'), //! sum of package quantities
+                'expires_in' => $groupedPackages->min('expiration_date'),
+                'packages' => $groupedPackages,
+            ];
+        })->values();
+
+        return $medications;
     }
 
 

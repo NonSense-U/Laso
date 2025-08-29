@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Helpers\medicationPriceHelper;
 use App\Helpers\vaultsHelper;
 use App\Models\Cart;
 use App\Models\CartItem;
@@ -34,6 +35,8 @@ class SalesService
         DB::beginTransaction();
 
         try {
+            medicationPriceHelper::getPrices();
+            
             //* DONE    TODO don't trust total_retail_price
             $payment = Payment::create([
                 'pharmacy_id' => $user->pharmacy_id,
@@ -48,6 +51,7 @@ class SalesService
                 'payment_id' => $payment->id
             ]);
 
+            $total_purchase_price =0 ;
 
             $grouped = collect($payload['items'])->groupBy('type');
 
@@ -116,6 +120,8 @@ class SalesService
                 ]);
                 $actual_total_retail_price = $actual_total_retail_price - $discounted_amount;
             }
+
+            $cart->total_purchase_price = $total_purchase_price;
 
             $actual_total_retail_price = round($actual_total_retail_price, 2);
             if ($cart->total_retail_price != $actual_total_retail_price) {
