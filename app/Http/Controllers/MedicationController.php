@@ -7,6 +7,7 @@ use App\Http\Requests\StoreMedicationRequest;
 use App\Http\Requests\UpdateMedicationRequest;
 use App\Traits\V1\ApiResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MedicationController extends Controller
 {
@@ -16,8 +17,8 @@ class MedicationController extends Controller
 
     public function index()
     {
-     $data = Medication::all();
-     return ApiResponse::success('Global medications retrieved successfully.',$data);
+        $data = Medication::all();
+        return ApiResponse::success('Global medications retrieved successfully.', $data);
     }
 
     /**
@@ -31,15 +32,38 @@ class MedicationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreMedicationRequest $request)
-    {
-        //
+
+public function addMedication(StoreMedicationRequest $request)
+{
+    $data = $request->validated();
+
+    $path = 'medications.json';
+    $disk = Storage::disk('public');
+
+    $medications = [];
+    if ($disk->exists($path)) {
+        $medications = json_decode($disk->get($path), true) ?? [];
     }
+
+    $medications[] = $data;
+
+    $disk->put($path, json_encode($medications, JSON_PRETTY_PRINT));
+
+    $medication = Medication::create($request->validated());
+
+    return response()->json([
+        'message' => 'Medication added successfully!',
+        'medication' => $data,
+        'file_path' => asset('storage/' . $path), // link to JSON file
+    ]);
+}
+
+
 
     /**
      * Display the specified resource.
      */
-    
+
     public function show(Request $request, int $medication_id)
     {
         $medication = Medication::findOrFail($medication_id);
@@ -49,7 +73,7 @@ class MedicationController extends Controller
     public function getMedBySerialNumber(Request $request, $serial_number)
     {
         $medication = Medication::query()->where('serial_number', '=', $serial_number)->firstOrFail();
-        return ApiResponse::success('ok',['medication' => $medication]);
+        return ApiResponse::success('ok', ['medication' => $medication]);
     }
 
     /**

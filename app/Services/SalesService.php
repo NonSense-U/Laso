@@ -55,7 +55,8 @@ class SalesService
 
             $grouped = collect($payload['items'])->groupBy('type');
 
-            $medPackages = MedPackage::whereIn('id', $grouped->get('med_package', collect())->pluck('product_id'))->get()->keyBy('id');
+            $medPackages = MedPackage::whereIn('id', $grouped->get('med_package', collect())->pluck('product_id'))->with('medication')->get()->keyBy('id');
+            dd($medPackages);
             $fastSellingItems = FastSellingItem::whereIn('id', $grouped->get('fast_selling_item', collect())->pluck('product_id'))->get()->keyBy('id');
 
             $redisKeys = $medPackages->mapWithKeys(fn($med) => [$med->id => $med->medication_id . '_medication_price'])->all();

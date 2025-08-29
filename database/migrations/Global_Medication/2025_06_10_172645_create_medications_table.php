@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('strength');
             $table->integer('entities')->nullable()->default(1);
             $table->integer('retail_price');
-            $table->string('notes');
+            $table->string('notes')->nullable();
             $table->foreignIdFor(Manufacturer::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });

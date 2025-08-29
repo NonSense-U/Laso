@@ -19,8 +19,8 @@
         </p>
 
         <div style="text-align: center; margin: 30px 0;">
-<!-- https://youtu.be/mcYLzu_1cNc?si=0-5fisHpiVAqogVF -->
-            <a href="{{ $registration_link ?? '#' }}" style="background-color: #007bff; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">
+
+            <a href="{{ $registration_link ?? 'https://youtu.be/mcYLzu_1cNc?si=0-5fisHpiVAqogVF' }}" style="background-color: #007bff; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">
                 Create Your Account
             </a>
         </div>

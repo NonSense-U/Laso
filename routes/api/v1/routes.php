@@ -19,7 +19,6 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\WorkerController;
 use Illuminate\Support\Facades\Route;
 
-use function Pest\Laravel\post;
 
 Route::get('/test', function () {
     dd('smile');
@@ -68,7 +67,7 @@ Route::delete('/patients/{patient_id}', [PatientController::class, 'deletePatien
 Route::get('/global-meds', [MedicationController::class, 'index']);
 Route::get('/global-meds/show/{medication_id}', [MedicationController::class, 'show'])->middleware('auth:sanctum');
 Route::get('/global-meds/{serial_number}', [MedicationController::class, 'getMedBySerialNumber'])->middleware('auth:sanctum');
-
+Route::post('/global-meds',[MedicationController::class, 'addMedication'])->middleware('auth:sanctum');
 //! PACKAGES_ORDERS
 Route::get('/packages_orders', [PackagesOrderController::class, 'index'])->middleware('auth:sanctum');
 Route::get('/packages_orders/{packages_order_id}', [PackagesOrderController::class, 'show']);
