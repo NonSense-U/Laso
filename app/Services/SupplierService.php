@@ -2,9 +2,14 @@
 
 namespace App\Services;
 
+use App\Helpers\vaultsHelper;
+use App\Models\PackagesOrder;
 use App\Models\Supplier;
 use App\Models\User;
+use Exception;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Throwable;
 
 class SupplierService
 {
@@ -44,5 +49,29 @@ class SupplierService
         $supplier = Supplier::findOrFail($supplier_id);
         $records = $supplier->packages_orders()->with('packages')->get();
         return $records;
+    }
+
+
+    public function paySupplierDebt($order_id, $amount, $user)
+    {
+        try {
+            DB::beginTransaction();
+
+            $record = PackagesOrder::findOrFail($order_id);
+            $vault = vaultsHelper::getMain($user);
+
+            $record->paid_amount += $amount;
+            $vault->balance -= $amount;
+
+            $record->save();
+            $vault->save();
+
+            DB::commit();
+            return $record;
+
+        } catch (Throwable $e) {
+            DB::rollBack();
+            throw $e;
+        }
     }
 }

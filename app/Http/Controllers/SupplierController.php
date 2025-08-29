@@ -62,4 +62,15 @@ class SupplierController extends Controller
         $data = $this->supplierService->getRecord($supplier_id);
         return ApiResponse::success('Supplier record retrieved successfully.', $data);
     }
+
+    public function paySupplierDebt(Request $request, $order_id)
+    {
+        $validated = $request->validate([
+            'amount' => ['required', 'decimal:0,2'],
+        ]);
+
+        $order = $this->supplierService->paySupplierDebt($order_id, $validated['amount'], $request->user());
+
+        return ApiResponse::success('Debt has been paid successfully!', ['order' => $order]);
+    }
 }
