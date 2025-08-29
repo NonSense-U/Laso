@@ -15,16 +15,11 @@ use App\Models\Patient;
 use App\Models\Payment;
 use App\Models\User;
 use Illuminate\Support\Exceptions\MathException;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 use Throwable;
-
-use function Pest\Laravel\get;
-use function PHPSTORM_META\map;
 
 class SalesService
 {
@@ -36,7 +31,7 @@ class SalesService
 
         try {
             medicationPriceHelper::getPrices();
-            
+
             //* DONE    TODO don't trust total_retail_price
             $payment = Payment::create([
                 'pharmacy_id' => $user->pharmacy_id,
@@ -51,24 +46,32 @@ class SalesService
                 'payment_id' => $payment->id
             ]);
 
-            $total_purchase_price =0 ;
+            $total_purchase_price = 0;
 
             $grouped = collect($payload['items'])->groupBy('type');
 
             $medPackages = MedPackage::whereIn('id', $grouped->get('med_package', collect())->pluck('product_id'))->with('medication')->get()->keyBy('id');
-            dd($medPackages);
             $fastSellingItems = FastSellingItem::whereIn('id', $grouped->get('fast_selling_item', collect())->pluck('product_id'))->get()->keyBy('id');
 
-            $redisKeys = $medPackages->mapWithKeys(fn($med) => [$med->id => $med->medication_id . '_medication_price'])->all();
+            $redisKeys = $medPackages->mapWithKeys(fn($med) => [$med->id => $med->medication->serial_number . '_medication_price'])->all();
             $values = Redis::mget(array_values($redisKeys));
-            $prices = collect($redisKeys)->keys()->combine($values)->all();
+            $prices = collect($redisKeys)
+                ->combine($values) // combine keys with values
+                ->map(function ($value, $key) {
+                    if (is_null($value)) {
+                        throw new \Exception("Missing value for key: $key");
+                    }
+                    return $value;
+                })
+                ->all();
+
             $actual_total_retail_price = 0;
 
             foreach ($payload['items'] as $item) {
                 $price = 0;
                 if ($item['type'] == 'med_package') {
                     $product = $medPackages->get($item['product_id']);
-                    $price = $prices[$product->id];
+                    $price = $prices[$product->medication->serial_number . '_medication_price'];
                     if ($item['partial_sale']) {
                         $price = ($price / $product->medication->entities);
                     }
