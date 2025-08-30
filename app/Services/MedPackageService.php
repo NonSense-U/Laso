@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Helpers\vaultsHelper;
 use App\Models\MedPackage;
 use App\Models\PackagesOrder;
 use App\Models\ReturnRecord;
@@ -240,7 +241,11 @@ class MedPackageService
                 $package['init_quantity'] = $package['quantity'];
                 $medPackages[] = MedPackage::create($package);
             }
-
+            
+            $vault = vaultsHelper::getMain($user);
+            $vault->balance-= $payload['paid_amount'];
+            $vault->save();
+            
             //! Check For Debt
             $debt = $payload['total_price'] - $payload['paid_amount'];
             if ($debt !== 0) {
