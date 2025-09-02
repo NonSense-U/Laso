@@ -27,9 +27,10 @@ class SalesService
     //! DON'T TAKE TOTAL_RETAIL_PRICE FOR GRANTED
     public function Checkout(array $payload, User $user)
     {
-        DB::beginTransaction();
 
         try {
+            DB::beginTransaction();
+
             medicationPriceHelper::getPrices();
 
             //* DONE    TODO don't trust total_retail_price

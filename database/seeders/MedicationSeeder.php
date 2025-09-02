@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Helpers\medicationPriceHelper;
+use App\Models\Manufacturer;
 use App\Models\Medication;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,7 +15,9 @@ class MedicationSeeder extends Seeder
      */
     public function run(): void
     {
-        Medication::factory(5)->create();
+        Manufacturer::factory()->create();
+        medicationPriceHelper::getPrices();
+        // Medication::factory(5)->create();
         Medication::factory()->create([
             'name' => 'Osteofix',
             'scientific_name' => 'Osteofix',
