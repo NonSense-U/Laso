@@ -33,13 +33,13 @@ class PharmacyFactory extends Factory
             Vault::create([
                 'pharmacy_id' => $pharmacy->id,
                 'name' => 'main',
-                'balance' => '50000',
+                'balance' => '500000',
             ]);
 
             Vault::create([
                 'pharmacy_id' => $pharmacy->id,
                 'name' => 'charity',
-                'balance' => '1000'
+                'balance' => '10000'
             ]);
 
         });

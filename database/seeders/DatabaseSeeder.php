@@ -41,6 +41,5 @@ class DatabaseSeeder extends Seeder
         ]);
         
         $super->assignRole('super_admin');
-        medicationPriceHelper::getPrices();
     }
 }

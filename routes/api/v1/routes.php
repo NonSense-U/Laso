@@ -1,5 +1,6 @@
 <?php
 
+use App\Helpers\medicationPriceHelper;
 use App\Http\Controllers\Accounts\AuthController;
 use App\Http\Controllers\Accounts\UserController;
 use App\Http\Controllers\AdminController;

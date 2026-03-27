@@ -53,17 +53,20 @@ class SalesService
             $medPackages = MedPackage::whereIn('id', $grouped->get('med_package', collect())->pluck('product_id'))->with('medication')->get()->keyBy('id');
             $fastSellingItems = FastSellingItem::whereIn('id', $grouped->get('fast_selling_item', collect())->pluck('product_id'))->get()->keyBy('id');
 
-            $redisKeys = $medPackages->mapWithKeys(fn($med) => [$med->id => $med->medication->serial_number . '_medication_price'])->all();
-            $values = Redis::mget(array_values($redisKeys));
-            $prices = collect($redisKeys)
-                ->combine($values) // combine keys with values
-                ->map(function ($value, $key) {
-                    if (is_null($value)) {
-                        throw new \Exception("Missing value for key: $key");
-                    }
-                    return $value;
-                })
-                ->all();
+            if (count($medPackages) > 0) {
+                $redisKeys = $medPackages->mapWithKeys(fn($med) => [$med->id => $med->medication->serial_number . '_medication_price'])->all();
+                $values = Redis::mget(array_values($redisKeys));
+                $prices = collect($redisKeys)
+                    ->combine($values) // combine keys with values
+                    ->map(function ($value, $key) {
+                        if (is_null($value)) {
+                            throw new \Exception("Missing value for key: $key");
+                        }
+                        return $value;
+                    })
+                    ->all();
+            }
+
 
             $actual_total_retail_price = 0;
 
